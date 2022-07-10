@@ -3,7 +3,7 @@
 Drone control with hand gestures using image processing is a project I realized in the seventh semester of my studies
 as a bachelor thesis at the Wroclaw University of Technology in the field of Control Engineering and Robotics.
 
-## The purpose and scope of the work
+## The purpose and scope of the project
 
 The main purpose of the project is to create an application that would allow you to control the drone using hand gestures.
 Gesture recognition will be realized by processing the image from the drone's built-in camera. Detection
