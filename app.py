@@ -7,6 +7,7 @@ def run_application():
     """
     camera = Camera(False, 1, 1, 0.8, 0.5)
     camera.load_modules()
+    camera.start_camera()
 
     while camera.cap.isOpened():
         camera.run()
