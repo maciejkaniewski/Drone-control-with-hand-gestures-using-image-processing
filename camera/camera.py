@@ -5,10 +5,11 @@ from camera import constants
 
 class Camera:
     """
-    A class to represent a camera.
+    A class used to represent a Camera.
     """
 
-    def __init__(self, width, height, image_source=0):
+    def __init__(self, width: int, height: int, image_source: int = 0):
+
         self.multi_hand_landmarks = None
         self.hands = None
         self.mp_hands = None
@@ -27,10 +28,10 @@ class Camera:
         self.capture.set(cv.CAP_PROP_FRAME_HEIGHT, self.height)
 
     def init_hand_detection_model(self,
-                                  static_image_mode,
-                                  max_num_hands,
-                                  min_detection_confidence,
-                                  min_tracking_confidence) -> None:
+                                  static_image_mode: bool,
+                                  max_num_hands: int,
+                                  min_detection_confidence: float,
+                                  min_tracking_confidence: float) -> None:
         """
         Initialize the necessary modules for hand detection from the MediaPipe framework.
         """
@@ -41,7 +42,7 @@ class Camera:
                                          min_detection_confidence=min_detection_confidence,
                                          min_tracking_confidence=min_tracking_confidence)
 
-    def run(self):
+    def run(self, gesture_id: int = None):
         """
         Starts displaying the image from the camera, draws landmarks on the detected hand.
         """
@@ -68,6 +69,16 @@ class Camera:
                                                 circle_radius=constants.HAND_LINE_RADIUS),
                 )
             self.multi_hand_landmarks = results.multi_hand_landmarks
+
+        if gesture_id is not None:
+            font = cv.FONT_HERSHEY_SIMPLEX
+            cv.putText(image,
+                       'Successfully saved gesture landmarks with ID: ' + str(gesture_id),
+                       (25, 700),
+                       font, 1,
+                       (126, 238, 28),
+                       2,
+                       cv.LINE_4)
 
         cv.imshow("Data Collector", image)
 
