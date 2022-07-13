@@ -1,0 +1,9 @@
+# Constants for MediaPipe's landmarks
+LANDMARK_COLOR_BGR = (155, 68, 236)
+LANDMARK_THICKNESS = 7
+LANDMARK_RADIUS = 2
+
+# Constants for MediaPipe's hand lines
+HAND_LINE_COLOR_BGR = (67, 244, 153)
+HAND_LINE_THICKNESS = 4
+HAND_LINE_RADIUS = 2
