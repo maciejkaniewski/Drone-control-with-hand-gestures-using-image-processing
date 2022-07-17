@@ -9,7 +9,13 @@ class Camera:
     """
 
     def __init__(self, width: int, height: int, image_source: int = 0):
+        """
+        Constructs camera object.
 
+        :param width: camera width
+        :param height: camera height
+        :param image_source: image source
+        """
         self.multi_hand_landmarks = None
         self.hands = None
         self.mp_hands = None
@@ -27,13 +33,18 @@ class Camera:
         self.capture.set(cv.CAP_PROP_FRAME_WIDTH, self.width)
         self.capture.set(cv.CAP_PROP_FRAME_HEIGHT, self.height)
 
-    def init_hand_detection_model(self,
-                                  static_image_mode: bool,
-                                  max_num_hands: int,
-                                  min_detection_confidence: float,
-                                  min_tracking_confidence: float) -> None:
+    def initialize_MediaPipe_Hands(self,
+                                   static_image_mode: bool,
+                                   max_num_hands: int,
+                                   min_detection_confidence: float,
+                                   min_tracking_confidence: float) -> None:
         """
         Initialize the necessary modules for hand detection from the MediaPipe framework.
+
+        :param static_image_mode: if set to false, the solution treats the input images as a video stream
+        :param max_num_hands: maximum number of hands to detect
+        :param min_detection_confidence: minimum confidence value ([0.0, 1.0]) from the hand detection model for the detection to be considered successful
+        :param min_tracking_confidence: minimum confidence value ([0.0, 1.0]) from the landmark-tracking model for the hand landmarks to be considered tracked successfully
         """
         self.mp_drawing = mp.solutions.drawing_utils
         self.mp_hands = mp.solutions.hands
@@ -42,9 +53,11 @@ class Camera:
                                          min_detection_confidence=min_detection_confidence,
                                          min_tracking_confidence=min_tracking_confidence)
 
-    def run(self, gesture_id: int = None):
+    def run(self, gesture_id: int = None) -> None:
         """
         Starts displaying the image from the camera, draws landmarks on the detected hand.
+
+        :param gesture_id: ID of the gesture
         """
         ret, frame = self.capture.read()
 
@@ -82,7 +95,7 @@ class Camera:
 
         cv.imshow("Data Collector", image)
 
-    def clear(self) -> None:
+    def free(self) -> None:
         """
         Releases camera's resources.
         """
