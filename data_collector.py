@@ -25,9 +25,10 @@ def run_data_collector() -> None:
             # pressed and hand landmarks are not empty
             gesture_id = int(chr(keyboard_key))  # Assign ID corresponding to pressed key
             data.append(gesture_id)  # Add ID at the beginning of data
+            wrist_position = camera.multi_hand_landmarks[0].landmark[camera.mp_hands.HandLandmark.WRIST]  # Save wrist
             for i in camera.multi_hand_landmarks[0].landmark:  # For each landmark in multi_hand_landmarks
-                data.append(i.x * camera.width)  # Multiply normalized "x" value by camera width
-                data.append(i.y * camera.height)  # Multiply normalized "y" value by camera height
+                data.append((i.x - wrist_position.x) * camera.width)  # Multiply normalized "x" value by camera width
+                data.append((i.y - wrist_position.y) * camera.height)  # Multiply normalized "y" value by camera height
             with open('data/data.csv', 'a', newline='') as f_object:  # Open .csv data file in append mode
                 writer_object = writer(f_object)  # Pass the .csv  file object to the writer() function
                 writer_object.writerow(data)  # Write rows with data list

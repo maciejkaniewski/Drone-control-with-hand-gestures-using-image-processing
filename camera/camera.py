@@ -39,7 +39,7 @@ class Camera:
                                    min_detection_confidence: float,
                                    min_tracking_confidence: float) -> None:
         """
-        Initialize the necessary modules for hand detection from the MediaPipe framework.
+        Initializes the necessary modules for hand detection from the MediaPipe framework.
 
         :param static_image_mode: if set to false, the solution treats the input images as a video stream
         :param max_num_hands: maximum number of hands to detect
