@@ -12,16 +12,17 @@ def run_data_collector() -> None:
 
     data = []  # Empty list for data collection
     gesture_id = None  # Variable for gesture ID
+    keyboard_key = None
 
     while camera.capture.isOpened():  # Main camera loop
-        camera.run(gesture_id)  # Collecting data from the camera
+        camera.run(gesture_id, keyboard_key)  # Collecting data from the camera
         keyboard_key = cv.waitKey(5) & 0xFF  # Waiting for a keyboard key
         if keyboard_key == ord("q"):  # If "q" key is pressed
             break  # Exit the loop and quit the application
         elif keyboard_key == ord("c"):  # If "c" key is pressed
             f = open('data/data.csv', "w+")  # Open and clear .csv data file
             f.close()  # Close .csv data file
-        elif keyboard_key in range(48, 58, 1) and camera.multi_hand_landmarks is not None:  # If "1,2... 9" key is
+        elif keyboard_key in range(48, 58, 1) and camera.multi_hand_landmarks is not None:  # If "0,1,2... 9" key is
             # pressed and hand landmarks are not empty
             gesture_id = int(chr(keyboard_key))  # Assign ID corresponding to pressed key
             data.append(gesture_id)  # Add ID at the beginning of data
@@ -34,6 +35,7 @@ def run_data_collector() -> None:
                 writer_object.writerow(data)  # Write rows with data list
                 f_object.close()  # Close file object
             data.clear()  # Clear data list
+        camera.multi_hand_landmarks = None
     camera.free()  # Free camera's resources
 
 

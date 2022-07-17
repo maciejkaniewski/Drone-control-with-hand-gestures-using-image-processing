@@ -24,6 +24,7 @@ class Camera:
         self.width = width
         self.height = height
         self.image_source = image_source
+        self.help_flag = True
 
     def start(self) -> None:
         """
@@ -53,11 +54,12 @@ class Camera:
                                          min_detection_confidence=min_detection_confidence,
                                          min_tracking_confidence=min_tracking_confidence)
 
-    def run(self, gesture_id: int = None) -> None:
+    def run(self, gesture_id: int = None, keyboard_key=None) -> None:
         """
         Starts displaying the image from the camera, draws landmarks on the detected hand.
 
         :param gesture_id: ID of the gesture
+        :param keyboard_key: pressed keyboard key
         """
         ret, frame = self.capture.read()
 
@@ -84,14 +86,41 @@ class Camera:
             self.multi_hand_landmarks = results.multi_hand_landmarks
 
         if gesture_id is not None:
-            font = cv.FONT_HERSHEY_SIMPLEX
             cv.putText(image,
-                       'Successfully saved gesture landmarks with ID: ' + str(gesture_id),
-                       (25, 700),
-                       font, 1,
+                       'Successfully saved',
+                       (10, 25),
+                       cv.FONT_HERSHEY_COMPLEX_SMALL, 1,
                        (126, 238, 28),
-                       2,
-                       cv.LINE_4)
+                       1,
+                       cv.LINE_AA)
+            cv.putText(image,
+                       'gesture landmarks with ID: ' + str(gesture_id),
+                       (10, 50),
+                       cv.FONT_HERSHEY_COMPLEX_SMALL, 1,
+                       (126, 238, 28),
+                       1,
+                       cv.LINE_AA)
+
+        if keyboard_key == ord("h"):
+            if self.help_flag is False:
+                self.help_flag = True
+            else:
+                self.help_flag = False
+
+        if self.help_flag:
+            cv.rectangle(image, (835, 10), (1270, 510), (255, 255, 255), -1)
+            cv.rectangle(image, (835, 10), (1270, 510), (0, 0, 0), 2)
+
+            help_text = "Options available:\nq - exit from the application\nc - clear the data file\nh - show/hide" \
+                        " help window\nIn order to write down the\ncoordinates of a given gesture,\nplace " \
+                        "the hand in the desired\nposition so that the hand\nlandmarks appear on it.\nBy pressing" \
+                        " the selected key\non the keyboard from 0 to 9,\nthe position of the hand will\nbe saved." \
+                        " The selected number\nis the identifier of the gesture."
+
+            y0, dy = 35, 35
+            for i, line in enumerate(help_text.split('\n')):
+                y = y0 + i * dy
+                cv.putText(image, line, (840, y), cv.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 0), 1, cv.LINE_AA)
 
         cv.imshow("Data Collector", image)
 
