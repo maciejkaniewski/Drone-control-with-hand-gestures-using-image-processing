@@ -1,5 +1,7 @@
 import mediapipe as mp
-import cv2 as cv
+import cv2
+import numpy as np
+
 from camera import constants
 
 
@@ -30,9 +32,16 @@ class Camera:
         """
         Starts camera.
         """
-        self.capture = cv.VideoCapture(self.image_source)
-        self.capture.set(cv.CAP_PROP_FRAME_WIDTH, self.width)
-        self.capture.set(cv.CAP_PROP_FRAME_HEIGHT, self.height)
+        self.capture = cv2.VideoCapture(self.image_source)
+        self.capture.set(cv2.CAP_PROP_FRAME_WIDTH, self.width)
+        self.capture.set(cv2.CAP_PROP_FRAME_HEIGHT, self.height)
+
+    def free(self) -> None:
+        """
+        Releases camera's resources.
+        """
+        self.capture.release()
+        cv2.destroyAllWindows()
 
     def initialize_MediaPipe_Hands(self,
                                    static_image_mode: bool,
@@ -63,12 +72,18 @@ class Camera:
         """
         ret, frame = self.capture.read()
 
-        image = cv.cvtColor(frame, cv.COLOR_BGR2RGB)
-        image = cv.flip(image, 1)
+        image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        image = cv2.flip(image, 1)
         image.flags.writeable = False
         results = self.hands.process(image)
         image.flags.writeable = True
-        image = cv.cvtColor(image, cv.COLOR_RGB2BGR)
+        image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+
+        # Read logo and resize
+        src = cv2.imread('resources/options.png')
+
+        img2gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
+        ret, mask = cv2.threshold(img2gray, 1, 255, cv2.THRESH_BINARY)
 
         if results.multi_hand_landmarks:
             for hand_landmarks in results.multi_hand_landmarks:
@@ -86,47 +101,30 @@ class Camera:
             self.multi_hand_landmarks = results.multi_hand_landmarks
 
         if gesture_id is not None:
-            cv.putText(image,
-                       'Successfully saved',
-                       (10, 25),
-                       cv.FONT_HERSHEY_COMPLEX_SMALL, 1,
-                       (126, 238, 28),
-                       1,
-                       cv.LINE_AA)
-            cv.putText(image,
-                       'gesture landmarks with ID: ' + str(gesture_id),
-                       (10, 50),
-                       cv.FONT_HERSHEY_COMPLEX_SMALL, 1,
-                       (126, 238, 28),
-                       1,
-                       cv.LINE_AA)
+            cv2.putText(image,
+                        'Successfully saved',
+                        (10, 25),
+                        cv2.FONT_HERSHEY_COMPLEX_SMALL, 1,
+                        (126, 238, 28),
+                        1,
+                        cv2.LINE_AA)
+            cv2.putText(image,
+                        'gesture landmarks with ID: ' + str(gesture_id),
+                        (10, 50),
+                        cv2.FONT_HERSHEY_COMPLEX_SMALL, 1,
+                        (126, 238, 28),
+                        1,
+                        cv2.LINE_AA)
 
-        if keyboard_key == ord("h"):
+        if keyboard_key == ord("o"):
             if self.help_flag is False:
                 self.help_flag = True
             else:
                 self.help_flag = False
 
         if self.help_flag:
-            cv.rectangle(image, (835, 10), (1270, 510), (255, 255, 255), -1)
-            cv.rectangle(image, (835, 10), (1270, 510), (0, 0, 0), 2)
+            roi = image[-405:-5, -505:-5]
+            roi[np.where(mask)] = 0
+            roi += src
 
-            help_text = "Options available:\nq - exit from the application\nc - clear the data file\nh - show/hide" \
-                        " help window\nIn order to write down the\ncoordinates of a given gesture,\nplace " \
-                        "the hand in the desired\nposition so that the hand\nlandmarks appear on it.\nBy pressing" \
-                        " the selected key\non the keyboard from 0 to 9,\nthe position of the hand will\nbe saved." \
-                        " The selected number\nis the identifier of the gesture."
-
-            y0, dy = 35, 35
-            for i, line in enumerate(help_text.split('\n')):
-                y = y0 + i * dy
-                cv.putText(image, line, (840, y), cv.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 0), 1, cv.LINE_AA)
-
-        cv.imshow("Data Collector", image)
-
-    def free(self) -> None:
-        """
-        Releases camera's resources.
-        """
-        self.capture.release()
-        cv.destroyAllWindows()
+        cv2.imshow("Data Collector", image)

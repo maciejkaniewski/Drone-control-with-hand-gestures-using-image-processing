@@ -1,4 +1,4 @@
-from camera import Camera, cv
+from camera import Camera, cv2
 from csv import writer
 
 
@@ -16,7 +16,7 @@ def run_data_collector() -> None:
 
     while camera.capture.isOpened():  # Main camera loop
         camera.run(gesture_id, keyboard_key)  # Collecting data from the camera
-        keyboard_key = cv.waitKey(5) & 0xFF  # Waiting for a keyboard key
+        keyboard_key = cv2.waitKey(5) & 0xFF  # Waiting for a keyboard key
         if keyboard_key == ord("q"):  # If "q" key is pressed
             break  # Exit the loop and quit the application
         elif keyboard_key == ord("c"):  # If "c" key is pressed
