@@ -2,6 +2,7 @@ import mediapipe as mp
 import cv2
 import numpy as np
 from csv import writer
+from sklearn import preprocessing
 
 # Constants for MediaPipe's landmarks
 LANDMARK_COLOR_BGR = (155, 68, 236)
@@ -23,19 +24,22 @@ class DataCollector:
         """
         Constructs Data Collector object.
         """
+
         self.image = None
         self.image_width = 1280
         self.image_height = 720
         self.camera_capture = None
-        
+
         self.multi_hand_landmarks = None
         self.hands = None
         self.mp_hands = None
         self.mp_drawing = None
 
-        self.help_flag = True
-        self.data = []
-        self.data_file = None
+        self.options_flag = True
+        self.data_raw = []
+        self.data_max_abs = []
+        self.data_min_max = []
+        self.data_standardized = []
 
     def configure_camera(self) -> None:
         """
@@ -106,11 +110,11 @@ class DataCollector:
 
         cv2.imshow("Data Collector", self.image)
 
-    def info(self, gesture_id: int = None, keyboard_key=None):
+    def info(self, gesture_label: int = None, keyboard_key=None):
         """
         Displays information about options and saved gestures.
 
-        :param gesture_id: ID of the gesture
+        :param gesture_label: label of the gesture
         :param keyboard_key: pressed keyboard key
         """
 
@@ -118,7 +122,7 @@ class DataCollector:
         img2gray = cv2.cvtColor(options_image, cv2.COLOR_BGR2GRAY)
         ret, mask = cv2.threshold(img2gray, 1, 255, cv2.THRESH_BINARY)
 
-        if gesture_id is not None:
+        if gesture_label is not None:
             cv2.putText(self.image,
                         'Successfully saved',
                         (10, 25),
@@ -127,7 +131,7 @@ class DataCollector:
                         1,
                         cv2.LINE_AA)
             cv2.putText(self.image,
-                        'gesture landmarks with ID: ' + str(gesture_id),
+                        'gesture landmarks with label: ' + str(gesture_label),
                         (10, 50),
                         cv2.FONT_HERSHEY_COMPLEX_SMALL, 1,
                         (126, 238, 28),
@@ -135,12 +139,12 @@ class DataCollector:
                         cv2.LINE_AA)
 
         if keyboard_key == ord("o"):
-            if self.help_flag is False:
-                self.help_flag = True
+            if self.options_flag is False:
+                self.options_flag = True
             else:
-                self.help_flag = False
+                self.options_flag = False
 
-        if self.help_flag:
+        if self.options_flag:
             ROI = self.image[-405:-5, -505:-5]
             ROI[np.where(mask)] = 0
             ROI += options_image
@@ -150,35 +154,91 @@ class DataCollector:
     def convert_coordinates(self) -> None:
         """
         Converts the coordinates of the hand landmarks from absolute to relative to the wrist point.
-
-        :param gesture_id: ID of the gesture
         """
 
         wrist_position = self.multi_hand_landmarks[0].landmark[
             self.mp_hands.HandLandmark.WRIST]  # Save wrist point landmark
         for landmark in self.multi_hand_landmarks[0].landmark:  # For each landmark in multi_hand_landmarks
-            self.data.append((landmark.x - wrist_position.x) * self.image_width)  # Multiply normalized "x" value by camera width
-            self.data.append((landmark.y - wrist_position.y) * self.image_height)  # Multiply normalized "y" value by camera height
+            self.data_raw.append(
+                (landmark.x - wrist_position.x) * self.image_width)  # Multiply normalized "x" value by camera width
+            self.data_raw.append(
+                (landmark.y - wrist_position.y) * self.image_height)  # Multiply normalized "y" value by camera height
 
-    def clear_data(self, data_file_path: str = 'data_collector/data/data.csv') -> None:
+    def maximum_absolute_scaling(self) -> None:
         """
-        Clears data.
-
-        :param data_file_path: path to data file
+        Rescales raw data between -1 and 1 by dividing every observation by its maximum absolute value.
         """
 
-        self.data_file = open(data_file_path, "w+")  # Open and clear .csv data file
-        self.data_file.close()  # Close .csv data file
+        scaler = preprocessing.MinMaxScaler()
+        data_array = np.reshape(self.data_raw, (-1, 1))
+        data_scaled = (scaler.fit_transform(data_array))
+        self.data_min_max = list(np.concatenate(data_scaled).flat)
 
-    def save_data(self, data_file_path: str = 'data_collector/data/data.csv') -> None:
+    def min_max_scaling(self) -> None:
+        """
+        Rescales raw data to a fixed range of [0,1] by subtracting the minimum value
+        of the feature and then dividing by the range.
+        """
+
+        scaler = preprocessing.MaxAbsScaler()
+        data_array = np.reshape(self.data_raw, (-1, 1))
+        data_scaled = (scaler.fit_transform(data_array))
+        self.data_max_abs = list(np.concatenate(data_scaled).flat)
+
+    def standardization(self) -> None:
+        """
+        Transforms raw data into a distribution with a mean of 0 and a standard deviation of 1. Each standardized
+        value is computed by subtracting the mean of the corresponding feature and then dividing by the standard
+        deviation.
+        """
+
+        scaler = preprocessing.StandardScaler()
+        data_array = np.reshape(self.data_raw, (-1, 1))
+        data_scaled = (scaler.fit_transform(data_array))
+        self.data_standardized = list(np.concatenate(data_scaled).flat)
+
+    def append_labels(self, gesture_label: int = None) -> None:
+        """
+        Appends gesture labels to data files.
+
+        :param gesture_label: label of the gesture
+        """
+
+        self.data_raw.append(gesture_label)
+        self.data_max_abs.append(gesture_label)
+        self.data_min_max.append(gesture_label)
+        self.data_standardized.append(gesture_label)
+
+    def save_data(self, data_raw_file_path: str, data_max_abs_file_path: str,
+                  data_min_max_file_path: str, data_standardized_file_path: str) -> None:
         """
         Saves data to the .csv file.
 
-        :param data_file_path: path to data file
+        :param data_raw_file_path: path to the raw data file
+        :param data_max_abs_file_path: path to the maximum absolute scaled data file
+        :param data_min_max_file_path: path to the min max scaled data file
+        :param data_standardized_file_path: path to the standardized data file
         """
 
-        with open(data_file_path, 'a', newline='') as f_object:  # Open .csv data file in append mode
-            writer_object = writer(f_object)  # Pass the .csv  file object to the writer() function
-            writer_object.writerow(self.data)  # Write rows with data list
-            f_object.close()  # Close file object
-            self.data.clear()  # Clear data list
+        data_files = [[self.data_raw, data_raw_file_path],
+                      [self.data_max_abs, data_max_abs_file_path],
+                      [self.data_min_max, data_min_max_file_path],
+                      [self.data_standardized, data_standardized_file_path]]
+
+        for files in data_files:
+            with open(files[1], 'a', newline='') as f_object:  # Open .csv data file in append mode
+                writer_object = writer(f_object)  # Pass the .csv  file object to the writer() function
+                writer_object.writerow(files[0])  # Write rows with data list
+                f_object.close()  # Close file object
+                files[0].clear()  # Clear data list
+
+    @staticmethod
+    def clear_data(data_file_path: str) -> None:
+        """
+        Clears data.
+
+        :param data_file_path: path to the data file
+        """
+
+        data_file = open(data_file_path, "w+")  # Open and clear .csv data file
+        data_file.close()  # Close .csv data file
