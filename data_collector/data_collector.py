@@ -40,6 +40,7 @@ class DataCollector:
         self.data_max_abs = []
         self.data_min_max = []
         self.data_standardized = []
+        self.data_robust_scaling = []
 
     def configure_camera(self) -> None:
         """
@@ -197,6 +198,16 @@ class DataCollector:
         data_scaled = (scaler.fit_transform(data_array))
         self.data_standardized = list(np.concatenate(data_scaled).flat)
 
+    def robust_scaling(self) -> None:
+        """
+        Scale each feature of the data set by subtracting the median and then dividing by the interquartile range.
+        """
+
+        scaler = preprocessing.RobustScaler()
+        data_array = np.reshape(self.data_raw, (-1, 1))
+        data_scaled = (scaler.fit_transform(data_array))
+        self.data_robust_scaling = list(np.concatenate(data_scaled).flat)
+
     def append_labels(self, gesture_label: int = None) -> None:
         """
         Appends gesture labels to data files.
@@ -208,9 +219,11 @@ class DataCollector:
         self.data_max_abs.append(gesture_label)
         self.data_min_max.append(gesture_label)
         self.data_standardized.append(gesture_label)
+        self.data_robust_scaling.append(gesture_label)
 
     def save_data(self, data_raw_file_path: str, data_max_abs_file_path: str,
-                  data_min_max_file_path: str, data_standardized_file_path: str) -> None:
+                  data_min_max_file_path: str, data_standardized_file_path: str,
+                  data_robust_scaling_file_path: str) -> None:
         """
         Saves data to the .csv file.
 
@@ -218,12 +231,14 @@ class DataCollector:
         :param data_max_abs_file_path: path to the maximum absolute scaled data file
         :param data_min_max_file_path: path to the min max scaled data file
         :param data_standardized_file_path: path to the standardized data file
+        :param data_robust_scaling_file_path: path to the robust scaled data file
         """
 
         data_files = [[self.data_raw, data_raw_file_path],
                       [self.data_max_abs, data_max_abs_file_path],
                       [self.data_min_max, data_min_max_file_path],
-                      [self.data_standardized, data_standardized_file_path]]
+                      [self.data_standardized, data_standardized_file_path],
+                      [self.data_robust_scaling, data_robust_scaling_file_path]]
 
         for files in data_files:
             with open(files[1], 'a', newline='') as f_object:  # Open .csv data file in append mode

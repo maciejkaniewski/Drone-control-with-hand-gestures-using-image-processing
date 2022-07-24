@@ -23,6 +23,7 @@ def run_data_collector() -> None:
             data_collector.clear_data('data_collector/data/02_data_max_abs.csv')
             data_collector.clear_data('data_collector/data/03_data_min_max.csv')
             data_collector.clear_data('data_collector/data/04_data_standardized.csv')
+            data_collector.clear_data('data_collector/data/05_data_robust.csv')
         # If "0,1,2... 9" key is pressed and hand landmarks are not empty
         elif keyboard_key in range(48, 58, 1) and data_collector.multi_hand_landmarks is not None:
             gesture_label = int(chr(keyboard_key))  # Assign label corresponding to pressed key
@@ -30,11 +31,13 @@ def run_data_collector() -> None:
             data_collector.maximum_absolute_scaling()  # Perform data normalization methods
             data_collector.min_max_scaling()
             data_collector.standardization()
+            data_collector.robust_scaling()
             data_collector.append_labels(gesture_label)
             data_collector.save_data('data_collector/data/01_data_raw.csv',
                                      'data_collector/data/02_data_max_abs.csv',
                                      'data_collector/data/03_data_min_max.csv',
-                                     'data_collector/data/04_data_standardized.csv')
+                                     'data_collector/data/04_data_standardized.csv',
+                                     'data_collector/data/05_data_robust.csv')
         data_collector.multi_hand_landmarks = None  # Clear hand landmarks
     data_collector.free_camera()  # Free data_collector's resources
 
