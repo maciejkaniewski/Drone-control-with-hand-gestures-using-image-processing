@@ -2,6 +2,8 @@ import mediapipe as mp
 import cv2
 import numpy as np
 from csv import writer
+
+from PySide6.QtGui import QImage, Qt
 from sklearn import preprocessing
 
 # Constants for MediaPipe's landmarks
@@ -92,7 +94,7 @@ class DataCollector:
         self.image.flags.writeable = False
         results = self.hands.process(self.image)
         self.image.flags.writeable = True
-        self.image = cv2.cvtColor(self.image, cv2.COLOR_RGB2BGR)
+        #self.image = cv2.cvtColor(self.image, cv2.COLOR_RGB2BGR)
 
         if results.multi_hand_landmarks:
             for hand_landmarks in results.multi_hand_landmarks:
@@ -109,7 +111,11 @@ class DataCollector:
                 )
             self.multi_hand_landmarks = results.multi_hand_landmarks
 
-        cv2.imshow("Data Collector", self.image)
+        ConvertToQtFormat = QImage(self.image.data, self.image.shape[1], self.image.shape[0],
+                                   QImage.Format_RGB888)
+        self.image = ConvertToQtFormat.scaled(640, 480, Qt.KeepAspectRatio)
+
+        #cv2.imshow("Data Collector", self.image)
 
     def info(self, gesture_label: int = None, keyboard_key=None):
         """
@@ -150,7 +156,7 @@ class DataCollector:
             ROI[np.where(mask)] = 0
             ROI += options_image
 
-        cv2.imshow("Data Collector", self.image)
+        #cv2.imshow("Data Collector", self.image)
 
     def convert_coordinates(self) -> None:
         """

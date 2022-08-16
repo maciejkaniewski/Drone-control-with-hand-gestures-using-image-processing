@@ -5,7 +5,6 @@ from PySide6.QtWidgets import *
 from PySide6.QtCore import *
 import cv2
 
-
 from PySide6.QtWidgets import QApplication, QMainWindow
 
 # Important:
@@ -13,70 +12,54 @@ from PySide6.QtWidgets import QApplication, QMainWindow
 #     pyside6-uic form.ui -o ui_form.py, or
 #     pyside2-uic form.ui -o ui_form.py
 from ui import Ui_MainWindow
-
-class Test(QWidget):
-    def __init__(self):
-        super(Test, self).__init__()
-
-        self.VBL = QVBoxLayout()
-
-        self.FeedLabel = QLabel()
-        self.VBL.addWidget(self.FeedLabel)
-
-        self.CancelBTN = QPushButton("Cancel")
-        self.CancelBTN.clicked.connect(self.CancelFeed)
-        self.VBL.addWidget(self.CancelBTN)
-
-        self.Worker1 = Worker1()
-
-        self.Worker1.start()
-        self.Worker1.ImageUpdate.connect(self.ImageUpdateSlot)
-        self.setLayout(self.VBL)
-
-    def ImageUpdateSlot(self, Image):
-        self.FeedLabel.setPixmap(QPixmap.fromImage(Image))
-
-    def CancelFeed(self):
-        self.Worker1.stop()
-
+from data_collector import DataCollector
 
 
 class MainWindow(QMainWindow):
+
     def __init__(self, parent=None):
         super().__init__(parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
+        self.CameraThread = CameraThread()
+        self.CameraThread.start()
+        self.CameraThread.image_update_signal.connect(self.image_update_slot)
 
-        self.Worker1 = Worker1()
+    def closeEvent(self, event):
+        self.CameraThread.stop()
+        self.CameraThread.wait()
+        if self.CameraThread.isFinished():
+            event.accept()
 
-        self.Worker1.start()
-        self.Worker1.ImageUpdate.connect(self.ImageUpdateSlot)
+    def image_update_slot(self, Image):
+        self.ui.QLabel_Camera_Feed.setPixmap(QPixmap.fromImage(Image))
 
-    def ImageUpdateSlot(self, Image):
-        self.ui.cam_label.setPixmap(QPixmap.fromImage(Image))
+class CameraThread(QThread):
 
+    image_update_signal = Signal(QImage)
 
-
-class Worker1(QThread):
-    ImageUpdate = Signal(QImage)
     def run(self):
+
+        data_collector = DataCollector()  # Construct Data Collector instance
+        data_collector.configure_camera()  # Configure Data Collector's camera
+        data_collector.configure_MediaPipe_Hands(False, 1, 0.8, 0.6)  # Configure MediaPipe model
         self.ThreadActive = True
-        Capture = cv2.VideoCapture(0)
+
         while self.ThreadActive:
-            ret, frame = Capture.read()
-            if ret:
-                Image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                FlippedImage = cv2.flip(Image, 1)
-                ConvertToQtFormat = QImage(FlippedImage.data, FlippedImage.shape[1], FlippedImage.shape[0], QImage.Format_RGB888)
-                Pic = ConvertToQtFormat.scaled(640, 480, Qt.KeepAspectRatio)
-                self.ImageUpdate.emit(Pic)
+            data_collector.detect()
+            self.image_update_signal.emit(data_collector.image)
+
+        data_collector.free_camera()  # Free data_collector's resources
+
     def stop(self):
+
         self.ThreadActive = False
         self.quit()
 
 
 if __name__ == "__main__":
+
     app = QApplication(sys.argv)
     widget = MainWindow()
     widget.show()
