@@ -3,7 +3,8 @@
     "ui/ui_form.py",
     "ui/form.ui",
     "ui/__init__.py",
-    "Drone-control-with-hand-gestures-using-image-processing.py",
+    "resources/resources.qrc",
+    "main.py",
     "data_collector/main.py",
     "data_collector/data_collector.py"]
 }

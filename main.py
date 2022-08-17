@@ -3,24 +3,21 @@ import sys
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
 from PySide6.QtCore import *
-import cv2
 
 from PySide6.QtWidgets import QApplication, QMainWindow
 
-# Important:
-# You need to run the following command to generate the ui_form.py file
-#     pyside6-uic form.ui -o ui_form.py, or
-#     pyside2-uic form.ui -o ui_form.py
 from ui import Ui_MainWindow
-from data_collector import DataCollector
+from data_collector import DataCollector, cv2
 
 
 class MainWindow(QMainWindow):
 
     def __init__(self, parent=None):
+
         super().__init__(parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.WindowMinimizeButtonHint)
 
         self.CameraThread = CameraThread()
         self.CameraThread.start()
@@ -49,7 +46,7 @@ class CameraThread(QThread):
         while self.ThreadActive:
             data_collector.detect()
             self.image_update_signal.emit(data_collector.image)
-
+            data_collector.multi_hand_landmarks = None  # Clear hand landmarks
         data_collector.free_camera()  # Free data_collector's resources
 
     def stop(self):
