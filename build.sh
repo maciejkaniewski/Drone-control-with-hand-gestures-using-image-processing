@@ -1,5 +1,11 @@
 #! /bin/bash
 
+if [[ "$VIRTUAL_ENV" == "" ]]
+then
+  echo "Activating virtual environment..."
+  source venv/bin/activate
+fi
+
 echo "Compiling resources file..."
 pyside6-rcc resources/resources.qrc -o resources/resources_rc.py
 echo "Compiling user interface file..."
