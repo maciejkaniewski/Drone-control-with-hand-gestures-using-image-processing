@@ -99,12 +99,36 @@ class Ui_MainWindow(object):
 "	left: 15px;\n"
 "    padding: 0px 5px 0px 5px;\n"
 "}")
-        self.frame = QFrame(self.QGroupBox_2)
-        self.frame.setObjectName(u"frame")
-        self.frame.setGeometry(QRect(420, 230, 181, 81))
-        self.frame.setFrameShape(QFrame.Panel)
-        self.frame.setFrameShadow(QFrame.Raised)
-        self.gridLayout_3 = QGridLayout(self.frame)
+        self.QGroupBox_Data_Collector = QGroupBox(self.QGroupBox_2)
+        self.QGroupBox_Data_Collector.setObjectName(u"QGroupBox_Data_Collector")
+        self.QGroupBox_Data_Collector.setGeometry(QRect(410, 190, 191, 121))
+        self.QGroupBox_Data_Collector.setStyleSheet(u"QGroupBox#QGroupBox_Data_Collector {\n"
+"    background-color:  #222831;\n"
+"    border: 2px solid gray;\n"
+"	 border-color: #00ADB5;\n"
+"    border-radius: 8px;\n"
+"    margin-top: 1ex; /* leave space at the top for the title */\n"
+"	font-size: 14px;\n"
+"}\n"
+"\n"
+"QGroupBox::title#QGroupBox_Data_Collector  {\n"
+"    color:  white;\n"
+"    subcontrol-origin: margin;\n"
+"	left: 15px;\n"
+"    padding: 0px 5px 0px 5px;\n"
+"}")
+        self.gridLayout_5 = QGridLayout(self.QGroupBox_Data_Collector)
+        self.gridLayout_5.setObjectName(u"gridLayout_5")
+        self.gridLayout_5.setContentsMargins(12, 12, 12, 12)
+        self.QFrame_Data_Collector = QFrame(self.QGroupBox_Data_Collector)
+        self.QFrame_Data_Collector.setObjectName(u"QFrame_Data_Collector")
+        self.QFrame_Data_Collector.setStyleSheet(u"QFrame#QFrame_Data_Collector {\n"
+"    border-radius: 8px;\n"
+"	background-color: #393E46;\n"
+"}")
+        self.QFrame_Data_Collector.setFrameShape(QFrame.Panel)
+        self.QFrame_Data_Collector.setFrameShadow(QFrame.Raised)
+        self.gridLayout_3 = QGridLayout(self.QFrame_Data_Collector)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setSpacing(8)
@@ -112,7 +136,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.setContentsMargins(0, -1, -1, -1)
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.QPushButton_Save_Gesture = QPushButton(self.frame)
+        self.QPushButton_Save_Gesture = QPushButton(self.QFrame_Data_Collector)
         self.QPushButton_Save_Gesture.setObjectName(u"QPushButton_Save_Gesture")
         font1 = QFont()
         font1.setPointSize(11)
@@ -123,7 +147,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.QPushButton_Save_Gesture)
 
-        self.QSpinBox_Gesture_Label = QSpinBox(self.frame)
+        self.QSpinBox_Gesture_Label = QSpinBox(self.QFrame_Data_Collector)
         self.QSpinBox_Gesture_Label.setObjectName(u"QSpinBox_Gesture_Label")
         self.QSpinBox_Gesture_Label.setStyleSheet(u"QSpinBox#QSpinBox_Gesture_Label {\n"
 "	color:#EEEEEE;\n"
@@ -135,7 +159,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout)
 
-        self.QPushButton_Clear_All_Gestures = QPushButton(self.frame)
+        self.QPushButton_Clear_All_Gestures = QPushButton(self.QFrame_Data_Collector)
         self.QPushButton_Clear_All_Gestures.setObjectName(u"QPushButton_Clear_All_Gestures")
         self.QPushButton_Clear_All_Gestures.setFont(font1)
         self.QPushButton_Clear_All_Gestures.setStyleSheet(u"QPushButton#QPushButton_Clear_All_Gestures{\n"
@@ -146,6 +170,9 @@ class Ui_MainWindow(object):
 
 
         self.gridLayout_3.addLayout(self.verticalLayout, 0, 0, 1, 1)
+
+
+        self.gridLayout_5.addWidget(self.QFrame_Data_Collector, 0, 0, 1, 1)
 
 
         self.gridLayout.addWidget(self.QGroupBox_2, 0, 1, 1, 1)
@@ -229,6 +256,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Drone Control Application", None))
         self.QGroupBox_1.setTitle(QCoreApplication.translate("MainWindow", u"Logs", None))
         self.QGroupBox_2.setTitle(QCoreApplication.translate("MainWindow", u"Utilities and settings", None))
+        self.QGroupBox_Data_Collector.setTitle(QCoreApplication.translate("MainWindow", u"Data Collector", None))
         self.QPushButton_Save_Gesture.setText(QCoreApplication.translate("MainWindow", u"Save gesture", None))
         self.QPushButton_Clear_All_Gestures.setText(QCoreApplication.translate("MainWindow", u"Clear all gestures", None))
         self.QGroupBox_3.setTitle(QCoreApplication.translate("MainWindow", u"Controls", None))

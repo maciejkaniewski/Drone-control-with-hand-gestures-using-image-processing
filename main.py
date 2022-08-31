@@ -69,12 +69,14 @@ class MainWindow(QMainWindow):
             'data_collector/data/04_data_standardized.csv',
             'data_collector/data/05_data_robust.csv')
 
-            self.add_to_logs("Gesture with label " + self.gesture_label + " has been successfully saved")
+            self.add_to_logs("<font color=\"GreenYellow\">Gesture with label <font color=\"Plum\">" + self.gesture_label + "<font color=\"GreenYellow\"> has been successfully saved")
+        else:
+            self.add_to_logs("<font color=\"OrangeRed\">No gesture has been detected in the camera image")
 
     def clear_all_gestures(self):
 
         if os.stat('data_collector/data/01_data_raw.csv').st_size == 0:
-            self.add_to_logs("Gesture files are already empty, no need to clear")
+            self.add_to_logs("<font color=\"Gold\">Gesture files are already empty, no need to clear")
         else:
             self.data_collector.clear_data('data_collector/data/01_data_raw.csv')
             self.data_collector.clear_data('data_collector/data/02_data_max_abs.csv')
@@ -82,7 +84,7 @@ class MainWindow(QMainWindow):
             self.data_collector.clear_data('data_collector/data/04_data_standardized.csv')
             self.data_collector.clear_data('data_collector/data/05_data_robust.csv')
 
-            self.add_to_logs("All gesture files have been cleared")
+            self.add_to_logs("<font color=\"GreenYellow\">All gesture files have been cleared")
 
 
 class CameraThread(QThread):
