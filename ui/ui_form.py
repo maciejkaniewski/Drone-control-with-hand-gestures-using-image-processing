@@ -80,6 +80,67 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.QGroupBox_1, 1, 1, 1, 1)
 
+        self.QGroupBox_3 = QGroupBox(self.centralwidget)
+        self.QGroupBox_3.setObjectName(u"QGroupBox_3")
+        self.QGroupBox_3.setMinimumSize(QSize(620, 326))
+        self.QGroupBox_3.setFont(font)
+        self.QGroupBox_3.setStyleSheet(u"QGroupBox#QGroupBox_3 {\n"
+"    background-color:  #222831;\n"
+"    border: 2px solid gray;\n"
+"	 border-color: #00ADB5;\n"
+"    border-radius: 8px;\n"
+"    margin-top: 1ex; /* leave space at the top for the title */\n"
+"	font-size: 16px;\n"
+"}\n"
+"\n"
+"QGroupBox::title#QGroupBox_3 {\n"
+"    color:  white;\n"
+"    subcontrol-origin: margin;\n"
+"	left: 15px;\n"
+"    padding: 0px 5px 0px 5px;\n"
+"}")
+
+        self.gridLayout.addWidget(self.QGroupBox_3, 1, 0, 1, 1)
+
+        self.QGroupBox_Camera_Feed = QGroupBox(self.centralwidget)
+        self.QGroupBox_Camera_Feed.setObjectName(u"QGroupBox_Camera_Feed")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Preferred)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.QGroupBox_Camera_Feed.sizePolicy().hasHeightForWidth())
+        self.QGroupBox_Camera_Feed.setSizePolicy(sizePolicy1)
+        self.QGroupBox_Camera_Feed.setMinimumSize(QSize(620, 326))
+        self.QGroupBox_Camera_Feed.setMaximumSize(QSize(620, 16777215))
+        self.QGroupBox_Camera_Feed.setFont(font)
+        self.QGroupBox_Camera_Feed.setStyleSheet(u"QGroupBox#QGroupBox_Camera_Feed {\n"
+"    background-color:  #222831;\n"
+"    border: 2px solid gray;\n"
+"	 border-color: #00ADB5;\n"
+"    border-radius: 8px;\n"
+"    margin-top: 1ex; /* leave space at the top for the title */\n"
+"	font-size: 16px;\n"
+"}\n"
+"\n"
+"QGroupBox::title#QGroupBox_Camera_Feed {\n"
+"    color:  white;\n"
+"    subcontrol-origin: margin;\n"
+"	left: 15px;\n"
+"    padding: 0px 5px 0px 5px;\n"
+"}")
+        self.gridLayout_6 = QGridLayout(self.QGroupBox_Camera_Feed)
+        self.gridLayout_6.setObjectName(u"gridLayout_6")
+        self.gridLayout_6.setContentsMargins(12, 12, 12, 12)
+        self.QLabel_Camera_Feed = QLabel(self.QGroupBox_Camera_Feed)
+        self.QLabel_Camera_Feed.setObjectName(u"QLabel_Camera_Feed")
+        self.QLabel_Camera_Feed.setStyleSheet(u"QLabel#QLabel_Camera_Feed{\n"
+"    border-radius: 8px;\n"
+"}")
+
+        self.gridLayout_6.addWidget(self.QLabel_Camera_Feed, 1, 0, 1, 1)
+
+
+        self.gridLayout.addWidget(self.QGroupBox_Camera_Feed, 0, 0, 1, 1)
+
         self.QGroupBox_2 = QGroupBox(self.centralwidget)
         self.QGroupBox_2.setObjectName(u"QGroupBox_2")
         self.QGroupBox_2.setMinimumSize(QSize(620, 326))
@@ -101,7 +162,7 @@ class Ui_MainWindow(object):
 "}")
         self.QGroupBox_Data_Collector = QGroupBox(self.QGroupBox_2)
         self.QGroupBox_Data_Collector.setObjectName(u"QGroupBox_Data_Collector")
-        self.QGroupBox_Data_Collector.setGeometry(QRect(410, 190, 191, 121))
+        self.QGroupBox_Data_Collector.setGeometry(QRect(410, 200, 191, 111))
         self.QGroupBox_Data_Collector.setStyleSheet(u"QGroupBox#QGroupBox_Data_Collector {\n"
 "    background-color:  #222831;\n"
 "    border: 2px solid gray;\n"
@@ -174,69 +235,69 @@ class Ui_MainWindow(object):
 
         self.gridLayout_5.addWidget(self.QFrame_Data_Collector, 0, 0, 1, 1)
 
+        self.QGroupBox_Drone_Connection = QGroupBox(self.QGroupBox_2)
+        self.QGroupBox_Drone_Connection.setObjectName(u"QGroupBox_Drone_Connection")
+        self.QGroupBox_Drone_Connection.setGeometry(QRect(210, 200, 191, 111))
+        self.QGroupBox_Drone_Connection.setStyleSheet(u"QGroupBox#QGroupBox_Drone_Connection {\n"
+"    background-color:  #222831;\n"
+"    border: 2px solid gray;\n"
+"	 border-color: #00ADB5;\n"
+"    border-radius: 8px;\n"
+"    margin-top: 1ex; /* leave space at the top for the title */\n"
+"	font-size: 14px;\n"
+"}\n"
+"\n"
+"QGroupBox::title#QGroupBox_Drone_Connection   {\n"
+"    color:  white;\n"
+"    subcontrol-origin: margin;\n"
+"	left: 15px;\n"
+"    padding: 0px 5px 0px 5px;\n"
+"}")
+        self.gridLayout_7 = QGridLayout(self.QGroupBox_Drone_Connection)
+        self.gridLayout_7.setObjectName(u"gridLayout_7")
+        self.gridLayout_7.setContentsMargins(12, 12, 12, 12)
+        self.QFrame_Data_Drone_Connection = QFrame(self.QGroupBox_Drone_Connection)
+        self.QFrame_Data_Drone_Connection.setObjectName(u"QFrame_Data_Drone_Connection")
+        self.QFrame_Data_Drone_Connection.setStyleSheet(u"QFrame#QFrame_Data_Collector {\n"
+"    border-radius: 8px;\n"
+"	background-color: #393E46;\n"
+"}")
+        self.QFrame_Data_Drone_Connection.setFrameShape(QFrame.Panel)
+        self.QFrame_Data_Drone_Connection.setFrameShadow(QFrame.Raised)
+        self.gridLayout_4 = QGridLayout(self.QFrame_Data_Drone_Connection)
+        self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.horizontalLayout_2 = QHBoxLayout()
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.QPushButton_Connect = QPushButton(self.QFrame_Data_Drone_Connection)
+        self.QPushButton_Connect.setObjectName(u"QPushButton_Connect")
+        self.QPushButton_Connect.setMinimumSize(QSize(0, 35))
+        self.QPushButton_Connect.setFont(font1)
+        self.QPushButton_Connect.setStyleSheet(u"QPushButton#QPushButton_Connect{\n"
+"	color:#EEEEEE;\n"
+"}")
+
+        self.horizontalLayout_2.addWidget(self.QPushButton_Connect)
+
+        self.QLabel_WiFI = QLabel(self.QFrame_Data_Drone_Connection)
+        self.QLabel_WiFI.setObjectName(u"QLabel_WiFI")
+        sizePolicy.setHeightForWidth(self.QLabel_WiFI.sizePolicy().hasHeightForWidth())
+        self.QLabel_WiFI.setSizePolicy(sizePolicy)
+        self.QLabel_WiFI.setMinimumSize(QSize(35, 35))
+        self.QLabel_WiFI.setMaximumSize(QSize(35, 35))
+        self.QLabel_WiFI.setPixmap(QPixmap(u":/images/images/wifi_0.png"))
+        self.QLabel_WiFI.setScaledContents(True)
+        self.QLabel_WiFI.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_2.addWidget(self.QLabel_WiFI)
+
+
+        self.gridLayout_4.addLayout(self.horizontalLayout_2, 0, 1, 1, 1)
+
+
+        self.gridLayout_7.addWidget(self.QFrame_Data_Drone_Connection, 0, 0, 1, 1)
+
 
         self.gridLayout.addWidget(self.QGroupBox_2, 0, 1, 1, 1)
-
-        self.QGroupBox_3 = QGroupBox(self.centralwidget)
-        self.QGroupBox_3.setObjectName(u"QGroupBox_3")
-        self.QGroupBox_3.setMinimumSize(QSize(620, 326))
-        self.QGroupBox_3.setFont(font)
-        self.QGroupBox_3.setStyleSheet(u"QGroupBox#QGroupBox_3 {\n"
-"    background-color:  #222831;\n"
-"    border: 2px solid gray;\n"
-"	 border-color: #00ADB5;\n"
-"    border-radius: 8px;\n"
-"    margin-top: 1ex; /* leave space at the top for the title */\n"
-"	font-size: 16px;\n"
-"}\n"
-"\n"
-"QGroupBox::title#QGroupBox_3 {\n"
-"    color:  white;\n"
-"    subcontrol-origin: margin;\n"
-"	left: 15px;\n"
-"    padding: 0px 5px 0px 5px;\n"
-"}")
-
-        self.gridLayout.addWidget(self.QGroupBox_3, 1, 0, 1, 1)
-
-        self.QGroupBox_Camera_Feed = QGroupBox(self.centralwidget)
-        self.QGroupBox_Camera_Feed.setObjectName(u"QGroupBox_Camera_Feed")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Preferred)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.QGroupBox_Camera_Feed.sizePolicy().hasHeightForWidth())
-        self.QGroupBox_Camera_Feed.setSizePolicy(sizePolicy1)
-        self.QGroupBox_Camera_Feed.setMinimumSize(QSize(620, 326))
-        self.QGroupBox_Camera_Feed.setMaximumSize(QSize(620, 16777215))
-        self.QGroupBox_Camera_Feed.setFont(font)
-        self.QGroupBox_Camera_Feed.setStyleSheet(u"QGroupBox#QGroupBox_Camera_Feed {\n"
-"    background-color:  #222831;\n"
-"    border: 2px solid gray;\n"
-"	 border-color: #00ADB5;\n"
-"    border-radius: 8px;\n"
-"    margin-top: 1ex; /* leave space at the top for the title */\n"
-"	font-size: 16px;\n"
-"}\n"
-"\n"
-"QGroupBox::title#QGroupBox_Camera_Feed {\n"
-"    color:  white;\n"
-"    subcontrol-origin: margin;\n"
-"	left: 15px;\n"
-"    padding: 0px 5px 0px 5px;\n"
-"}")
-        self.gridLayout_6 = QGridLayout(self.QGroupBox_Camera_Feed)
-        self.gridLayout_6.setObjectName(u"gridLayout_6")
-        self.gridLayout_6.setContentsMargins(12, 12, 12, 12)
-        self.QLabel_Camera_Feed = QLabel(self.QGroupBox_Camera_Feed)
-        self.QLabel_Camera_Feed.setObjectName(u"QLabel_Camera_Feed")
-        self.QLabel_Camera_Feed.setStyleSheet(u"QLabel#QLabel_Camera_Feed{\n"
-"    border-radius: 8px;\n"
-"}")
-
-        self.gridLayout_6.addWidget(self.QLabel_Camera_Feed, 1, 0, 1, 1)
-
-
-        self.gridLayout.addWidget(self.QGroupBox_Camera_Feed, 0, 0, 1, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
@@ -255,12 +316,15 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Drone Control Application", None))
         self.QGroupBox_1.setTitle(QCoreApplication.translate("MainWindow", u"Logs", None))
+        self.QGroupBox_3.setTitle(QCoreApplication.translate("MainWindow", u"Controls", None))
+        self.QGroupBox_Camera_Feed.setTitle(QCoreApplication.translate("MainWindow", u"Camera Feed", None))
+        self.QLabel_Camera_Feed.setText("")
         self.QGroupBox_2.setTitle(QCoreApplication.translate("MainWindow", u"Utilities and settings", None))
         self.QGroupBox_Data_Collector.setTitle(QCoreApplication.translate("MainWindow", u"Data Collector", None))
         self.QPushButton_Save_Gesture.setText(QCoreApplication.translate("MainWindow", u"Save gesture", None))
         self.QPushButton_Clear_All_Gestures.setText(QCoreApplication.translate("MainWindow", u"Clear all gestures", None))
-        self.QGroupBox_3.setTitle(QCoreApplication.translate("MainWindow", u"Controls", None))
-        self.QGroupBox_Camera_Feed.setTitle(QCoreApplication.translate("MainWindow", u"Camera Feed", None))
-        self.QLabel_Camera_Feed.setText("")
+        self.QGroupBox_Drone_Connection.setTitle(QCoreApplication.translate("MainWindow", u"Connection", None))
+        self.QPushButton_Connect.setText(QCoreApplication.translate("MainWindow", u"Connect", None))
+        self.QLabel_WiFI.setText("")
     # retranslateUi
 
