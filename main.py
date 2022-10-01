@@ -1,7 +1,7 @@
 # This Python file uses the following encoding: utf-8
 import sys
 import os
-import subprocess
+
 import time
 
 from PySide6.QtGui import *
@@ -12,7 +12,8 @@ from PySide6.QtWidgets import QApplication, QMainWindow
 
 from ui import Ui_MainWindow
 from data_collector import DataCollector, cv2
-from djitellopy import tello
+from wifi import WiFi
+from wifi.wifi import DRONE_WIFI_NETWORK_NAME
 
 
 class MainWindow(QMainWindow):
@@ -26,10 +27,9 @@ class MainWindow(QMainWindow):
 
         self.data_collector = DataCollector()  # Construct Data Collector instance
         self.data_collector.configure_MediaPipe_Hands(False, 1, 0.8, 0.6)  # Configure MediaPipe model
+        self.wifi = WiFi()
         self.gesture_label = "0"  # Variable for gesture label
         self.wifi_signal_image = None
-        self.is_connected = False
-        self.TelloDrone = tello.Tello()
 
         self.CameraThread = CameraThread()  # Construct Camera Thread instance
         self.CameraThread.start()  # Start Camera Thread
@@ -63,7 +63,7 @@ class MainWindow(QMainWindow):
             self.ui.QLabel_WiFI.setPixmap(QPixmap(u":/images/images/wifi_0.png"))
             self.WiFiThread.stop_thread()
             self.WiFiThread.wait(500)
-            self.is_connected = False
+            self.wifi.is_there_active_connection = False
         elif strength <= 25:
             self.ui.QLabel_WiFI.setPixmap(QPixmap(u":/images/images/wifi_1.png"))
         elif strength <= 50:
@@ -73,8 +73,7 @@ class MainWindow(QMainWindow):
         else:
             self.ui.QLabel_WiFI.setPixmap(QPixmap(u":/images/images/wifi_4.png"))
 
-
-    def add_to_logs(self, message):
+    def add_message_to_the_logs(self, message):
         current_time = QDateTime.currentDateTime().toString("hh:mm:ss")
         self.ui.QTextBrowser_Logs.append("[ " + current_time + " ]" + " :  " + message)
 
@@ -84,85 +83,50 @@ class MainWindow(QMainWindow):
     def save_gesture(self):
 
         if len(self.data_collector.multi_hand_landmarks):
-            self.data_collector.convert_coordinates()  # Convert coordinates to wrist-relative
-            self.data_collector.maximum_absolute_scaling()  # Perform data normalization methods
+            self.data_collector.convert_coordinates()
+            self.data_collector.maximum_absolute_scaling()
             self.data_collector.min_max_scaling()
             self.data_collector.standardization()
             self.data_collector.robust_scaling()
-            self.data_collector.append_labels(self.gesture_label)
+            self.data_collector.append_labels(int(self.gesture_label))
             self.data_collector.save_data(
                 'data_collector/data/01_data_raw.csv',
                 'data_collector/data/02_data_max_abs.csv',
                 'data_collector/data/03_data_min_max.csv',
                 'data_collector/data/04_data_standardized.csv',
                 'data_collector/data/05_data_robust.csv')
-
-            self.add_to_logs(
+            self.add_message_to_the_logs(
                 "<font color=\"GreenYellow\">Gesture with label <font color=\"Plum\">"
-                + self.gesture_label + "<font color=\"GreenYellow\"> has been successfully saved")
+                + self.gesture_label
+                + "<font color=\"GreenYellow\"> has been successfully saved.")
         else:
-            self.add_to_logs("<font color=\"OrangeRed\">No gesture has been detected in the camera image")
+            self.add_message_to_the_logs("<font color=\"OrangeRed\">No gesture has been detected in the camera image.")
 
     def clear_all_gestures(self):
 
         if os.stat('data_collector/data/01_data_raw.csv').st_size == 0:
-            self.add_to_logs("<font color=\"Gold\">Gesture files are already empty, no need to clear")
+            self.add_message_to_the_logs("<font color=\"Gold\">Gesture files are already empty, no need to clear.")
         else:
             self.data_collector.clear_data('data_collector/data/01_data_raw.csv')
             self.data_collector.clear_data('data_collector/data/02_data_max_abs.csv')
             self.data_collector.clear_data('data_collector/data/03_data_min_max.csv')
             self.data_collector.clear_data('data_collector/data/04_data_standardized.csv')
             self.data_collector.clear_data('data_collector/data/05_data_robust.csv')
-
-            self.add_to_logs("<font color=\"GreenYellow\">All gesture files have been cleared")
-
-
-    def what_wifi(self):
-        process = subprocess.run(['nmcli', '-t', '-f', 'ACTIVE,SSID', 'dev', 'wifi'], stdout=subprocess.PIPE)
-        if process.returncode == 0:
-            return [i for i in process.stdout.decode('utf-8').strip().split('\n') if i.startswith('yes')][0].split(":")[1]
-        else:
-            return ''
-
-    def is_connected_to(self, ssid: str):
-            return self.what_wifi() == ssid
-
-    def scan_wifi(self):
-        process = subprocess.run(['nmcli', '-t', '-f', 'SSID,SECURITY,SIGNAL', 'dev', 'wifi'], stdout=subprocess.PIPE)
-        if process.returncode == 0:
-            return process.stdout.decode('utf-8').strip().split('\n')
-        else:
-            return []
-
-    def is_wifi_available(self, ssid: str):
-        return ssid in [x.split(':')[0] for x in self.scan_wifi()]
-
-    def connect_to(self, ssid: str, password: str):
-        if not self.is_wifi_available(ssid):
-            return False
-        subprocess.call(['nmcli', 'd', 'wifi', 'connect', ssid, 'password', password])
-        return self.is_connected_to(ssid)
-
-    def show_active_wifi(self):
-        process = subprocess.run(['nmcli', 'con', 'show', '--active'], stdout=subprocess.PIPE)
-        if process.returncode == 0:
-            return process.stdout.decode('utf-8').strip().split('\n')[2].split(' ')[0]
-        else:
-            return []
+            self.add_message_to_the_logs("<font color=\"GreenYellow\">All gesture files have been cleared.")
 
     def connect_to_the_drone(self):
-        if self.is_wifi_available('TELLO-F11F4E') and not self.is_connected:
-            self.connect_to('TELLO-F11F4E','')
-            self.add_to_logs("<font color=\"GreenYellow\">Successfully connected to the drone")
+        self.wifi.find_available_networks()
+        if self.wifi.is_wifi_available(DRONE_WIFI_NETWORK_NAME) and not self.wifi.is_there_active_connection:
+            self.wifi.connect_to(DRONE_WIFI_NETWORK_NAME, '')
+            self.add_message_to_the_logs("<font color=\"GreenYellow\">Successfully connected to the drone.")
             self.WiFiThread.start()
-            self.is_connected = True
-            self.TelloDrone.connect()
+            self.wifi.is_there_active_connection = True
             self.CameraThread.start()
-        elif self.is_connected:
-            self.add_to_logs("<font color=\"Gold\">You are already connected to the drone")
-
+        elif self.wifi.is_there_active_connection:
+            self.add_message_to_the_logs("<font color=\"Gold\">You are already connected to the drone.")
         else:
-            self.add_to_logs("<font color=\"OrangeRed\">Drone WiFi is not available. Make sure the drone is powered on")
+            self.add_message_to_the_logs(
+                "<font color=\"OrangeRed\">Drone WiFi is not available. Make sure the drone is powered on.")
 
 
 class CameraThread(QThread):
@@ -190,29 +154,19 @@ class CameraThread(QThread):
 class WiFiThread(QThread):
     wifi_strength_update_signal = Signal(int)
 
-    def what_wifi(self):
-        process = subprocess.run(['nmcli', '-t', '-f', 'ACTIVE,SSID', 'dev', 'wifi'], stdout=subprocess.PIPE)
-        if process.returncode == 0:
-            return [i for i in process.stdout.decode('utf-8').strip().split('\n') if i.startswith('yes')][0].split(":")[1]
-        else:
-            return ''
-
     def run(self):
+        wifi = WiFi()
         self.ThreadActive = True
         while self.ThreadActive:
-            if self.what_wifi() == 'TELLO-F11F4E':
-                process = subprocess.run(['nmcli', '-f', 'IN-USE,SECURITY,SIGNAL', 'dev', 'wifi'], stdout=subprocess.PIPE)
-                if process.returncode == 0:
-                    signal_strength = (int([i for i in process.stdout.decode('utf-8').strip().split('\n') if i.startswith('*')][0].split('       ')[2]))
-                    self.wifi_strength_update_signal.emit(signal_strength)
+            if wifi.current_connection() == DRONE_WIFI_NETWORK_NAME:
+                self.wifi_strength_update_signal.emit(wifi.check_signal_strength())
             else:
                 self.wifi_strength_update_signal.emit(0)
-
-            time.sleep(35)
 
     def stop_thread(self):
         self.ThreadActive = False
         self.quit()
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
