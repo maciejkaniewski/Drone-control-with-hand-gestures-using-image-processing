@@ -117,47 +117,6 @@ class DataCollector:
 
         #cv2.imshow("Data Collector", self.image)
 
-    def info(self, gesture_label: int = None, keyboard_key=None):
-        """
-        Displays information about options and saved gestures.
-
-        :param gesture_label: label of the gesture
-        :param keyboard_key: pressed keyboard key
-        """
-
-        options_image = cv2.imread('data_collector/res/options.png')
-        img2gray = cv2.cvtColor(options_image, cv2.COLOR_BGR2GRAY)
-        ret, mask = cv2.threshold(img2gray, 1, 255, cv2.THRESH_BINARY)
-
-        if gesture_label is not None:
-            cv2.putText(self.image,
-                        'Successfully saved',
-                        (10, 25),
-                        cv2.FONT_HERSHEY_COMPLEX_SMALL, 1,
-                        (126, 238, 28),
-                        1,
-                        cv2.LINE_AA)
-            cv2.putText(self.image,
-                        'gesture landmarks with label: ' + str(gesture_label),
-                        (10, 50),
-                        cv2.FONT_HERSHEY_COMPLEX_SMALL, 1,
-                        (126, 238, 28),
-                        1,
-                        cv2.LINE_AA)
-
-        if keyboard_key == ord("o"):
-            if self.options_flag is False:
-                self.options_flag = True
-            else:
-                self.options_flag = False
-
-        if self.options_flag:
-            ROI = self.image[-405:-5, -505:-5]
-            ROI[np.where(mask)] = 0
-            ROI += options_image
-
-        #cv2.imshow("Data Collector", self.image)
-
     def convert_coordinates(self) -> None:
         """
         Converts the coordinates of the hand landmarks from absolute to relative to the wrist point.
