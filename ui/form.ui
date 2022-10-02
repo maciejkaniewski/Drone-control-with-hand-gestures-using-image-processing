@@ -506,6 +506,109 @@ QGroupBox::title#QGroupBox_Drone_Connection   {
         </item>
        </layout>
       </widget>
+      <widget class="QGroupBox" name="QGroupBox_Drone_Battery">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>200</y>
+         <width>191</width>
+         <height>111</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QGroupBox#QGroupBox_Drone_Battery {
+    background-color:  #222831;
+    border: 2px solid gray;
+	 border-color: #00ADB5;
+    border-radius: 8px;
+    margin-top: 1ex; /* leave space at the top for the title */
+	font-size: 14px;
+}
+
+QGroupBox::title#QGroupBox_Drone_Battery   {
+    color:  white;
+    subcontrol-origin: margin;
+	left: 15px;
+    padding: 0px 5px 0px 5px;
+}</string>
+       </property>
+       <property name="title">
+        <string>Battery</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_8">
+        <property name="leftMargin">
+         <number>12</number>
+        </property>
+        <property name="topMargin">
+         <number>12</number>
+        </property>
+        <property name="rightMargin">
+         <number>12</number>
+        </property>
+        <property name="bottomMargin">
+         <number>12</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QFrame" name="QFrame_Data_Drone_Battery">
+          <property name="styleSheet">
+           <string notr="true">QFrame#QFrame_Data_Drone_Battery {
+    border-radius: 8px;
+	background-color: #393E46;
+}</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Panel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_9">
+           <item row="0" column="0">
+            <widget class="QProgressBar" name="QProgressBar_Battery">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QProgressBar#QProgressBar_Battery {
+    border: 2px solid grey;
+    border-radius: 5px;
+	 color:#EEEEEE;
+}
+
+QProgressBar::chunk#QProgressBar_Battery  {
+    background-color: #00ADB5;
+    width: 20px;
+}
+</string>
+             </property>
+             <property name="value">
+              <number>0</number>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="textVisible">
+              <bool>true</bool>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="invertedAppearance">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>

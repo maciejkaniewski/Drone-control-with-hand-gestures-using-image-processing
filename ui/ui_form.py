@@ -17,8 +17,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QGroupBox,
     QHBoxLayout, QLabel, QMainWindow, QMenuBar,
-    QPushButton, QSizePolicy, QSpinBox, QStatusBar,
-    QTextBrowser, QVBoxLayout, QWidget)
+    QProgressBar, QPushButton, QSizePolicy, QSpinBox,
+    QStatusBar, QTextBrowser, QVBoxLayout, QWidget)
 from resources import resources_rc
 
 class Ui_MainWindow(object):
@@ -296,6 +296,67 @@ class Ui_MainWindow(object):
 
         self.gridLayout_7.addWidget(self.QFrame_Data_Drone_Connection, 0, 0, 1, 1)
 
+        self.QGroupBox_Drone_Battery = QGroupBox(self.QGroupBox_2)
+        self.QGroupBox_Drone_Battery.setObjectName(u"QGroupBox_Drone_Battery")
+        self.QGroupBox_Drone_Battery.setGeometry(QRect(10, 200, 191, 111))
+        self.QGroupBox_Drone_Battery.setStyleSheet(u"QGroupBox#QGroupBox_Drone_Battery {\n"
+"    background-color:  #222831;\n"
+"    border: 2px solid gray;\n"
+"	 border-color: #00ADB5;\n"
+"    border-radius: 8px;\n"
+"    margin-top: 1ex; /* leave space at the top for the title */\n"
+"	font-size: 14px;\n"
+"}\n"
+"\n"
+"QGroupBox::title#QGroupBox_Drone_Battery   {\n"
+"    color:  white;\n"
+"    subcontrol-origin: margin;\n"
+"	left: 15px;\n"
+"    padding: 0px 5px 0px 5px;\n"
+"}")
+        self.gridLayout_8 = QGridLayout(self.QGroupBox_Drone_Battery)
+        self.gridLayout_8.setObjectName(u"gridLayout_8")
+        self.gridLayout_8.setContentsMargins(12, 12, 12, 12)
+        self.QFrame_Data_Drone_Battery = QFrame(self.QGroupBox_Drone_Battery)
+        self.QFrame_Data_Drone_Battery.setObjectName(u"QFrame_Data_Drone_Battery")
+        self.QFrame_Data_Drone_Battery.setStyleSheet(u"QFrame#QFrame_Data_Drone_Battery {\n"
+"    border-radius: 8px;\n"
+"	background-color: #393E46;\n"
+"}")
+        self.QFrame_Data_Drone_Battery.setFrameShape(QFrame.Panel)
+        self.QFrame_Data_Drone_Battery.setFrameShadow(QFrame.Raised)
+        self.gridLayout_9 = QGridLayout(self.QFrame_Data_Drone_Battery)
+        self.gridLayout_9.setObjectName(u"gridLayout_9")
+        self.QProgressBar_Battery = QProgressBar(self.QFrame_Data_Drone_Battery)
+        self.QProgressBar_Battery.setObjectName(u"QProgressBar_Battery")
+        self.QProgressBar_Battery.setEnabled(True)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Minimum)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.QProgressBar_Battery.sizePolicy().hasHeightForWidth())
+        self.QProgressBar_Battery.setSizePolicy(sizePolicy2)
+        self.QProgressBar_Battery.setStyleSheet(u"QProgressBar#QProgressBar_Battery {\n"
+"    border: 2px solid grey;\n"
+"    border-radius: 5px;\n"
+"	 color:#EEEEEE;\n"
+"}\n"
+"\n"
+"QProgressBar::chunk#QProgressBar_Battery  {\n"
+"    background-color: #00ADB5;\n"
+"    width: 20px;\n"
+"}\n"
+"")
+        self.QProgressBar_Battery.setValue(0)
+        self.QProgressBar_Battery.setAlignment(Qt.AlignCenter)
+        self.QProgressBar_Battery.setTextVisible(True)
+        self.QProgressBar_Battery.setOrientation(Qt.Horizontal)
+        self.QProgressBar_Battery.setInvertedAppearance(False)
+
+        self.gridLayout_9.addWidget(self.QProgressBar_Battery, 0, 0, 1, 1)
+
+
+        self.gridLayout_8.addWidget(self.QFrame_Data_Drone_Battery, 0, 0, 1, 1)
+
 
         self.gridLayout.addWidget(self.QGroupBox_2, 0, 1, 1, 1)
 
@@ -326,5 +387,6 @@ class Ui_MainWindow(object):
         self.QGroupBox_Drone_Connection.setTitle(QCoreApplication.translate("MainWindow", u"Connection", None))
         self.QPushButton_Connect.setText(QCoreApplication.translate("MainWindow", u"Connect", None))
         self.QLabel_WiFI.setText("")
+        self.QGroupBox_Drone_Battery.setTitle(QCoreApplication.translate("MainWindow", u"Battery", None))
     # retranslateUi
 

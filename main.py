@@ -12,6 +12,7 @@ from ui import Ui_MainWindow
 from data_collector import DataCollector
 from wifi import WiFi
 from wifi.wifi import DRONE_WIFI_NETWORK_NAME
+from djitellopy import Tello
 
 
 class MainWindow(QMainWindow):
@@ -22,6 +23,8 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.WindowMinimizeButtonHint)
+
+        self.TelloDrone = Tello()
 
         self.data_collector = DataCollector()  # Construct Data Collector instance
         self.data_collector.configure_MediaPipe_Hands(False, 1, 0.8, 0.6)  # Configure MediaPipe model
@@ -38,6 +41,9 @@ class MainWindow(QMainWindow):
         self.WiFiThread = WiFiThread(self.wifi)
         self.WiFiThread.wifi_strength_update_signal.connect(self.wifi_strength_update_slot)
 
+        self.BatteryThread = BatteryThread(self.TelloDrone)
+        self.BatteryThread.battery_percentage_update_signal.connect(self.battery_percentage_update_slot)
+
         self.ui.QPushButton_Save_Gesture.clicked.connect(self.save_gesture)
         self.ui.QPushButton_Clear_All_Gestures.clicked.connect(self.clear_all_gestures)
         self.ui.QSpinBox_Gesture_Label.valueChanged.connect(self.set_gesture_label)
@@ -52,7 +58,9 @@ class MainWindow(QMainWindow):
         self.CameraThread.wait(500)
         self.WiFiThread.stop_thread()
         self.WiFiThread.wait(500)
-        if self.CameraThread.isFinished() and self.WiFiThread.isFinished():
+        self.BatteryThread.stop_thread()
+        self.BatteryThread.wait(500)
+        if self.CameraThread.isFinished() and self.WiFiThread.isFinished() and self.BatteryThread.isFinished():
             event.accept()
 
     def image_update_slot(self, image):
@@ -91,6 +99,9 @@ class MainWindow(QMainWindow):
             self.ui.QLabel_WiFI.setPixmap(QPixmap(u":/images/images/wifi_3.png"))
         else:
             self.ui.QLabel_WiFI.setPixmap(QPixmap(u":/images/images/wifi_4.png"))
+
+    def battery_percentage_update_slot(self, battery_percentage):
+        self.ui.QProgressBar_Battery.setValue(battery_percentage)
 
     def add_message_to_the_logs(self, message):
         """
@@ -159,6 +170,8 @@ class MainWindow(QMainWindow):
             self.wifi.connect_to(DRONE_WIFI_NETWORK_NAME, '')
             self.WiFiThread.start()
             self.wifi.is_there_active_connection = True
+            self.TelloDrone.connect()
+            self.BatteryThread.start()
             self.add_message_to_the_logs("<font color=\"GreenYellow\">Successfully connected to the drone.")
         elif self.wifi.is_there_active_connection:
             self.add_message_to_the_logs("<font color=\"Gold\">You are already connected to the drone.")
@@ -195,6 +208,7 @@ class CameraThread(QThread):
 class WiFiThread(QThread):
     wifi_strength_update_signal = Signal(int)
 
+
     def __init__(self, wifi_instance: WiFi(), parent=None):
         super().__init__(parent)
         self.ThreadActive = None
@@ -212,6 +226,22 @@ class WiFiThread(QThread):
         self.ThreadActive = False
         self.quit()
 
+class BatteryThread(QThread):
+    battery_percentage_update_signal = Signal(int)
+
+    def __init__(self, drone_instance: Tello(), parent=None):
+        super().__init__(parent)
+        self.ThreadActive = None
+        self.TelloDrone = drone_instance
+
+    def run(self):
+        self.ThreadActive = True
+        while self.ThreadActive:
+            self.battery_percentage_update_signal.emit(self.TelloDrone.get_battery())
+
+    def stop_thread(self):
+        self.ThreadActive = False
+        self.quit()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
