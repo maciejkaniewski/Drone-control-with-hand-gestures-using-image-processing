@@ -28,26 +28,52 @@ class MainWindow(QMainWindow):
 
         self.data_collector = DataCollector()  # Construct Data Collector instance
         self.data_collector.configure_MediaPipe_Hands(False, 1, 0.8, 0.6)  # Configure MediaPipe model
-        self.data_collector.configure_camera()  # Configure Data Collector's camera
         self.wifi = WiFi()
         self.gesture_label = "0"  # Variable for gesture label
         self.wifi_signal_image = None
 
-        self.CameraThread = CameraThread(self.data_collector)  # Construct Camera Thread instance
+        self.CameraThread = CameraThread()  # Construct Camera Thread instance
         self.CameraThread.start()  # Start Camera Thread
         self.CameraThread.image_update_signal.connect(self.image_update_slot)
         self.CameraThread.landmarks_update_signal.connect(self.landmarks_update_slot)
 
-        self.WiFiThread = WiFiThread(self.wifi)
+        self.WiFiThread = WiFiThread(self.wifi, self.TelloDrone)
         self.WiFiThread.wifi_strength_update_signal.connect(self.wifi_strength_update_slot)
-
-        self.BatteryThread = BatteryThread(self.TelloDrone)
-        self.BatteryThread.battery_percentage_update_signal.connect(self.battery_percentage_update_slot)
+        self.WiFiThread.battery_percentage_update_signal.connect(self.battery_percentage_update_slot)
+        self.WiFiThread.message_update_signal.connect(self.add_message_to_the_logs)
+        self.WiFiThread.ui_update_signal.connect(self.ui_update_slot)
 
         self.ui.QPushButton_Save_Gesture.clicked.connect(self.save_gesture)
         self.ui.QPushButton_Clear_All_Gestures.clicked.connect(self.clear_all_gestures)
         self.ui.QSpinBox_Gesture_Label.valueChanged.connect(self.set_gesture_label)
         self.ui.QPushButton_Connect.clicked.connect(self.connect_to_the_drone)
+
+        self.ui.QPushButton_Forward.pressed.connect(self.move_forward_pressed)
+        self.ui.QPushButton_Forward.released.connect(self.move_forward_released)
+
+        self.ui.QPushButton_Backward.pressed.connect(self.move_backward_pressed)
+        self.ui.QPushButton_Backward.released.connect(self.move_backward_released)
+
+        self.ui.QPushButton_Right.pressed.connect(self.move_right_pressed)
+        self.ui.QPushButton_Right.released.connect(self.move_right_released)
+
+        self.ui.QPushButton_Left.pressed.connect(self.move_left_pressed)
+        self.ui.QPushButton_Left.released.connect(self.move_left_released)
+
+        self.ui.QPushButton_Take_Off.clicked.connect(self.take_off)
+        self.ui.QPushButton_Land.clicked.connect(self.land)
+
+        self.ui.QPushButton_Up.pressed.connect(self.move_up_pressed)
+        self.ui.QPushButton_Up.released.connect(self.move_up_released)
+
+        self.ui.QPushButton_Down.pressed.connect(self.move_down_pressed)
+        self.ui.QPushButton_Down.released.connect(self.move_down_released)
+
+        self.ui.QPushButton_Rotate_Right.pressed.connect(self.move_rotate_right_pressed)
+        self.ui.QPushButton_Rotate_Right.released.connect(self.move_rotate_right_released)
+
+        self.ui.QPushButton_Rotate_Left.pressed.connect(self.move_rotate_left_pressed)
+        self.ui.QPushButton_Rotate_Left.released.connect(self.move_rotate_left_released)
 
     def closeEvent(self, event):
         """
@@ -58,9 +84,7 @@ class MainWindow(QMainWindow):
         self.CameraThread.wait(500)
         self.WiFiThread.stop_thread()
         self.WiFiThread.wait(500)
-        self.BatteryThread.stop_thread()
-        self.BatteryThread.wait(500)
-        if self.CameraThread.isFinished() and self.WiFiThread.isFinished() and self.BatteryThread.isFinished():
+        if self.CameraThread.isFinished() and self.WiFiThread.isFinished():
             event.accept()
 
     def image_update_slot(self, image):
@@ -102,6 +126,18 @@ class MainWindow(QMainWindow):
 
     def battery_percentage_update_slot(self, battery_percentage):
         self.ui.QProgressBar_Battery.setValue(battery_percentage)
+
+    def ui_update_slot(self):
+        self.ui.QPushButton_Forward.setEnabled(True)
+        self.ui.QPushButton_Backward.setEnabled(True)
+        self.ui.QPushButton_Right.setEnabled(True)
+        self.ui.QPushButton_Left.setEnabled(True)
+        self.ui.QPushButton_Take_Off.setEnabled(True)
+        self.ui.QPushButton_Land.setEnabled(True)
+        self.ui.QPushButton_Up.setEnabled(True)
+        self.ui.QPushButton_Down.setEnabled(True)
+        self.ui.QPushButton_Rotate_Right.setEnabled(True)
+        self.ui.QPushButton_Rotate_Left.setEnabled(True)
 
     def add_message_to_the_logs(self, message):
         """
@@ -165,40 +201,87 @@ class MainWindow(QMainWindow):
         Connects to the drone.
         """
 
-        self.wifi.find_available_networks()
-        if self.wifi.is_wifi_available(DRONE_WIFI_NETWORK_NAME) and not self.wifi.is_there_active_connection:
-            self.wifi.connect_to(DRONE_WIFI_NETWORK_NAME, '')
-            self.WiFiThread.start()
-            self.wifi.is_there_active_connection = True
-            self.TelloDrone.connect()
-            self.BatteryThread.start()
-            self.add_message_to_the_logs("<font color=\"GreenYellow\">Successfully connected to the drone.")
-        elif self.wifi.is_there_active_connection:
+        self.add_message_to_the_logs("<font color=\"Gold\">Attempting to connect to the drone.")
+
+        if self.wifi.is_there_active_connection:
             self.add_message_to_the_logs("<font color=\"Gold\">You are already connected to the drone.")
         else:
-            self.add_message_to_the_logs(
-                "<font color=\"OrangeRed\">Drone WiFi is not available. Make sure the drone is powered on.")
+            self.WiFiThread.start()
+
+    def move_forward_pressed(self):
+        self.ui.QPushButton_Forward.setIcon(QIcon(u":/images/images/forward_clicked.png"))
+
+    def move_forward_released(self):
+        self.ui.QPushButton_Forward.setIcon(QIcon(u":/images/images/forward.png"))
+
+    def move_backward_pressed(self):
+        self.ui.QPushButton_Backward.setIcon(QIcon(u":/images/images/backward_clicked.png"))
+
+    def move_backward_released(self):
+        self.ui.QPushButton_Backward.setIcon(QIcon(u":/images/images/backward.png"))
+
+    def move_right_pressed(self):
+        self.ui.QPushButton_Right.setIcon(QIcon(u":/images/images/right_clicked.png"))
+
+    def move_right_released(self):
+        self.ui.QPushButton_Right.setIcon(QIcon(u":/images/images/right.png"))
+
+    def move_left_pressed(self):
+        self.ui.QPushButton_Left.setIcon(QIcon(u":/images/images/left_clicked.png"))
+
+    def move_left_released(self):
+        self.ui.QPushButton_Left.setIcon(QIcon(u":/images/images/left.png"))
+
+    def take_off(self):
+        pass
+
+    def land(self):
+        pass
+
+    def move_up_pressed(self):
+        self.ui.QPushButton_Up.setIcon(QIcon(u":/images/images/up_clicked.png"))
+
+    def move_up_released(self):
+        self.ui.QPushButton_Up.setIcon(QIcon(u":/images/images/up.png"))
+
+    def move_down_pressed(self):
+        self.ui.QPushButton_Down.setIcon(QIcon(u":/images/images/down_clicked.png"))
+
+    def move_down_released(self):
+        self.ui.QPushButton_Down.setIcon(QIcon(u":/images/images/down.png"))
+
+    def move_rotate_right_pressed(self):
+        self.ui.QPushButton_Rotate_Right.setIcon(QIcon(u":/images/images/rotate_right_clicked.png"))
+
+    def move_rotate_right_released(self):
+        self.ui.QPushButton_Rotate_Right.setIcon(QIcon(u":/images/images/rotate_right.png"))
+
+    def move_rotate_left_pressed(self):
+        self.ui.QPushButton_Rotate_Left.setIcon(QIcon(u":/images/images/rotate_left_clicked.png"))
+
+    def move_rotate_left_released(self):
+        self.ui.QPushButton_Rotate_Left.setIcon(QIcon(u":/images/images/rotate_left.png"))
 
 
 class CameraThread(QThread):
     image_update_signal = Signal(QImage)
     landmarks_update_signal = Signal(list)
 
-    def __init__(self, data_collector_instance: DataCollector(), parent=None):
+    def __init__(self, parent=None):
         super().__init__(parent)
         self.ThreadActive = None
-        self.data_collector = data_collector_instance
 
     def run(self):
-
+        data_collector = DataCollector()  # Construct Data Collector instance
+        data_collector.configure_camera()  # Configure Data Collector's camera
+        data_collector.configure_MediaPipe_Hands(False, 1, 0.8, 0.6)  # Configure MediaPipe model
         self.ThreadActive = True
-
         while self.ThreadActive:
-            self.data_collector.detect()
-            self.image_update_signal.emit(self.data_collector.image)
-            self.landmarks_update_signal.emit(self.data_collector.multi_hand_landmarks)
-            self.data_collector.multi_hand_landmarks = None  # Clear hand landmarks
-        self.data_collector.free_camera()  # Free data_collector's resources
+            data_collector.detect()
+            self.image_update_signal.emit(data_collector.image)
+            self.landmarks_update_signal.emit(data_collector.multi_hand_landmarks)
+            data_collector.multi_hand_landmarks = None  # Clear hand landmarks
+        data_collector.free_camera()  # Free data_collector's resources
 
     def stop_thread(self):
         self.ThreadActive = False
@@ -207,18 +290,33 @@ class CameraThread(QThread):
 
 class WiFiThread(QThread):
     wifi_strength_update_signal = Signal(int)
+    battery_percentage_update_signal = Signal(int)
+    message_update_signal = Signal(str)
+    ui_update_signal = Signal()
 
+    def __init__(self, wifi_instance: WiFi(), drone_instance, parent=None):
 
-    def __init__(self, wifi_instance: WiFi(), parent=None):
         super().__init__(parent)
-        self.ThreadActive = None
+        self.TelloDrone = drone_instance
         self.wifi = wifi_instance
+        self.ThreadActive = None
 
     def run(self):
-        self.ThreadActive = True
+        self.wifi.find_available_networks()
+        if self.wifi.is_wifi_available(DRONE_WIFI_NETWORK_NAME) and not self.wifi.is_there_active_connection:
+            self.wifi.connect_to(DRONE_WIFI_NETWORK_NAME, '')
+            self.wifi.is_there_active_connection = True
+            self.TelloDrone.connect()
+            self.ThreadActive = True
+            self.message_update_signal.emit("<font color=\"GreenYellow\">Successfully connected to the drone.")
+            self.ui_update_signal.emit()
+        else:
+            self.message_update_signal.emit("<font color=\"OrangeRed\">Drone WiFi is not available. Make sure the "
+                                            "drone is powered on.")
         while self.ThreadActive:
             if self.wifi.current_connection() == DRONE_WIFI_NETWORK_NAME:
                 self.wifi_strength_update_signal.emit(self.wifi.check_signal_strength())
+                self.battery_percentage_update_signal.emit(self.TelloDrone.get_battery())
             else:
                 self.wifi_strength_update_signal.emit(0)
 
@@ -226,22 +324,6 @@ class WiFiThread(QThread):
         self.ThreadActive = False
         self.quit()
 
-class BatteryThread(QThread):
-    battery_percentage_update_signal = Signal(int)
-
-    def __init__(self, drone_instance: Tello(), parent=None):
-        super().__init__(parent)
-        self.ThreadActive = None
-        self.TelloDrone = drone_instance
-
-    def run(self):
-        self.ThreadActive = True
-        while self.ThreadActive:
-            self.battery_percentage_update_signal.emit(self.TelloDrone.get_battery())
-
-    def stop_thread(self):
-        self.ThreadActive = False
-        self.quit()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

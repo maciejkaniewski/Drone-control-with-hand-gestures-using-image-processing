@@ -58,175 +58,6 @@
     <property name="verticalSpacing">
      <number>9</number>
     </property>
-    <item row="1" column="1">
-     <widget class="QGroupBox" name="QGroupBox_1">
-      <property name="minimumSize">
-       <size>
-        <width>620</width>
-        <height>326</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>-1</pointsize>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QGroupBox#QGroupBox_1 {
-    background-color:  #222831;
-    border: 2px solid gray;
-	 border-color: #00ADB5;
-    border-radius: 8px;
-    margin-top: 1ex; /* leave space at the top for the title */
-	 font-size: 16px;
-}
-
-QGroupBox::title#QGroupBox_1 {
-    color:  white;
-    subcontrol-origin: margin;
-	left: 15px;
-    padding: 0px 5px 0px 5px;
-}</string>
-      </property>
-      <property name="title">
-       <string>Logs</string>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_2">
-       <property name="leftMargin">
-        <number>16</number>
-       </property>
-       <property name="topMargin">
-        <number>16</number>
-       </property>
-       <property name="rightMargin">
-        <number>16</number>
-       </property>
-       <property name="bottomMargin">
-        <number>16</number>
-       </property>
-       <item row="0" column="0">
-        <widget class="QTextBrowser" name="QTextBrowser_Logs">
-         <property name="styleSheet">
-          <string notr="true">QTextBrowser#QTextBrowser_Logs {
-	color:#EEEEEE;
-}</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QGroupBox" name="QGroupBox_3">
-      <property name="minimumSize">
-       <size>
-        <width>620</width>
-        <height>326</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>-1</pointsize>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QGroupBox#QGroupBox_3 {
-    background-color:  #222831;
-    border: 2px solid gray;
-	 border-color: #00ADB5;
-    border-radius: 8px;
-    margin-top: 1ex; /* leave space at the top for the title */
-	font-size: 16px;
-}
-
-QGroupBox::title#QGroupBox_3 {
-    color:  white;
-    subcontrol-origin: margin;
-	left: 15px;
-    padding: 0px 5px 0px 5px;
-}</string>
-      </property>
-      <property name="title">
-       <string>Controls</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QGroupBox" name="QGroupBox_Camera_Feed">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>620</width>
-        <height>326</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>620</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>-1</pointsize>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QGroupBox#QGroupBox_Camera_Feed {
-    background-color:  #222831;
-    border: 2px solid gray;
-	 border-color: #00ADB5;
-    border-radius: 8px;
-    margin-top: 1ex; /* leave space at the top for the title */
-	font-size: 16px;
-}
-
-QGroupBox::title#QGroupBox_Camera_Feed {
-    color:  white;
-    subcontrol-origin: margin;
-	left: 15px;
-    padding: 0px 5px 0px 5px;
-}</string>
-      </property>
-      <property name="title">
-       <string>Camera Feed</string>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_6">
-       <property name="leftMargin">
-        <number>12</number>
-       </property>
-       <property name="topMargin">
-        <number>12</number>
-       </property>
-       <property name="rightMargin">
-        <number>12</number>
-       </property>
-       <property name="bottomMargin">
-        <number>12</number>
-       </property>
-       <item row="1" column="0">
-        <widget class="QLabel" name="QLabel_Camera_Feed">
-         <property name="styleSheet">
-          <string notr="true">QLabel#QLabel_Camera_Feed{
-    border-radius: 8px;
-}</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
     <item row="0" column="1">
      <widget class="QGroupBox" name="QGroupBox_2">
       <property name="minimumSize">
@@ -426,9 +257,9 @@ QGroupBox::title#QGroupBox_Drone_Connection   {
          <number>12</number>
         </property>
         <item row="0" column="0">
-         <widget class="QFrame" name="QFrame_Data_Drone_Connection">
+         <widget class="QFrame" name="QFrame_Drone_Connection">
           <property name="styleSheet">
-           <string notr="true">QFrame#QFrame_Data_Collector {
+           <string notr="true">QFrame#QFrame_Drone_Connection {
     border-radius: 8px;
 	background-color: #393E46;
 }</string>
@@ -549,9 +380,9 @@ QGroupBox::title#QGroupBox_Drone_Battery   {
          <number>12</number>
         </property>
         <item row="0" column="0">
-         <widget class="QFrame" name="QFrame_Data_Drone_Battery">
+         <widget class="QFrame" name="QFrame_Drone_Battery">
           <property name="styleSheet">
-           <string notr="true">QFrame#QFrame_Data_Drone_Battery {
+           <string notr="true">QFrame#QFrame_Drone_Battery {
     border-radius: 8px;
 	background-color: #393E46;
 }</string>
@@ -605,6 +436,553 @@ QProgressBar::chunk#QProgressBar_Battery  {
             </widget>
            </item>
           </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QGroupBox" name="QGroupBox_1">
+      <property name="minimumSize">
+       <size>
+        <width>620</width>
+        <height>326</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>-1</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QGroupBox#QGroupBox_1 {
+    background-color:  #222831;
+    border: 2px solid gray;
+	 border-color: #00ADB5;
+    border-radius: 8px;
+    margin-top: 1ex; /* leave space at the top for the title */
+	 font-size: 16px;
+}
+
+QGroupBox::title#QGroupBox_1 {
+    color:  white;
+    subcontrol-origin: margin;
+	left: 15px;
+    padding: 0px 5px 0px 5px;
+}</string>
+      </property>
+      <property name="title">
+       <string>Logs</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <property name="leftMargin">
+        <number>16</number>
+       </property>
+       <property name="topMargin">
+        <number>16</number>
+       </property>
+       <property name="rightMargin">
+        <number>16</number>
+       </property>
+       <property name="bottomMargin">
+        <number>16</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QTextBrowser" name="QTextBrowser_Logs">
+         <property name="styleSheet">
+          <string notr="true">QTextBrowser#QTextBrowser_Logs {
+	color:#EEEEEE;
+}</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QGroupBox" name="QGroupBox_Camera_Feed">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>620</width>
+        <height>326</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>620</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>-1</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QGroupBox#QGroupBox_Camera_Feed {
+    background-color:  #222831;
+    border: 2px solid gray;
+	 border-color: #00ADB5;
+    border-radius: 8px;
+    margin-top: 1ex; /* leave space at the top for the title */
+	font-size: 16px;
+}
+
+QGroupBox::title#QGroupBox_Camera_Feed {
+    color:  white;
+    subcontrol-origin: margin;
+	left: 15px;
+    padding: 0px 5px 0px 5px;
+}</string>
+      </property>
+      <property name="title">
+       <string>Camera Feed</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_6">
+       <property name="leftMargin">
+        <number>12</number>
+       </property>
+       <property name="topMargin">
+        <number>12</number>
+       </property>
+       <property name="rightMargin">
+        <number>12</number>
+       </property>
+       <property name="bottomMargin">
+        <number>12</number>
+       </property>
+       <item row="1" column="0">
+        <widget class="QLabel" name="QLabel_Camera_Feed">
+         <property name="styleSheet">
+          <string notr="true">QLabel#QLabel_Camera_Feed{
+    border-radius: 8px;
+}</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QGroupBox" name="QGroupBox_3">
+      <property name="minimumSize">
+       <size>
+        <width>620</width>
+        <height>326</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>-1</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QGroupBox#QGroupBox_3 {
+    background-color:  #222831;
+    border: 2px solid gray;
+	 border-color: #00ADB5;
+    border-radius: 8px;
+    margin-top: 1ex; /* leave space at the top for the title */
+	font-size: 16px;
+}
+
+QGroupBox::title#QGroupBox_3 {
+    color:  white;
+    subcontrol-origin: margin;
+	left: 15px;
+    padding: 0px 5px 0px 5px;
+}</string>
+      </property>
+      <property name="title">
+       <string>Controls</string>
+      </property>
+      <widget class="QPushButton" name="QPushButton_Take_Off">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>260</y>
+         <width>89</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton#QPushButton_Take_Off{
+	color:#EEEEEE;
+}</string>
+       </property>
+       <property name="text">
+        <string>Take Off</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="QPushButton_Land">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>290</y>
+         <width>89</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton#QPushButton_Land{
+	color:#EEEEEE;
+}</string>
+       </property>
+       <property name="text">
+        <string>Land</string>
+       </property>
+      </widget>
+      <widget class="QFrame" name="QFrame_Basic_Moves">
+       <property name="geometry">
+        <rect>
+         <x>358</x>
+         <y>81</y>
+         <width>225</width>
+         <height>168</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame#QFrame_Basic_Moves {
+    border-radius: 64px;
+	background-color: #393E46;
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_11">
+        <item row="2" column="2">
+         <widget class="QPushButton" name="QPushButton_Backward">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>65</width>
+            <height>45</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../resources/resources.qrc">
+            <normaloff>:/images/images/backward.png</normaloff>:/images/images/backward.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>40</width>
+            <height>40</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QPushButton" name="QPushButton_Forward">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>65</width>
+            <height>45</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../resources/resources.qrc">
+            <normaloff>:/images/images/forward.png</normaloff>:/images/images/forward.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>40</width>
+            <height>40</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QPushButton" name="QPushButton_Dummy1">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>65</width>
+            <height>45</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QPushButton" name="QPushButton_Right">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>65</width>
+            <height>45</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../resources/resources.qrc">
+            <normaloff>:/images/images/right.png</normaloff>:/images/images/right.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>40</width>
+            <height>40</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="QPushButton_Left">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>65</width>
+            <height>45</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../resources/resources.qrc">
+            <normaloff>:/images/images/left.png</normaloff>:/images/images/left.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>40</width>
+            <height>40</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QFrame" name="QFrame_Advanced_Moves">
+       <property name="geometry">
+        <rect>
+         <x>41</x>
+         <y>81</y>
+         <width>225</width>
+         <height>168</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QFrame#QFrame_Advanced_Moves {
+    border-radius: 64px;
+	background-color: #393E46;
+}</string>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_12">
+        <item row="2" column="2">
+         <widget class="QPushButton" name="QPushButton_Down">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>65</width>
+            <height>45</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../resources/resources.qrc">
+            <normaloff>:/images/images/down.png</normaloff>:/images/images/down.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>40</width>
+            <height>40</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QPushButton" name="QPushButton_Up">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>65</width>
+            <height>45</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../resources/resources.qrc">
+            <normaloff>:/images/images/up.png</normaloff>:/images/images/up.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>40</width>
+            <height>40</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QPushButton" name="QPushButton_Dummy2">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>65</width>
+            <height>45</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="QPushButton_Rotate_Left">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>65</width>
+            <height>45</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../resources/resources.qrc">
+            <normaloff>:/images/images/rotate_left.png</normaloff>:/images/images/rotate_left.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>40</width>
+            <height>40</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QPushButton" name="QPushButton_Rotate_Right">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>65</width>
+            <height>45</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../resources/resources.qrc">
+            <normaloff>:/images/images/rotate_right.png</normaloff>:/images/images/rotate_right.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>40</width>
+            <height>40</height>
+           </size>
+          </property>
          </widget>
         </item>
        </layout>
