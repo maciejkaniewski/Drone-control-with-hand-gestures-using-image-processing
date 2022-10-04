@@ -703,6 +703,9 @@ QGroupBox::title#QGroupBox_3 {
             <height>40</height>
            </size>
           </property>
+          <property name="shortcut">
+           <string>Down</string>
+          </property>
          </widget>
         </item>
         <item row="0" column="2">
@@ -734,6 +737,9 @@ QGroupBox::title#QGroupBox_3 {
             <width>40</width>
             <height>40</height>
            </size>
+          </property>
+          <property name="shortcut">
+           <string>Up</string>
           </property>
          </widget>
         </item>
@@ -786,6 +792,9 @@ QGroupBox::title#QGroupBox_3 {
             <height>40</height>
            </size>
           </property>
+          <property name="shortcut">
+           <string>Right</string>
+          </property>
          </widget>
         </item>
         <item row="1" column="0">
@@ -817,6 +826,9 @@ QGroupBox::title#QGroupBox_3 {
             <width>40</width>
             <height>40</height>
            </size>
+          </property>
+          <property name="shortcut">
+           <string>Left</string>
           </property>
          </widget>
         </item>
