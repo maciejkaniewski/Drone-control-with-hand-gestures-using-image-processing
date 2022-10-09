@@ -360,20 +360,20 @@ class Ui_MainWindow(object):
         self.QPushButton_Take_Off = QPushButton(self.QGroupBox_3)
         self.QPushButton_Take_Off.setObjectName(u"QPushButton_Take_Off")
         self.QPushButton_Take_Off.setEnabled(False)
-        self.QPushButton_Take_Off.setGeometry(QRect(260, 260, 89, 25))
+        self.QPushButton_Take_Off.setGeometry(QRect(30, 30, 89, 25))
         self.QPushButton_Take_Off.setStyleSheet(u"QPushButton#QPushButton_Take_Off{\n"
 "	color:#EEEEEE;\n"
 "}")
         self.QPushButton_Land = QPushButton(self.QGroupBox_3)
         self.QPushButton_Land.setObjectName(u"QPushButton_Land")
         self.QPushButton_Land.setEnabled(False)
-        self.QPushButton_Land.setGeometry(QRect(260, 290, 89, 25))
+        self.QPushButton_Land.setGeometry(QRect(130, 30, 89, 25))
         self.QPushButton_Land.setStyleSheet(u"QPushButton#QPushButton_Land{\n"
 "	color:#EEEEEE;\n"
 "}")
         self.QFrame_Basic_Moves = QFrame(self.QGroupBox_3)
         self.QFrame_Basic_Moves.setObjectName(u"QFrame_Basic_Moves")
-        self.QFrame_Basic_Moves.setGeometry(QRect(358, 81, 225, 168))
+        self.QFrame_Basic_Moves.setGeometry(QRect(350, 130, 225, 168))
         self.QFrame_Basic_Moves.setStyleSheet(u"QFrame#QFrame_Basic_Moves {\n"
 "    border-radius: 64px;\n"
 "	background-color: #393E46;\n"
@@ -447,7 +447,7 @@ class Ui_MainWindow(object):
 
         self.QFrame_Advanced_Moves = QFrame(self.QGroupBox_3)
         self.QFrame_Advanced_Moves.setObjectName(u"QFrame_Advanced_Moves")
-        self.QFrame_Advanced_Moves.setGeometry(QRect(41, 81, 225, 168))
+        self.QFrame_Advanced_Moves.setGeometry(QRect(30, 130, 225, 168))
         self.QFrame_Advanced_Moves.setStyleSheet(u"QFrame#QFrame_Advanced_Moves {\n"
 "    border-radius: 64px;\n"
 "	background-color: #393E46;\n"

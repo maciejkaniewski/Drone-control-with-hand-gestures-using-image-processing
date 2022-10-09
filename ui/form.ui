@@ -615,8 +615,8 @@ QGroupBox::title#QGroupBox_3 {
        </property>
        <property name="geometry">
         <rect>
-         <x>260</x>
-         <y>260</y>
+         <x>30</x>
+         <y>30</y>
          <width>89</width>
          <height>25</height>
         </rect>
@@ -636,8 +636,8 @@ QGroupBox::title#QGroupBox_3 {
        </property>
        <property name="geometry">
         <rect>
-         <x>260</x>
-         <y>290</y>
+         <x>130</x>
+         <y>30</y>
          <width>89</width>
          <height>25</height>
         </rect>
@@ -654,8 +654,8 @@ QGroupBox::title#QGroupBox_3 {
       <widget class="QFrame" name="QFrame_Basic_Moves">
        <property name="geometry">
         <rect>
-         <x>358</x>
-         <y>81</y>
+         <x>350</x>
+         <y>130</y>
          <width>225</width>
          <height>168</height>
         </rect>
@@ -837,8 +837,8 @@ QGroupBox::title#QGroupBox_3 {
       <widget class="QFrame" name="QFrame_Advanced_Moves">
        <property name="geometry">
         <rect>
-         <x>41</x>
-         <y>81</y>
+         <x>30</x>
+         <y>130</y>
          <width>225</width>
          <height>168</height>
         </rect>

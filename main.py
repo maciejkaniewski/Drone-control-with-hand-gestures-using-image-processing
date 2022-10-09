@@ -1,4 +1,4 @@
-# This Python file uses the following encoding: utf-8
+## This Python file uses the following encoding: utf-8
 import sys
 import os
 
@@ -13,6 +13,20 @@ from data_collector import DataCollector
 from wifi import WiFi
 from wifi.wifi import DRONE_WIFI_NETWORK_NAME
 from djitellopy import Tello
+import time
+
+FORWARD = "FORWARD"
+BACKWARD = "BACKWARD"
+RIGHT = "RIGHT"
+LEFT = "LEFT"
+
+TAKE_OFF = "TAKE_OFF"
+LAND = "LAND"
+
+UP = "UP"
+DOWN = "DOWN"
+ROTATE_RIGHT = "ROTATE_RIGHT"
+ROTATE_LEFT = "ROTATE_LEFT"
 
 
 class MainWindow(QMainWindow):
@@ -24,7 +38,7 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.WindowMinimizeButtonHint)
 
-        self.TelloDrone = Tello()
+        self.tello_drone = Tello()
 
         self.data_collector = DataCollector()  # Construct Data Collector instance
         self.data_collector.configure_MediaPipe_Hands(False, 1, 0.8, 0.6)  # Configure MediaPipe model
@@ -32,17 +46,23 @@ class MainWindow(QMainWindow):
         self.gesture_label = "0"  # Variable for gesture label
         self.wifi_signal_image = None
 
+        # Camera Thread
         self.CameraThread = CameraThread()  # Construct Camera Thread instance
         self.CameraThread.start()  # Start Camera Thread
         self.CameraThread.image_update_signal.connect(self.image_update_slot)
         self.CameraThread.landmarks_update_signal.connect(self.landmarks_update_slot)
 
-        self.WiFiThread = WiFiThread(self.wifi, self.TelloDrone)
+        # Wi-Fi Thread
+        self.WiFiThread = WiFiThread(self.wifi, self.tello_drone)
         self.WiFiThread.wifi_strength_update_signal.connect(self.wifi_strength_update_slot)
         self.WiFiThread.battery_percentage_update_signal.connect(self.battery_percentage_update_slot)
         self.WiFiThread.message_update_signal.connect(self.add_message_to_the_logs)
         self.WiFiThread.ui_update_signal.connect(self.ui_update_slot)
 
+        # Worker
+        self.DroneControlThread = DroneControlThread(self.tello_drone)
+
+        # Buttons actions
         self.ui.QPushButton_Save_Gesture.clicked.connect(self.save_gesture)
         self.ui.QPushButton_Clear_All_Gestures.clicked.connect(self.clear_all_gestures)
         self.ui.QSpinBox_Gesture_Label.valueChanged.connect(self.set_gesture_label)
@@ -60,8 +80,11 @@ class MainWindow(QMainWindow):
         self.ui.QPushButton_Left.pressed.connect(self.move_left_pressed)
         self.ui.QPushButton_Left.released.connect(self.move_left_released)
 
-        self.ui.QPushButton_Take_Off.clicked.connect(self.take_off)
-        self.ui.QPushButton_Land.clicked.connect(self.land)
+        self.ui.QPushButton_Take_Off.pressed.connect(self.take_off_pressed)
+        self.ui.QPushButton_Take_Off.released.connect(self.take_off_released)
+
+        self.ui.QPushButton_Land.pressed.connect(self.land_pressed)
+        self.ui.QPushButton_Land.released.connect(self.land_released)
 
         self.ui.QPushButton_Up.pressed.connect(self.move_up_pressed)
         self.ui.QPushButton_Up.released.connect(self.move_up_released)
@@ -84,7 +107,10 @@ class MainWindow(QMainWindow):
         self.CameraThread.wait(500)
         self.WiFiThread.stop_thread()
         self.WiFiThread.wait(500)
-        if self.CameraThread.isFinished() and self.WiFiThread.isFinished():
+        self.DroneControlThread.stop_thread()
+        self.DroneControlThread.wait(500)
+
+        if self.CameraThread.isFinished() and self.WiFiThread.isFinished() and self.DroneControlThread.isFinished():
             event.accept()
 
     def image_update_slot(self, image):
@@ -93,17 +119,19 @@ class MainWindow(QMainWindow):
 
         :param image: camera image
         """
+
         self.ui.QLabel_Camera_Feed.setPixmap(QPixmap.fromImage(image))
 
-    def landmarks_update_slot(self, landmarks_list):
+    def landmarks_update_slot(self, landmarks_list: list):
         """
         Updates hand landmarks.
 
         :param landmarks_list: hand landmarks
         """
+
         self.data_collector.multi_hand_landmarks = landmarks_list
 
-    def wifi_strength_update_slot(self, strength):
+    def wifi_strength_update_slot(self, strength: int):
         """
         Updates the signal strength of the Wi-Fi network.
 
@@ -124,10 +152,20 @@ class MainWindow(QMainWindow):
         else:
             self.ui.QLabel_WiFI.setPixmap(QPixmap(u":/images/images/wifi_4.png"))
 
-    def battery_percentage_update_slot(self, battery_percentage):
+    def battery_percentage_update_slot(self, battery_percentage: int):
+        """
+        Updates drone's battery percentage.
+
+        :param battery_percentage: battery percentage
+        """
+
         self.ui.QProgressBar_Battery.setValue(battery_percentage)
 
     def ui_update_slot(self):
+        """
+        Enables control buttons.
+        """
+
         self.ui.QPushButton_Forward.setEnabled(True)
         self.ui.QPushButton_Backward.setEnabled(True)
         self.ui.QPushButton_Right.setEnabled(True)
@@ -207,60 +245,83 @@ class MainWindow(QMainWindow):
             self.add_message_to_the_logs("<font color=\"Gold\">You are already connected to the drone.")
         else:
             self.WiFiThread.start()
+            self.DroneControlThread.start()
 
     def move_forward_pressed(self):
         self.ui.QPushButton_Forward.setIcon(QIcon(u":/images/images/forward_clicked.png"))
+        self.DroneControlThread.firstWork(FORWARD)
 
     def move_forward_released(self):
         self.ui.QPushButton_Forward.setIcon(QIcon(u":/images/images/forward.png"))
+        self.DroneControlThread.firstWork(" ")
 
     def move_backward_pressed(self):
         self.ui.QPushButton_Backward.setIcon(QIcon(u":/images/images/backward_clicked.png"))
+        self.DroneControlThread.firstWork(BACKWARD)
 
     def move_backward_released(self):
         self.ui.QPushButton_Backward.setIcon(QIcon(u":/images/images/backward.png"))
+        self.DroneControlThread.firstWork(" ")
 
     def move_right_pressed(self):
         self.ui.QPushButton_Right.setIcon(QIcon(u":/images/images/right_clicked.png"))
+        self.DroneControlThread.firstWork(RIGHT)
 
     def move_right_released(self):
         self.ui.QPushButton_Right.setIcon(QIcon(u":/images/images/right.png"))
+        self.DroneControlThread.firstWork(" ")
 
     def move_left_pressed(self):
         self.ui.QPushButton_Left.setIcon(QIcon(u":/images/images/left_clicked.png"))
+        self.DroneControlThread.firstWork(LEFT)
 
     def move_left_released(self):
         self.ui.QPushButton_Left.setIcon(QIcon(u":/images/images/left.png"))
+        self.DroneControlThread.firstWork(" ")
 
-    def take_off(self):
-        pass
+    def take_off_pressed(self):
+        self.DroneControlThread.firstWork(TAKE_OFF)
 
-    def land(self):
-        pass
+    def take_off_released(self):
+        self.DroneControlThread.firstWork("")
+
+    def land_pressed(self):
+        self.DroneControlThread.firstWork(LAND)
+
+    def land_released(self):
+        self.DroneControlThread.firstWork("")
 
     def move_up_pressed(self):
         self.ui.QPushButton_Up.setIcon(QIcon(u":/images/images/up_clicked.png"))
+        self.DroneControlThread.firstWork(UP)
 
     def move_up_released(self):
         self.ui.QPushButton_Up.setIcon(QIcon(u":/images/images/up.png"))
+        self.DroneControlThread.firstWork(" ")
 
     def move_down_pressed(self):
         self.ui.QPushButton_Down.setIcon(QIcon(u":/images/images/down_clicked.png"))
+        self.DroneControlThread.firstWork(DOWN)
 
     def move_down_released(self):
         self.ui.QPushButton_Down.setIcon(QIcon(u":/images/images/down.png"))
+        self.DroneControlThread.firstWork(" ")
 
     def move_rotate_right_pressed(self):
         self.ui.QPushButton_Rotate_Right.setIcon(QIcon(u":/images/images/rotate_right_clicked.png"))
+        self.DroneControlThread.firstWork(ROTATE_RIGHT)
 
     def move_rotate_right_released(self):
         self.ui.QPushButton_Rotate_Right.setIcon(QIcon(u":/images/images/rotate_right.png"))
+        self.DroneControlThread.firstWork("")
 
     def move_rotate_left_pressed(self):
         self.ui.QPushButton_Rotate_Left.setIcon(QIcon(u":/images/images/rotate_left_clicked.png"))
+        self.DroneControlThread.firstWork(ROTATE_LEFT)
 
     def move_rotate_left_released(self):
         self.ui.QPushButton_Rotate_Left.setIcon(QIcon(u":/images/images/rotate_left.png"))
+        self.DroneControlThread.firstWork("")
 
 
 class CameraThread(QThread):
@@ -281,7 +342,6 @@ class CameraThread(QThread):
             self.image_update_signal.emit(data_collector.image)
             self.landmarks_update_signal.emit(data_collector.multi_hand_landmarks)
             data_collector.multi_hand_landmarks = None  # Clear hand landmarks
-        data_collector.free_camera()  # Free data_collector's resources
 
     def stop_thread(self):
         self.ThreadActive = False
@@ -297,7 +357,7 @@ class WiFiThread(QThread):
     def __init__(self, wifi_instance: WiFi(), drone_instance, parent=None):
 
         super().__init__(parent)
-        self.TelloDrone = drone_instance
+        self.tello_drone = drone_instance
         self.wifi = wifi_instance
         self.ThreadActive = None
 
@@ -306,7 +366,7 @@ class WiFiThread(QThread):
         if self.wifi.is_wifi_available(DRONE_WIFI_NETWORK_NAME) and not self.wifi.is_there_active_connection:
             self.wifi.connect_to(DRONE_WIFI_NETWORK_NAME, '')
             self.wifi.is_there_active_connection = True
-            self.TelloDrone.connect()
+            self.tello_drone.connect()
             self.ThreadActive = True
             self.message_update_signal.emit("<font color=\"GreenYellow\">Successfully connected to the drone.")
             self.ui_update_signal.emit()
@@ -316,13 +376,64 @@ class WiFiThread(QThread):
         while self.ThreadActive:
             if self.wifi.current_connection() == DRONE_WIFI_NETWORK_NAME:
                 self.wifi_strength_update_signal.emit(self.wifi.check_signal_strength())
-                self.battery_percentage_update_signal.emit(self.TelloDrone.get_battery())
+                self.battery_percentage_update_signal.emit(self.tello_drone.get_battery())
             else:
                 self.wifi_strength_update_signal.emit(0)
 
     def stop_thread(self):
         self.ThreadActive = False
         self.quit()
+
+
+class DroneControlThread(QThread):
+
+    def __init__(self, drone_instance, parent=None):
+        super().__init__(parent)
+        self.ThreadActive = None
+        self.move = " "
+        self.tello_drone = drone_instance
+        self.velocity_vector = [0, 0, 0, 0]
+        self.velocity = 50
+
+    def run(self):
+        self.ThreadActive = True
+        while self.ThreadActive:
+            left_right_velocity, forward_backward_velocity, up_down_velocity, yaw_velocity = 0, 0, 0, 0
+            if self.move == " ":
+                pass
+            elif self.move == FORWARD:
+                forward_backward_velocity = self.velocity
+            elif self.move == BACKWARD:
+                forward_backward_velocity = -self.velocity
+            elif self.move == RIGHT:
+                left_right_velocity = self.velocity
+            elif self.move == LEFT:
+                left_right_velocity = -self.velocity
+            elif self.move == TAKE_OFF:
+                self.tello_drone.takeoff()
+            elif self.move == LAND:
+                self.tello_drone.land()
+            elif self.move == UP:
+                up_down_velocity = self.velocity
+            elif self.move == DOWN:
+                up_down_velocity = -self.velocity
+            elif self.move == ROTATE_RIGHT:
+                yaw_velocity = -self.velocity
+            elif self.move == ROTATE_LEFT:
+                yaw_velocity = self.velocity
+
+            self.velocity_vector = [left_right_velocity, forward_backward_velocity, up_down_velocity, yaw_velocity]
+            self.tello_drone.send_rc_control(self.velocity_vector[0], self.velocity_vector[1],
+                                             self.velocity_vector[2], self.velocity_vector[3])
+            time.sleep(0.05)
+
+    def stop_thread(self):
+        self.ThreadActive = False
+        self.quit()
+
+    @Slot()
+    def firstWork(self, received_move):
+        self.move = received_move
 
 
 if __name__ == "__main__":
