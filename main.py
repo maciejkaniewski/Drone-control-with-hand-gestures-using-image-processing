@@ -2,6 +2,7 @@
 import sys
 import os
 
+import cv2
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
 from PySide6.QtCore import *
@@ -14,6 +15,9 @@ from wifi import WiFi
 from wifi.wifi import DRONE_WIFI_NETWORK_NAME
 from djitellopy import Tello
 import time
+
+from tensorflow import keras
+import numpy as np
 
 FORWARD = "FORWARD"
 BACKWARD = "BACKWARD"
@@ -51,6 +55,7 @@ class MainWindow(QMainWindow):
         self.CameraThread.start()  # Start Camera Thread
         self.CameraThread.image_update_signal.connect(self.image_update_slot)
         self.CameraThread.landmarks_update_signal.connect(self.landmarks_update_slot)
+        self.CameraThread.message_update_signal.connect(self.add_message_to_the_logs)
 
         # Wi-Fi Thread
         self.WiFiThread = WiFiThread(self.wifi, self.tello_drone)
@@ -327,6 +332,7 @@ class MainWindow(QMainWindow):
 class CameraThread(QThread):
     image_update_signal = Signal(QImage)
     landmarks_update_signal = Signal(list)
+    message_update_signal = Signal(str)
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -341,6 +347,24 @@ class CameraThread(QThread):
             data_collector.detect()
             self.image_update_signal.emit(data_collector.image)
             self.landmarks_update_signal.emit(data_collector.multi_hand_landmarks)
+            if data_collector.multi_hand_landmarks is not None:
+                fingers = data_collector.find_fingers()
+                if fingers == [1, 1, 1, 1, 1]:
+                    self.message_update_signal.emit(
+                        "<font color=\"GreenYellow\"> [✗] Stop")
+                elif fingers == [0, 1, 0, 0, 0]:
+                    self.message_update_signal.emit(
+                        "<font color=\"GreenYellow\"> [↑] Up")
+                elif fingers == [0, 1, 1, 0, 0]:
+                    self.message_update_signal.emit(
+                        "<font color=\"GreenYellow\"> [↓] Down")
+                elif fingers == [1, 0, 0, 0, 0]:
+                    self.message_update_signal.emit(
+                        "<font color=\"GreenYellow\"> [←] Left")
+                elif fingers == [0, 0, 0, 0, 1]:
+                    self.message_update_signal.emit(
+                        "<font color=\"GreenYellow\"> [→] Right")
+
             data_collector.multi_hand_landmarks = None  # Clear hand landmarks
 
     def stop_thread(self):

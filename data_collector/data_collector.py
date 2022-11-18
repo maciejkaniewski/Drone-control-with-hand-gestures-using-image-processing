@@ -16,6 +16,17 @@ HAND_LINE_COLOR_BGR = (67, 244, 153)
 HAND_LINE_THICKNESS = 4
 HAND_LINE_RADIUS = 2
 
+# Constants for used hand landmarks
+THUMB_IP = 3
+THUMB_TIP = 4
+INDEX_FINGER_TIP = 8
+MIDDLE_FINGER_TIP = 12
+RING_FINGER_TIP = 16
+PINKY_TIP = 20
+
+X_CORD = 0
+Y_CORD = 1
+
 
 class DataCollector:
     """
@@ -27,12 +38,14 @@ class DataCollector:
         Constructs Data Collector object.
         """
 
+        self.coords = []
         self.image = None
         self.image_width = 1280
         self.image_height = 720
         self.camera_capture = None
 
         self.multi_hand_landmarks = None
+        self.multi_handedness = None
         self.hands = None
         self.mp_hands = None
         self.mp_drawing = None
@@ -94,28 +107,42 @@ class DataCollector:
         self.image.flags.writeable = False
         results = self.hands.process(self.image)
         self.image.flags.writeable = True
-        #self.image = cv2.cvtColor(self.image, cv2.COLOR_RGB2BGR)
+        # self.image = cv2.cvtColor(self.image, cv2.COLOR_RGB2BGR)
+
+        cv2.rectangle(self.image, (775, 100), (1150, 625), (255, 0, 0), 6)
 
         if results.multi_hand_landmarks:
+
             for hand_landmarks in results.multi_hand_landmarks:
-                self.mp_drawing.draw_landmarks(
-                    self.image,
-                    hand_landmarks,
-                    self.mp_hands.HAND_CONNECTIONS,
-                    self.mp_drawing.DrawingSpec(color=LANDMARK_COLOR_BGR,
-                                                thickness=LANDMARK_THICKNESS,
-                                                circle_radius=LANDMARK_RADIUS),
-                    self.mp_drawing.DrawingSpec(color=HAND_LINE_COLOR_BGR,
-                                                thickness=HAND_LINE_THICKNESS,
-                                                circle_radius=HAND_LINE_RADIUS),
-                )
-            self.multi_hand_landmarks = results.multi_hand_landmarks
+
+                handLandmarks = []
+
+                for landmarks in hand_landmarks.landmark:
+                    handLandmarks.append([landmarks.x * self.image_width, landmarks.y * self.image_height])
+
+                if all([(775 < handLandmark[X_CORD] < 1150) and
+                        (100 < handLandmark[Y_CORD] < 625) for handLandmark in handLandmarks]):
+                    cv2.rectangle(self.image, (775, 100), (1150, 625), (0, 255, 0), 6)
+
+                    self.mp_drawing.draw_landmarks(
+                        self.image,
+                        hand_landmarks,
+                        self.mp_hands.HAND_CONNECTIONS,
+                        self.mp_drawing.DrawingSpec(color=LANDMARK_COLOR_BGR,
+                                                    thickness=LANDMARK_THICKNESS,
+                                                    circle_radius=LANDMARK_RADIUS),
+                        self.mp_drawing.DrawingSpec(color=HAND_LINE_COLOR_BGR,
+                                                    thickness=HAND_LINE_THICKNESS,
+                                                    circle_radius=HAND_LINE_RADIUS),
+                    )
+                    self.multi_hand_landmarks = results.multi_hand_landmarks
+                    self.multi_handedness = results.multi_handedness
 
         ConvertToQtFormat = QImage(self.image.data, self.image.shape[1], self.image.shape[0],
                                    QImage.Format_RGB888)
         self.image = ConvertToQtFormat.scaled(640, 480, Qt.KeepAspectRatio)
 
-        #cv2.imshow("Data Collector", self.image)
+        # cv2.imshow("Data Collector", self.image)
 
     def convert_coordinates(self) -> None:
         """
@@ -211,6 +238,41 @@ class DataCollector:
                 writer_object.writerow(files[0])  # Write rows with data list
                 f_object.close()  # Close file object
                 files[0].clear()  # Clear data list
+
+    def find_fingers(self):
+
+        fingersState = []
+        fingersTips = [THUMB_TIP, INDEX_FINGER_TIP, MIDDLE_FINGER_TIP, RING_FINGER_TIP, PINKY_TIP]
+
+        if self.multi_hand_landmarks:
+
+            for hand_landmarks in self.multi_hand_landmarks:
+
+                handIndex = self.multi_hand_landmarks.index(hand_landmarks)
+                handLabel = self.multi_handedness[handIndex].classification[0].label
+
+                handLandmarks = []
+
+                for landmarks in hand_landmarks.landmark:
+                    handLandmarks.append([landmarks.x, landmarks.y])
+
+                if handLabel == "Left":
+                    if handLandmarks[THUMB_TIP][X_CORD] > handLandmarks[THUMB_IP][X_CORD]:
+                        fingersState.append(1)
+                    else:
+                        fingersState.append(0)
+                elif handLabel == "Right":
+                    if handLandmarks[THUMB_TIP][X_CORD] < handLandmarks[THUMB_IP][X_CORD]:
+                        fingersState.append(1)
+                    else:
+                        fingersState.append(0)
+
+                for tip in range(1, 5):
+                    if handLandmarks[fingersTips[tip]][Y_CORD] < handLandmarks[fingersTips[tip] - 2][Y_CORD]:
+                        fingersState.append(1)
+                    else:
+                        fingersState.append(0)
+        return fingersState
 
     @staticmethod
     def clear_data(data_file_path: str) -> None:
