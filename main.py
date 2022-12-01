@@ -326,19 +326,21 @@ class MainWindow(QMainWindow):
 
     def take_off_pressed(self):
         self.DroneControlThread.firstWork(TAKE_OFF)
-        self.ui.QPushButton_Take_Off.setEnabled(False)
-        self.ui.QPushButton_Land.setEnabled(True)
+
 
     def take_off_released(self):
         self.DroneControlThread.firstWork("")
+        self.ui.QPushButton_Take_Off.setEnabled(False)
+        self.ui.QPushButton_Land.setEnabled(True)
 
     def land_pressed(self):
         self.DroneControlThread.firstWork(LAND)
-        self.ui.QPushButton_Take_Off.setEnabled(True)
-        self.ui.QPushButton_Land.setEnabled(False)
+
 
     def land_released(self):
         self.DroneControlThread.firstWork("")
+        self.ui.QPushButton_Take_Off.setEnabled(True)
+        self.ui.QPushButton_Land.setEnabled(False)
 
     def move_up_pressed(self):
         self.ui.QPushButton_Up.setIcon(QIcon(u":/images/images/up_clicked.png"))
@@ -362,7 +364,7 @@ class MainWindow(QMainWindow):
 
     def move_rotate_right_released(self):
         self.ui.QPushButton_Rotate_Right.setIcon(QIcon(u":/images/images/rotate_right.png"))
-        self.DroneControlThread.firstWork("")
+        self.DroneControlThread.firstWork(" ")
 
     def move_rotate_left_pressed(self):
         self.ui.QPushButton_Rotate_Left.setIcon(QIcon(u":/images/images/rotate_left_clicked.png"))
@@ -370,7 +372,7 @@ class MainWindow(QMainWindow):
 
     def move_rotate_left_released(self):
         self.ui.QPushButton_Rotate_Left.setIcon(QIcon(u":/images/images/rotate_left.png"))
-        self.DroneControlThread.firstWork("")
+        self.DroneControlThread.firstWork(" ")
 
     def change_to_right_hand_mode(self):
         self.ui.QPushButton_Right_Hand.setEnabled(False)
@@ -426,8 +428,8 @@ class CameraThread(QThread):
                 else:
                     self.gesture_update_signal.emit(" ")
             else:
-                self.gesture_update_signal.emit(" ")
-                # pass
+                #self.gesture_update_signal.emit(" ")
+                pass
 
             data_collector.multi_hand_landmarks = None  # Clear hand landmarks
 
@@ -486,37 +488,52 @@ class DroneControlThread(QThread):
         self.tello_drone = drone_instance
         self.velocity_vector = [0, 0, 0, 0]
         self.velocity = 50
+        self.move_is_present = False
+        self.stop_move = False
 
     def run(self):
         self.ThreadActive = True
         while self.ThreadActive:
             left_right_velocity, forward_backward_velocity, up_down_velocity, yaw_velocity = 0, 0, 0, 0
-            if self.move == " ":
-                pass
+            if self.move == " " and not self.stop_move:
+                self.tello_drone.send_rc_control(0,0,0,0)
+                self.stop_move = True
             elif self.move == FORWARD:
                 forward_backward_velocity = self.velocity
+                self.move_is_present = True
             elif self.move == BACKWARD:
                 forward_backward_velocity = -self.velocity
+                self.move_is_present = True
             elif self.move == RIGHT:
                 left_right_velocity = self.velocity
+                self.move_is_present = True
             elif self.move == LEFT:
                 left_right_velocity = -self.velocity
+                self.move_is_present = True
             elif self.move == TAKE_OFF:
                 self.tello_drone.takeoff()
             elif self.move == LAND:
                 self.tello_drone.land()
             elif self.move == UP:
                 up_down_velocity = self.velocity
+                self.move_is_present = True
             elif self.move == DOWN:
                 up_down_velocity = -self.velocity
+                self.move_is_present = True
             elif self.move == ROTATE_RIGHT:
                 yaw_velocity = -self.velocity
+                self.move_is_present = True
             elif self.move == ROTATE_LEFT:
                 yaw_velocity = self.velocity
+                self.move_is_present = True
 
-            self.velocity_vector = [left_right_velocity, forward_backward_velocity, up_down_velocity, yaw_velocity]
-            self.tello_drone.send_rc_control(self.velocity_vector[0], self.velocity_vector[1],
+            if self.move_is_present:
+                self.velocity_vector = [left_right_velocity, forward_backward_velocity, up_down_velocity, yaw_velocity]
+                self.tello_drone.send_rc_control(self.velocity_vector[0], self.velocity_vector[1],
                                              self.velocity_vector[2], self.velocity_vector[3])
+                self.move_is_present = False
+                self.stop_move = False
+
             time.sleep(0.05)
 
     def stop_thread(self):
