@@ -699,6 +699,10 @@ QGroupBox::title#QGroupBox_3 {
          <property name="styleSheet">
           <string notr="true">QPushButton#QPushButton_Take_Off{
 	color:#EEEEEE;
+}
+
+QPushButton::disabled#QPushButton_Take_Off  {
+    color:  grey;
 }</string>
          </property>
          <property name="text">
@@ -714,6 +718,10 @@ QGroupBox::title#QGroupBox_3 {
          <property name="styleSheet">
           <string notr="true">QPushButton#QPushButton_Land{
 	color:#EEEEEE;
+}
+
+QPushButton::disabled#QPushButton_Land {
+    color:  grey;
 }</string>
          </property>
          <property name="text">

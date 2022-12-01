@@ -109,6 +109,9 @@ class DataCollector:
         self.image.flags.writeable = True
         # self.image = cv2.cvtColor(self.image, cv2.COLOR_RGB2BGR)
 
+        local_landmarks = None
+        local_handedness = None
+
         if hand_mode:
             cv2.rectangle(self.image, (775, 100), (1150, 625), (255, 0, 0), 6)
         else:
@@ -128,37 +131,53 @@ class DataCollector:
                             (100 < handLandmark[Y_CORD] < 625) for handLandmark in handLandmarks]):
                         cv2.rectangle(self.image, (775, 100), (1150, 625), (0, 255, 0), 6)
 
-                    self.mp_drawing.draw_landmarks(
-                        self.image,
-                        hand_landmarks,
-                        self.mp_hands.HAND_CONNECTIONS,
-                        self.mp_drawing.DrawingSpec(color=LANDMARK_COLOR_BGR,
-                                                    thickness=LANDMARK_THICKNESS,
-                                                    circle_radius=LANDMARK_RADIUS),
-                        self.mp_drawing.DrawingSpec(color=HAND_LINE_COLOR_BGR,
-                                                    thickness=HAND_LINE_THICKNESS,
-                                                    circle_radius=HAND_LINE_RADIUS),
-                    )
-                    self.multi_hand_landmarks = results.multi_hand_landmarks
-                    self.multi_handedness = results.multi_handedness
+                        self.mp_drawing.draw_landmarks(
+                            self.image,
+                            hand_landmarks,
+                            self.mp_hands.HAND_CONNECTIONS,
+                            self.mp_drawing.DrawingSpec(color=LANDMARK_COLOR_BGR,
+                                                        thickness=LANDMARK_THICKNESS,
+                                                        circle_radius=LANDMARK_RADIUS),
+                            self.mp_drawing.DrawingSpec(color=HAND_LINE_COLOR_BGR,
+                                                        thickness=HAND_LINE_THICKNESS,
+                                                        circle_radius=HAND_LINE_RADIUS),
+                        )
+
+                        local_landmarks = results.multi_hand_landmarks
+                        local_handedness = results.multi_handedness
+
+                        handIndex = local_landmarks.index(hand_landmarks)
+                        handLabel = local_handedness[handIndex].classification[0].label
+
+                        if handLabel == "Right":
+                            self.multi_hand_landmarks = results.multi_hand_landmarks
+                            self.multi_handedness = results.multi_handedness
                 else:
                     if all([(35 < handLandmark[X_CORD] < 410) and
                             (100 < handLandmark[Y_CORD] < 625) for handLandmark in handLandmarks]):
                         cv2.rectangle(self.image, (35, 100), (410, 625), (0, 255, 0), 6)
 
-                    self.mp_drawing.draw_landmarks(
-                        self.image,
-                        hand_landmarks,
-                        self.mp_hands.HAND_CONNECTIONS,
-                        self.mp_drawing.DrawingSpec(color=LANDMARK_COLOR_BGR,
-                                                    thickness=LANDMARK_THICKNESS,
-                                                    circle_radius=LANDMARK_RADIUS),
-                        self.mp_drawing.DrawingSpec(color=HAND_LINE_COLOR_BGR,
-                                                    thickness=HAND_LINE_THICKNESS,
-                                                    circle_radius=HAND_LINE_RADIUS),
-                    )
-                    self.multi_hand_landmarks = results.multi_hand_landmarks
-                    self.multi_handedness = results.multi_handedness
+                        self.mp_drawing.draw_landmarks(
+                            self.image,
+                            hand_landmarks,
+                            self.mp_hands.HAND_CONNECTIONS,
+                            self.mp_drawing.DrawingSpec(color=LANDMARK_COLOR_BGR,
+                                                        thickness=LANDMARK_THICKNESS,
+                                                        circle_radius=LANDMARK_RADIUS),
+                            self.mp_drawing.DrawingSpec(color=HAND_LINE_COLOR_BGR,
+                                                        thickness=HAND_LINE_THICKNESS,
+                                                        circle_radius=HAND_LINE_RADIUS),
+                        )
+
+                        local_landmarks = results.multi_hand_landmarks
+                        local_handedness = results.multi_handedness
+
+                        handIndex = local_landmarks.index(hand_landmarks)
+                        handLabel = local_handedness[handIndex].classification[0].label
+
+                        if handLabel == "Left":
+                            self.multi_hand_landmarks = results.multi_hand_landmarks
+                            self.multi_handedness = results.multi_handedness
 
         ConvertToQtFormat = QImage(self.image.data, self.image.shape[1], self.image.shape[0],
                                    QImage.Format_RGB888)

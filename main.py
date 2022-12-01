@@ -169,6 +169,30 @@ class MainWindow(QMainWindow):
         """
 
         self.ui.QProgressBar_Battery.setValue(battery_percentage)
+        if battery_percentage <= 20:
+            self.ui.QProgressBar_Battery.setStyleSheet(u"QProgressBar#QProgressBar_Battery {\n"
+                                                       "    border: 2px solid grey;\n"
+                                                       "    border-radius: 5px;\n"
+                                                       "	 color:#EEEEEE;\n"
+                                                       "}\n"
+                                                       "\n"
+                                                       "QProgressBar::chunk#QProgressBar_Battery  {\n"
+                                                       "    background-color: #ff9933;\n"
+                                                       "    width: 20px;\n"
+                                                       "}\n"
+                                                       "")
+        else:
+            self.ui.QProgressBar_Battery.setStyleSheet(u"QProgressBar#QProgressBar_Battery {\n"
+                                                       "    border: 2px solid grey;\n"
+                                                       "    border-radius: 5px;\n"
+                                                       "	 color:#EEEEEE;\n"
+                                                       "}\n"
+                                                       "\n"
+                                                       "QProgressBar::chunk#QProgressBar_Battery  {\n"
+                                                       "    background-color: #00ADB5;\n"
+                                                       "    width: 20px;\n"
+                                                       "}\n"
+                                                       "")
 
     def ui_update_slot(self):
         """
@@ -180,7 +204,6 @@ class MainWindow(QMainWindow):
         self.ui.QPushButton_Right.setEnabled(True)
         self.ui.QPushButton_Left.setEnabled(True)
         self.ui.QPushButton_Take_Off.setEnabled(True)
-        self.ui.QPushButton_Land.setEnabled(True)
         self.ui.QPushButton_Up.setEnabled(True)
         self.ui.QPushButton_Down.setEnabled(True)
         self.ui.QPushButton_Rotate_Right.setEnabled(True)
@@ -303,12 +326,16 @@ class MainWindow(QMainWindow):
 
     def take_off_pressed(self):
         self.DroneControlThread.firstWork(TAKE_OFF)
+        self.ui.QPushButton_Take_Off.setEnabled(False)
+        self.ui.QPushButton_Land.setEnabled(True)
 
     def take_off_released(self):
         self.DroneControlThread.firstWork("")
 
     def land_pressed(self):
         self.DroneControlThread.firstWork(LAND)
+        self.ui.QPushButton_Take_Off.setEnabled(True)
+        self.ui.QPushButton_Land.setEnabled(False)
 
     def land_released(self):
         self.DroneControlThread.firstWork("")

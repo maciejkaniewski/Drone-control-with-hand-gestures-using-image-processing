@@ -371,6 +371,10 @@ class Ui_MainWindow(object):
         self.QPushButton_Take_Off.setEnabled(False)
         self.QPushButton_Take_Off.setStyleSheet(u"QPushButton#QPushButton_Take_Off{\n"
 "	color:#EEEEEE;\n"
+"}\n"
+"\n"
+"QPushButton::disabled#QPushButton_Take_Off  {\n"
+"    color:  grey;\n"
 "}")
 
         self.gridLayout_10.addWidget(self.QPushButton_Take_Off, 1, 0, 1, 1)
@@ -380,6 +384,10 @@ class Ui_MainWindow(object):
         self.QPushButton_Land.setEnabled(False)
         self.QPushButton_Land.setStyleSheet(u"QPushButton#QPushButton_Land{\n"
 "	color:#EEEEEE;\n"
+"}\n"
+"\n"
+"QPushButton::disabled#QPushButton_Land {\n"
+"    color:  grey;\n"
 "}")
 
         self.gridLayout_10.addWidget(self.QPushButton_Land, 1, 2, 1, 1)
