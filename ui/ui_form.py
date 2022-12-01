@@ -680,6 +680,75 @@ class Ui_MainWindow(object):
 
         self.gridLayout_13.addWidget(self.QFrame_Hand_Mode, 0, 0, 1, 1)
 
+        self.QGroupBox_Camera_Source = QGroupBox(self.QGroupBox_2)
+        self.QGroupBox_Camera_Source.setObjectName(u"QGroupBox_Camera_Source")
+        self.QGroupBox_Camera_Source.setGeometry(QRect(210, 100, 191, 90))
+        self.QGroupBox_Camera_Source.setStyleSheet(u"QGroupBox#QGroupBox_Camera_Source{\n"
+"    background-color:  #222831;\n"
+"    border: 2px solid gray;\n"
+"	 border-color: #00ADB5;\n"
+"    border-radius: 8px;\n"
+"    margin-top: 1ex; /* leave space at the top for the title */\n"
+"	font-size: 14px;\n"
+"}\n"
+"\n"
+"QGroupBox::title#QGroupBox_Camera_Source  {\n"
+"    color:  white;\n"
+"    subcontrol-origin: margin;\n"
+"	left: 15px;\n"
+"    padding: 0px 5px 0px 5px;\n"
+"}")
+        self.gridLayout_19 = QGridLayout(self.QGroupBox_Camera_Source)
+        self.gridLayout_19.setObjectName(u"gridLayout_19")
+        self.gridLayout_19.setContentsMargins(12, 12, 12, 12)
+        self.QFrame_Camera_Source = QFrame(self.QGroupBox_Camera_Source)
+        self.QFrame_Camera_Source.setObjectName(u"QFrame_Camera_Source")
+        self.QFrame_Camera_Source.setStyleSheet(u"QFrame#QFrame_Camera_Source{\n"
+"    border-radius: 8px;\n"
+"	background-color: #393E46;\n"
+"}")
+        self.QFrame_Camera_Source.setFrameShape(QFrame.Panel)
+        self.QFrame_Camera_Source.setFrameShadow(QFrame.Raised)
+        self.gridLayout_20 = QGridLayout(self.QFrame_Camera_Source)
+        self.gridLayout_20.setObjectName(u"gridLayout_20")
+        self.horizontalLayout_6 = QHBoxLayout()
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.QPushButton_Computer = QPushButton(self.QFrame_Camera_Source)
+        self.QPushButton_Computer.setObjectName(u"QPushButton_Computer")
+        self.QPushButton_Computer.setEnabled(False)
+        self.QPushButton_Computer.setMinimumSize(QSize(0, 35))
+        self.QPushButton_Computer.setFont(font1)
+        self.QPushButton_Computer.setStyleSheet(u"QPushButton#QPushButton_Computer{\n"
+"	color:#EEEEEE;\n"
+"}\n"
+"\n"
+"QPushButton::disabled#QPushButton_Computer   {\n"
+"    color:  grey;\n"
+"}")
+
+        self.horizontalLayout_6.addWidget(self.QPushButton_Computer)
+
+        self.QPushButton_Tello = QPushButton(self.QFrame_Camera_Source)
+        self.QPushButton_Tello.setObjectName(u"QPushButton_Tello")
+        self.QPushButton_Tello.setEnabled(False)
+        self.QPushButton_Tello.setMinimumSize(QSize(0, 35))
+        self.QPushButton_Tello.setFont(font1)
+        self.QPushButton_Tello.setStyleSheet(u"QPushButton#QPushButton_Tello{\n"
+"	color:#EEEEEE;\n"
+"}\n"
+"\n"
+"QPushButton::disabled#QPushButton_Tello  {\n"
+"    color:  grey;\n"
+"}")
+
+        self.horizontalLayout_6.addWidget(self.QPushButton_Tello)
+
+
+        self.gridLayout_20.addLayout(self.horizontalLayout_6, 0, 0, 1, 1)
+
+
+        self.gridLayout_19.addWidget(self.QFrame_Camera_Source, 0, 0, 1, 1)
+
 
         self.gridLayout.addWidget(self.QGroupBox_2, 0, 1, 1, 1)
 
@@ -758,5 +827,8 @@ class Ui_MainWindow(object):
         self.QGroupBox_Hand_Mode.setTitle(QCoreApplication.translate("MainWindow", u"Hand Mode", None))
         self.QPushButton_Left_Hand.setText(QCoreApplication.translate("MainWindow", u"Left", None))
         self.QPushButton_Right_Hand.setText(QCoreApplication.translate("MainWindow", u"Right", None))
+        self.QGroupBox_Camera_Source.setTitle(QCoreApplication.translate("MainWindow", u"Camera source", None))
+        self.QPushButton_Computer.setText(QCoreApplication.translate("MainWindow", u"PC", None))
+        self.QPushButton_Tello.setText(QCoreApplication.translate("MainWindow", u"Drone", None))
     # retranslateUi
 

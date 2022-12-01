@@ -95,12 +95,15 @@ class DataCollector:
                                          min_detection_confidence=min_detection_confidence,
                                          min_tracking_confidence=min_tracking_confidence)
 
-    def detect(self, hand_mode: bool) -> None:
+    def detect(self, hand_mode: bool, drone_instance, camera_source) -> None:
         """
         Displays the image from the camera, draws landmarks on the detected hand.
         """
-
-        ret, frame = self.camera_capture.read()
+        if camera_source:
+            frame = drone_instance.get_frame_read().frame
+            frame = cv2.resize(frame, (1280, 720))
+        else:
+            ret, frame = self.camera_capture.read()
 
         self.image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         self.image = cv2.flip(self.image, 1)

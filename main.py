@@ -19,6 +19,8 @@ import time
 from tensorflow import keras
 import numpy as np
 
+CAMERA_SOURCE = 0  # 0 - PC, 1 - DRONE
+
 FORWARD = "FORWARD"
 BACKWARD = "BACKWARD"
 RIGHT = "RIGHT"
@@ -51,7 +53,7 @@ class MainWindow(QMainWindow):
         self.wifi_signal_image = None
 
         # Camera Thread
-        self.CameraThread = CameraThread()  # Construct Camera Thread instance
+        self.CameraThread = CameraThread(self.tello_drone)  # Construct Camera Thread instance
         self.CameraThread.start()  # Start Camera Thread
         self.CameraThread.image_update_signal.connect(self.image_update_slot)
         self.CameraThread.landmarks_update_signal.connect(self.landmarks_update_slot)
@@ -107,6 +109,9 @@ class MainWindow(QMainWindow):
         self.ui.QPushButton_Right_Hand.clicked.connect(self.change_to_right_hand_mode)
         self.ui.QPushButton_Left_Hand.clicked.connect(self.change_to_left_hand_mode)
 
+        self.ui.QPushButton_Computer.clicked.connect(self.change_to_pc_source)
+        self.ui.QPushButton_Tello.clicked.connect(self.change_to_tello_source)
+
     def closeEvent(self, event):
         """
         It is called when the application is closed.
@@ -118,6 +123,7 @@ class MainWindow(QMainWindow):
         self.WiFiThread.wait(500)
         self.DroneControlThread.stop_thread()
         self.DroneControlThread.wait(500)
+        self.tello_drone.streamoff()
 
         if self.CameraThread.isFinished() and self.WiFiThread.isFinished() and self.DroneControlThread.isFinished():
             event.accept()
@@ -208,6 +214,7 @@ class MainWindow(QMainWindow):
         self.ui.QPushButton_Down.setEnabled(True)
         self.ui.QPushButton_Rotate_Right.setEnabled(True)
         self.ui.QPushButton_Rotate_Left.setEnabled(True)
+        self.ui.QPushButton_Tello.setEnabled(True)
         self.ui.QFrame_Basic_Moves.setStyleSheet(u"QFrame#QFrame_Basic_Moves {\n"
                                                  "    border-radius: 64px;\n"
                                                  "	    border: 2px solid green;\n"
@@ -327,7 +334,6 @@ class MainWindow(QMainWindow):
     def take_off_pressed(self):
         self.DroneControlThread.firstWork(TAKE_OFF)
 
-
     def take_off_released(self):
         self.DroneControlThread.firstWork("")
         self.ui.QPushButton_Take_Off.setEnabled(False)
@@ -335,7 +341,6 @@ class MainWindow(QMainWindow):
 
     def land_pressed(self):
         self.DroneControlThread.firstWork(LAND)
-
 
     def land_released(self):
         self.DroneControlThread.firstWork("")
@@ -384,6 +389,25 @@ class MainWindow(QMainWindow):
         self.ui.QPushButton_Left_Hand.setEnabled(False)
         self.CameraThread.firstWork(False)
 
+    def change_to_pc_source(self):
+        self.CameraThread.stop_thread()
+        self.CameraThread.wait(125)
+        global CAMERA_SOURCE
+        CAMERA_SOURCE = 0
+        self.tello_drone.streamoff()
+        self.CameraThread.start()
+        self.ui.QPushButton_Computer.setEnabled(False)
+        self.ui.QPushButton_Tello.setEnabled(True)
+
+    def change_to_tello_source(self):
+        self.CameraThread.stop_thread()
+        self.CameraThread.wait(125)
+        global CAMERA_SOURCE
+        CAMERA_SOURCE = 1
+        self.CameraThread.start()
+        self.ui.QPushButton_Computer.setEnabled(True)
+        self.ui.QPushButton_Tello.setEnabled(False)
+
 
 class CameraThread(QThread):
     image_update_signal = Signal(QImage)
@@ -391,10 +415,11 @@ class CameraThread(QThread):
     message_update_signal = Signal(str)
     gesture_update_signal = Signal(str)
 
-    def __init__(self, parent=None):
+    def __init__(self, drone_instance, parent=None):
         super().__init__(parent)
         self.fingers = None
         self.ThreadActive = None
+        self.tello_drone = drone_instance
         self.hand_mode = True
 
     def run(self):
@@ -402,8 +427,10 @@ class CameraThread(QThread):
         data_collector.configure_camera()  # Configure Data Collector's camera
         data_collector.configure_MediaPipe_Hands(False, 1, 0.8, 0.6)  # Configure MediaPipe model
         self.ThreadActive = True
+        if CAMERA_SOURCE:
+            self.tello_drone.streamon()
         while self.ThreadActive:
-            data_collector.detect(self.hand_mode)
+            data_collector.detect(self.hand_mode, self.tello_drone, CAMERA_SOURCE)
             self.image_update_signal.emit(data_collector.image)
             self.landmarks_update_signal.emit(data_collector.multi_hand_landmarks)
             self.fingers = [0, 0, 0, 0, 0]
@@ -428,7 +455,7 @@ class CameraThread(QThread):
                 else:
                     self.gesture_update_signal.emit(" ")
             else:
-                #self.gesture_update_signal.emit(" ")
+                # self.gesture_update_signal.emit(" ")
                 pass
 
             data_collector.multi_hand_landmarks = None  # Clear hand landmarks
@@ -496,7 +523,7 @@ class DroneControlThread(QThread):
         while self.ThreadActive:
             left_right_velocity, forward_backward_velocity, up_down_velocity, yaw_velocity = 0, 0, 0, 0
             if self.move == " " and not self.stop_move:
-                self.tello_drone.send_rc_control(0,0,0,0)
+                self.tello_drone.send_rc_control(0, 0, 0, 0)
                 self.stop_move = True
             elif self.move == FORWARD:
                 forward_backward_velocity = self.velocity
@@ -530,7 +557,7 @@ class DroneControlThread(QThread):
             if self.move_is_present:
                 self.velocity_vector = [left_right_velocity, forward_backward_velocity, up_down_velocity, yaw_velocity]
                 self.tello_drone.send_rc_control(self.velocity_vector[0], self.velocity_vector[1],
-                                             self.velocity_vector[2], self.velocity_vector[3])
+                                                 self.velocity_vector[2], self.velocity_vector[3])
                 self.move_is_present = False
                 self.stop_move = False
 

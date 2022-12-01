@@ -1252,6 +1252,132 @@ QPushButton::disabled#QPushButton_Right_Hand   {
         </item>
        </layout>
       </widget>
+      <widget class="QGroupBox" name="QGroupBox_Camera_Source">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>100</y>
+         <width>191</width>
+         <height>90</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QGroupBox#QGroupBox_Camera_Source{
+    background-color:  #222831;
+    border: 2px solid gray;
+	 border-color: #00ADB5;
+    border-radius: 8px;
+    margin-top: 1ex; /* leave space at the top for the title */
+	font-size: 14px;
+}
+
+QGroupBox::title#QGroupBox_Camera_Source  {
+    color:  white;
+    subcontrol-origin: margin;
+	left: 15px;
+    padding: 0px 5px 0px 5px;
+}</string>
+       </property>
+       <property name="title">
+        <string>Camera source</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_19">
+        <property name="leftMargin">
+         <number>12</number>
+        </property>
+        <property name="topMargin">
+         <number>12</number>
+        </property>
+        <property name="rightMargin">
+         <number>12</number>
+        </property>
+        <property name="bottomMargin">
+         <number>12</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QFrame" name="QFrame_Camera_Source">
+          <property name="styleSheet">
+           <string notr="true">QFrame#QFrame_Camera_Source{
+    border-radius: 8px;
+	background-color: #393E46;
+}</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Panel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_20">
+           <item row="0" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_6">
+             <item>
+              <widget class="QPushButton" name="QPushButton_Computer">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>35</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton#QPushButton_Computer{
+	color:#EEEEEE;
+}
+
+QPushButton::disabled#QPushButton_Computer   {
+    color:  grey;
+}</string>
+               </property>
+               <property name="text">
+                <string>PC</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="QPushButton_Tello">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>35</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton#QPushButton_Tello{
+	color:#EEEEEE;
+}
+
+QPushButton::disabled#QPushButton_Tello  {
+    color:  grey;
+}</string>
+               </property>
+               <property name="text">
+                <string>Drone</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
