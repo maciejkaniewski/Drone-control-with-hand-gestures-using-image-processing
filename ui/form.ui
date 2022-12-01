@@ -58,6 +58,66 @@
     <property name="verticalSpacing">
      <number>9</number>
     </property>
+    <item row="1" column="1">
+     <widget class="QGroupBox" name="QGroupBox_1">
+      <property name="minimumSize">
+       <size>
+        <width>620</width>
+        <height>326</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>-1</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QGroupBox#QGroupBox_1 {
+    background-color:  #222831;
+    border: 2px solid gray;
+	 border-color: #00ADB5;
+    border-radius: 8px;
+    margin-top: 1ex; /* leave space at the top for the title */
+	 font-size: 16px;
+}
+
+QGroupBox::title#QGroupBox_1 {
+    color:  white;
+    subcontrol-origin: margin;
+	left: 15px;
+    padding: 0px 5px 0px 5px;
+}</string>
+      </property>
+      <property name="title">
+       <string>Logs</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <property name="leftMargin">
+        <number>16</number>
+       </property>
+       <property name="topMargin">
+        <number>16</number>
+       </property>
+       <property name="rightMargin">
+        <number>16</number>
+       </property>
+       <property name="bottomMargin">
+        <number>16</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QTextBrowser" name="QTextBrowser_Logs">
+         <property name="styleSheet">
+          <string notr="true">QTextBrowser#QTextBrowser_Logs {
+	color:#EEEEEE;
+	border: 2px solid gray;
+}</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
     <item row="0" column="0">
      <widget class="QGroupBox" name="QGroupBox_Camera_Feed">
       <property name="sizePolicy">
@@ -126,450 +186,6 @@ QGroupBox::title#QGroupBox_Camera_Feed {
          </property>
          <property name="text">
           <string/>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QGroupBox" name="QGroupBox_2">
-      <property name="minimumSize">
-       <size>
-        <width>620</width>
-        <height>326</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>-1</pointsize>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QGroupBox#QGroupBox_2 {
-    background-color:  #222831;
-    border: 2px solid gray;
-	 border-color: #00ADB5;
-    border-radius: 8px;
-    margin-top: 1ex; /* leave space at the top for the title */
-	font-size: 16px;
-}
-
-QGroupBox::title#QGroupBox_2 {
-    color:  white;
-    subcontrol-origin: margin;
-	left: 15px;
-    padding: 0px 5px 0px 5px;
-}</string>
-      </property>
-      <property name="title">
-       <string>Utilities and settings</string>
-      </property>
-      <widget class="QGroupBox" name="QGroupBox_Data_Collector">
-       <property name="geometry">
-        <rect>
-         <x>410</x>
-         <y>200</y>
-         <width>191</width>
-         <height>111</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QGroupBox#QGroupBox_Data_Collector {
-    background-color:  #222831;
-    border: 2px solid gray;
-	 border-color: #00ADB5;
-    border-radius: 8px;
-    margin-top: 1ex; /* leave space at the top for the title */
-	font-size: 14px;
-}
-
-QGroupBox::title#QGroupBox_Data_Collector  {
-    color:  white;
-    subcontrol-origin: margin;
-	left: 15px;
-    padding: 0px 5px 0px 5px;
-}</string>
-       </property>
-       <property name="title">
-        <string>Data Collector</string>
-       </property>
-       <layout class="QGridLayout" name="gridLayout_5">
-        <property name="leftMargin">
-         <number>12</number>
-        </property>
-        <property name="topMargin">
-         <number>12</number>
-        </property>
-        <property name="rightMargin">
-         <number>12</number>
-        </property>
-        <property name="bottomMargin">
-         <number>12</number>
-        </property>
-        <item row="0" column="0">
-         <widget class="QFrame" name="QFrame_Data_Collector">
-          <property name="styleSheet">
-           <string notr="true">QFrame#QFrame_Data_Collector {
-    border-radius: 8px;
-	background-color: #393E46;
-}</string>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::Panel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_3">
-           <item row="0" column="0">
-            <layout class="QVBoxLayout" name="verticalLayout">
-             <property name="spacing">
-              <number>8</number>
-             </property>
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout">
-               <item>
-                <widget class="QPushButton" name="QPushButton_Save_Gesture">
-                 <property name="font">
-                  <font>
-                   <pointsize>11</pointsize>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">QPushButton#QPushButton_Save_Gesture {
-	color:#EEEEEE;
-}</string>
-                 </property>
-                 <property name="text">
-                  <string>Save gesture</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QSpinBox" name="QSpinBox_Gesture_Label">
-                 <property name="styleSheet">
-                  <string notr="true">QSpinBox#QSpinBox_Gesture_Label {
-	color:#EEEEEE;
-}</string>
-                 </property>
-                 <property name="maximum">
-                  <number>9</number>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="QPushButton" name="QPushButton_Clear_All_Gestures">
-               <property name="font">
-                <font>
-                 <pointsize>11</pointsize>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QPushButton#QPushButton_Clear_All_Gestures{
-	color:#EEEEEE;
-}</string>
-               </property>
-               <property name="text">
-                <string>Clear all gestures</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QGroupBox" name="QGroupBox_Drone_Connection">
-       <property name="geometry">
-        <rect>
-         <x>210</x>
-         <y>200</y>
-         <width>191</width>
-         <height>111</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QGroupBox#QGroupBox_Drone_Connection {
-    background-color:  #222831;
-    border: 2px solid gray;
-	 border-color: #00ADB5;
-    border-radius: 8px;
-    margin-top: 1ex; /* leave space at the top for the title */
-	font-size: 14px;
-}
-
-QGroupBox::title#QGroupBox_Drone_Connection   {
-    color:  white;
-    subcontrol-origin: margin;
-	left: 15px;
-    padding: 0px 5px 0px 5px;
-}</string>
-       </property>
-       <property name="title">
-        <string>Connection</string>
-       </property>
-       <layout class="QGridLayout" name="gridLayout_7">
-        <property name="leftMargin">
-         <number>12</number>
-        </property>
-        <property name="topMargin">
-         <number>12</number>
-        </property>
-        <property name="rightMargin">
-         <number>12</number>
-        </property>
-        <property name="bottomMargin">
-         <number>12</number>
-        </property>
-        <item row="0" column="0">
-         <widget class="QFrame" name="QFrame_Drone_Connection">
-          <property name="styleSheet">
-           <string notr="true">QFrame#QFrame_Drone_Connection {
-    border-radius: 8px;
-	background-color: #393E46;
-}</string>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::Panel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_4">
-           <item row="0" column="1">
-            <layout class="QHBoxLayout" name="horizontalLayout_2">
-             <item>
-              <widget class="QPushButton" name="QPushButton_Connect">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>35</height>
-                </size>
-               </property>
-               <property name="font">
-                <font>
-                 <pointsize>11</pointsize>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QPushButton#QPushButton_Connect{
-	color:#EEEEEE;
-}</string>
-               </property>
-               <property name="text">
-                <string>Connect</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="QLabel_WiFI">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="minimumSize">
-                <size>
-                 <width>35</width>
-                 <height>35</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>35</width>
-                 <height>35</height>
-                </size>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="pixmap">
-                <pixmap resource="../resources/resources.qrc">:/images/images/wifi_0.png</pixmap>
-               </property>
-               <property name="scaledContents">
-                <bool>true</bool>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QGroupBox" name="QGroupBox_Drone_Battery">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>200</y>
-         <width>191</width>
-         <height>111</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QGroupBox#QGroupBox_Drone_Battery {
-    background-color:  #222831;
-    border: 2px solid gray;
-	 border-color: #00ADB5;
-    border-radius: 8px;
-    margin-top: 1ex; /* leave space at the top for the title */
-	font-size: 14px;
-}
-
-QGroupBox::title#QGroupBox_Drone_Battery   {
-    color:  white;
-    subcontrol-origin: margin;
-	left: 15px;
-    padding: 0px 5px 0px 5px;
-}</string>
-       </property>
-       <property name="title">
-        <string>Battery</string>
-       </property>
-       <layout class="QGridLayout" name="gridLayout_8">
-        <property name="leftMargin">
-         <number>12</number>
-        </property>
-        <property name="topMargin">
-         <number>12</number>
-        </property>
-        <property name="rightMargin">
-         <number>12</number>
-        </property>
-        <property name="bottomMargin">
-         <number>12</number>
-        </property>
-        <item row="0" column="0">
-         <widget class="QFrame" name="QFrame_Drone_Battery">
-          <property name="styleSheet">
-           <string notr="true">QFrame#QFrame_Drone_Battery {
-    border-radius: 8px;
-	background-color: #393E46;
-}</string>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::Panel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_9">
-           <item row="0" column="0">
-            <widget class="QProgressBar" name="QProgressBar_Battery">
-             <property name="enabled">
-              <bool>true</bool>
-             </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QProgressBar#QProgressBar_Battery {
-    border: 2px solid grey;
-    border-radius: 5px;
-	 color:#EEEEEE;
-}
-
-QProgressBar::chunk#QProgressBar_Battery  {
-    background-color: #00ADB5;
-    width: 20px;
-}
-</string>
-             </property>
-             <property name="value">
-              <number>0</number>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-             <property name="textVisible">
-              <bool>true</bool>
-             </property>
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="invertedAppearance">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QGroupBox" name="QGroupBox_1">
-      <property name="minimumSize">
-       <size>
-        <width>620</width>
-        <height>326</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>-1</pointsize>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QGroupBox#QGroupBox_1 {
-    background-color:  #222831;
-    border: 2px solid gray;
-	 border-color: #00ADB5;
-    border-radius: 8px;
-    margin-top: 1ex; /* leave space at the top for the title */
-	 font-size: 16px;
-}
-
-QGroupBox::title#QGroupBox_1 {
-    color:  white;
-    subcontrol-origin: margin;
-	left: 15px;
-    padding: 0px 5px 0px 5px;
-}</string>
-      </property>
-      <property name="title">
-       <string>Logs</string>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_2">
-       <property name="leftMargin">
-        <number>16</number>
-       </property>
-       <property name="topMargin">
-        <number>16</number>
-       </property>
-       <property name="rightMargin">
-        <number>16</number>
-       </property>
-       <property name="bottomMargin">
-        <number>16</number>
-       </property>
-       <item row="0" column="0">
-        <widget class="QTextBrowser" name="QTextBrowser_Logs">
-         <property name="styleSheet">
-          <string notr="true">QTextBrowser#QTextBrowser_Logs {
-	color:#EEEEEE;
-	border: 2px solid gray;
-}</string>
          </property>
         </widget>
        </item>
@@ -1106,6 +722,516 @@ QGroupBox::title#QGroupBox_3 {
         </widget>
        </item>
       </layout>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QGroupBox" name="QGroupBox_2">
+      <property name="minimumSize">
+       <size>
+        <width>620</width>
+        <height>326</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>-1</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QGroupBox#QGroupBox_2 {
+    background-color:  #222831;
+    border: 2px solid gray;
+	 border-color: #00ADB5;
+    border-radius: 8px;
+    margin-top: 1ex; /* leave space at the top for the title */
+	font-size: 16px;
+}
+
+QGroupBox::title#QGroupBox_2 {
+    color:  white;
+    subcontrol-origin: margin;
+	left: 15px;
+    padding: 0px 5px 0px 5px;
+}</string>
+      </property>
+      <property name="title">
+       <string>Utilities and settings</string>
+      </property>
+      <widget class="QGroupBox" name="QGroupBox_Data_Collector">
+       <property name="geometry">
+        <rect>
+         <x>410</x>
+         <y>200</y>
+         <width>191</width>
+         <height>111</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QGroupBox#QGroupBox_Data_Collector {
+    background-color:  #222831;
+    border: 2px solid gray;
+	 border-color: #00ADB5;
+    border-radius: 8px;
+    margin-top: 1ex; /* leave space at the top for the title */
+	font-size: 14px;
+}
+
+QGroupBox::title#QGroupBox_Data_Collector  {
+    color:  white;
+    subcontrol-origin: margin;
+	left: 15px;
+    padding: 0px 5px 0px 5px;
+}</string>
+       </property>
+       <property name="title">
+        <string>Data Collector</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <property name="leftMargin">
+         <number>12</number>
+        </property>
+        <property name="topMargin">
+         <number>12</number>
+        </property>
+        <property name="rightMargin">
+         <number>12</number>
+        </property>
+        <property name="bottomMargin">
+         <number>12</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QFrame" name="QFrame_Data_Collector">
+          <property name="styleSheet">
+           <string notr="true">QFrame#QFrame_Data_Collector {
+    border-radius: 8px;
+	background-color: #393E46;
+}</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Panel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="0" column="0">
+            <layout class="QVBoxLayout" name="verticalLayout">
+             <property name="spacing">
+              <number>8</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
+                <widget class="QPushButton" name="QPushButton_Save_Gesture">
+                 <property name="font">
+                  <font>
+                   <pointsize>11</pointsize>
+                  </font>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">QPushButton#QPushButton_Save_Gesture {
+	color:#EEEEEE;
+}</string>
+                 </property>
+                 <property name="text">
+                  <string>Save gesture</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="QSpinBox_Gesture_Label">
+                 <property name="styleSheet">
+                  <string notr="true">QSpinBox#QSpinBox_Gesture_Label {
+	color:#EEEEEE;
+}</string>
+                 </property>
+                 <property name="maximum">
+                  <number>9</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QPushButton" name="QPushButton_Clear_All_Gestures">
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton#QPushButton_Clear_All_Gestures{
+	color:#EEEEEE;
+}</string>
+               </property>
+               <property name="text">
+                <string>Clear all gestures</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QGroupBox" name="QGroupBox_Drone_Connection">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>200</y>
+         <width>191</width>
+         <height>111</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QGroupBox#QGroupBox_Drone_Connection {
+    background-color:  #222831;
+    border: 2px solid gray;
+	 border-color: #00ADB5;
+    border-radius: 8px;
+    margin-top: 1ex; /* leave space at the top for the title */
+	font-size: 14px;
+}
+
+QGroupBox::title#QGroupBox_Drone_Connection   {
+    color:  white;
+    subcontrol-origin: margin;
+	left: 15px;
+    padding: 0px 5px 0px 5px;
+}</string>
+       </property>
+       <property name="title">
+        <string>Connection</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_7">
+        <property name="leftMargin">
+         <number>12</number>
+        </property>
+        <property name="topMargin">
+         <number>12</number>
+        </property>
+        <property name="rightMargin">
+         <number>12</number>
+        </property>
+        <property name="bottomMargin">
+         <number>12</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QFrame" name="QFrame_Drone_Connection">
+          <property name="styleSheet">
+           <string notr="true">QFrame#QFrame_Drone_Connection {
+    border-radius: 8px;
+	background-color: #393E46;
+}</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Panel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="0" column="1">
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item>
+              <widget class="QPushButton" name="QPushButton_Connect">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>35</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton#QPushButton_Connect{
+	color:#EEEEEE;
+}</string>
+               </property>
+               <property name="text">
+                <string>Connect</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="QLabel_WiFI">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>35</width>
+                 <height>35</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>35</width>
+                 <height>35</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="pixmap">
+                <pixmap resource="../resources/resources.qrc">:/images/images/wifi_0.png</pixmap>
+               </property>
+               <property name="scaledContents">
+                <bool>true</bool>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QGroupBox" name="QGroupBox_Drone_Battery">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>200</y>
+         <width>191</width>
+         <height>111</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QGroupBox#QGroupBox_Drone_Battery {
+    background-color:  #222831;
+    border: 2px solid gray;
+	 border-color: #00ADB5;
+    border-radius: 8px;
+    margin-top: 1ex; /* leave space at the top for the title */
+	font-size: 14px;
+}
+
+QGroupBox::title#QGroupBox_Drone_Battery   {
+    color:  white;
+    subcontrol-origin: margin;
+	left: 15px;
+    padding: 0px 5px 0px 5px;
+}</string>
+       </property>
+       <property name="title">
+        <string>Battery</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_8">
+        <property name="leftMargin">
+         <number>12</number>
+        </property>
+        <property name="topMargin">
+         <number>12</number>
+        </property>
+        <property name="rightMargin">
+         <number>12</number>
+        </property>
+        <property name="bottomMargin">
+         <number>12</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QFrame" name="QFrame_Drone_Battery">
+          <property name="styleSheet">
+           <string notr="true">QFrame#QFrame_Drone_Battery {
+    border-radius: 8px;
+	background-color: #393E46;
+}</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Panel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_9">
+           <item row="0" column="0">
+            <widget class="QProgressBar" name="QProgressBar_Battery">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QProgressBar#QProgressBar_Battery {
+    border: 2px solid grey;
+    border-radius: 5px;
+	 color:#EEEEEE;
+}
+
+QProgressBar::chunk#QProgressBar_Battery  {
+    background-color: #00ADB5;
+    width: 20px;
+}
+</string>
+             </property>
+             <property name="value">
+              <number>0</number>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="textVisible">
+              <bool>true</bool>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="invertedAppearance">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QGroupBox" name="QGroupBox_Hand_Mode">
+       <property name="geometry">
+        <rect>
+         <x>410</x>
+         <y>100</y>
+         <width>191</width>
+         <height>90</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QGroupBox#QGroupBox_Hand_Mode {
+    background-color:  #222831;
+    border: 2px solid gray;
+	 border-color: #00ADB5;
+    border-radius: 8px;
+    margin-top: 1ex; /* leave space at the top for the title */
+	font-size: 14px;
+}
+
+QGroupBox::title#QGroupBox_Hand_Mode   {
+    color:  white;
+    subcontrol-origin: margin;
+	left: 15px;
+    padding: 0px 5px 0px 5px;
+}</string>
+       </property>
+       <property name="title">
+        <string>Hand Mode</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_13">
+        <property name="leftMargin">
+         <number>12</number>
+        </property>
+        <property name="topMargin">
+         <number>12</number>
+        </property>
+        <property name="rightMargin">
+         <number>12</number>
+        </property>
+        <property name="bottomMargin">
+         <number>12</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QFrame" name="QFrame_Hand_Mode">
+          <property name="styleSheet">
+           <string notr="true">QFrame#QFrame_Hand_Mode {
+    border-radius: 8px;
+	background-color: #393E46;
+}</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Panel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_14">
+           <item row="0" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <item>
+              <widget class="QPushButton" name="QPushButton_Left_Hand">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>35</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton#QPushButton_Left_Hand{
+	color:#EEEEEE;
+}
+
+QPushButton::disabled#QPushButton_Left_Hand   {
+    color:  grey;
+}</string>
+               </property>
+               <property name="text">
+                <string>Left</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="QPushButton_Right_Hand">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>35</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QPushButton#QPushButton_Right_Hand{
+	color:#EEEEEE;
+}
+
+QPushButton::disabled#QPushButton_Right_Hand   {
+    color:  grey;
+}</string>
+               </property>
+               <property name="text">
+                <string>Right</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>

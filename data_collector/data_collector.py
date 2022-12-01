@@ -95,7 +95,7 @@ class DataCollector:
                                          min_detection_confidence=min_detection_confidence,
                                          min_tracking_confidence=min_tracking_confidence)
 
-    def detect(self) -> None:
+    def detect(self, hand_mode: bool) -> None:
         """
         Displays the image from the camera, draws landmarks on the detected hand.
         """
@@ -109,7 +109,10 @@ class DataCollector:
         self.image.flags.writeable = True
         # self.image = cv2.cvtColor(self.image, cv2.COLOR_RGB2BGR)
 
-        cv2.rectangle(self.image, (775, 100), (1150, 625), (255, 0, 0), 6)
+        if hand_mode:
+            cv2.rectangle(self.image, (775, 100), (1150, 625), (255, 0, 0), 6)
+        else:
+            cv2.rectangle(self.image, (35, 100), (410, 625), (255, 0, 0), 6)
 
         if results.multi_hand_landmarks:
 
@@ -120,9 +123,28 @@ class DataCollector:
                 for landmarks in hand_landmarks.landmark:
                     handLandmarks.append([landmarks.x * self.image_width, landmarks.y * self.image_height])
 
-                if all([(775 < handLandmark[X_CORD] < 1150) and
-                        (100 < handLandmark[Y_CORD] < 625) for handLandmark in handLandmarks]):
-                    cv2.rectangle(self.image, (775, 100), (1150, 625), (0, 255, 0), 6)
+                if hand_mode:
+                    if all([(775 < handLandmark[X_CORD] < 1150) and
+                            (100 < handLandmark[Y_CORD] < 625) for handLandmark in handLandmarks]):
+                        cv2.rectangle(self.image, (775, 100), (1150, 625), (0, 255, 0), 6)
+
+                    self.mp_drawing.draw_landmarks(
+                        self.image,
+                        hand_landmarks,
+                        self.mp_hands.HAND_CONNECTIONS,
+                        self.mp_drawing.DrawingSpec(color=LANDMARK_COLOR_BGR,
+                                                    thickness=LANDMARK_THICKNESS,
+                                                    circle_radius=LANDMARK_RADIUS),
+                        self.mp_drawing.DrawingSpec(color=HAND_LINE_COLOR_BGR,
+                                                    thickness=HAND_LINE_THICKNESS,
+                                                    circle_radius=HAND_LINE_RADIUS),
+                    )
+                    self.multi_hand_landmarks = results.multi_hand_landmarks
+                    self.multi_handedness = results.multi_handedness
+                else:
+                    if all([(35 < handLandmark[X_CORD] < 410) and
+                            (100 < handLandmark[Y_CORD] < 625) for handLandmark in handLandmarks]):
+                        cv2.rectangle(self.image, (35, 100), (410, 625), (0, 255, 0), 6)
 
                     self.mp_drawing.draw_landmarks(
                         self.image,

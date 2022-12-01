@@ -104,6 +104,9 @@ class MainWindow(QMainWindow):
         self.ui.QPushButton_Rotate_Left.pressed.connect(self.move_rotate_left_pressed)
         self.ui.QPushButton_Rotate_Left.released.connect(self.move_rotate_left_released)
 
+        self.ui.QPushButton_Right_Hand.clicked.connect(self.change_to_right_hand_mode)
+        self.ui.QPushButton_Left_Hand.clicked.connect(self.change_to_left_hand_mode)
+
     def closeEvent(self, event):
         """
         It is called when the application is closed.
@@ -342,6 +345,16 @@ class MainWindow(QMainWindow):
         self.ui.QPushButton_Rotate_Left.setIcon(QIcon(u":/images/images/rotate_left.png"))
         self.DroneControlThread.firstWork("")
 
+    def change_to_right_hand_mode(self):
+        self.ui.QPushButton_Right_Hand.setEnabled(False)
+        self.ui.QPushButton_Left_Hand.setEnabled(True)
+        self.CameraThread.firstWork(True)
+
+    def change_to_left_hand_mode(self):
+        self.ui.QPushButton_Right_Hand.setEnabled(True)
+        self.ui.QPushButton_Left_Hand.setEnabled(False)
+        self.CameraThread.firstWork(False)
+
 
 class CameraThread(QThread):
     image_update_signal = Signal(QImage)
@@ -351,7 +364,9 @@ class CameraThread(QThread):
 
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.fingers = None
         self.ThreadActive = None
+        self.hand_mode = True
 
     def run(self):
         data_collector = DataCollector()  # Construct Data Collector instance
@@ -359,21 +374,28 @@ class CameraThread(QThread):
         data_collector.configure_MediaPipe_Hands(False, 1, 0.8, 0.6)  # Configure MediaPipe model
         self.ThreadActive = True
         while self.ThreadActive:
-            data_collector.detect()
+            data_collector.detect(self.hand_mode)
             self.image_update_signal.emit(data_collector.image)
             self.landmarks_update_signal.emit(data_collector.multi_hand_landmarks)
+            self.fingers = [0, 0, 0, 0, 0]
             if data_collector.multi_hand_landmarks is not None:
-                fingers = data_collector.find_fingers()
-                if fingers == [1, 1, 1, 1, 1]:
+                self.fingers = data_collector.find_fingers()
+                if self.fingers == [1, 1, 1, 1, 1]:
                     self.gesture_update_signal.emit(" ")
-                elif fingers == [0, 1, 0, 0, 0]:
+                elif self.fingers == [0, 1, 0, 0, 0]:
                     self.gesture_update_signal.emit(UP)
-                elif fingers == [0, 1, 1, 0, 0]:
+                elif self.fingers == [0, 1, 1, 0, 0]:
                     self.gesture_update_signal.emit(DOWN)
-                elif fingers == [1, 0, 0, 0, 0]:
-                    self.gesture_update_signal.emit(LEFT)
-                elif fingers == [0, 0, 0, 0, 1]:
-                    self.gesture_update_signal.emit(RIGHT)
+                elif self.fingers == [1, 0, 0, 0, 0]:
+                    if self.hand_mode:
+                        self.gesture_update_signal.emit(LEFT)
+                    else:
+                        self.gesture_update_signal.emit(RIGHT)
+                elif self.fingers == [0, 0, 0, 0, 1]:
+                    if self.hand_mode:
+                        self.gesture_update_signal.emit(RIGHT)
+                    else:
+                        self.gesture_update_signal.emit(LEFT)
                 else:
                     self.gesture_update_signal.emit(" ")
             else:
@@ -385,6 +407,10 @@ class CameraThread(QThread):
     def stop_thread(self):
         self.ThreadActive = False
         self.quit()
+
+    @Slot()
+    def firstWork(self, received_mode):
+        self.hand_mode = received_mode
 
 
 class WiFiThread(QThread):
