@@ -56,6 +56,7 @@ class MainWindow(QMainWindow):
         self.CameraThread.image_update_signal.connect(self.image_update_slot)
         self.CameraThread.landmarks_update_signal.connect(self.landmarks_update_slot)
         self.CameraThread.message_update_signal.connect(self.add_message_to_the_logs)
+        self.CameraThread.gesture_update_signal.connect(self.send_gestures_to_the_drone_control_slot)
 
         # Wi-Fi Thread
         self.WiFiThread = WiFiThread(self.wifi, self.tello_drone)
@@ -181,6 +182,19 @@ class MainWindow(QMainWindow):
         self.ui.QPushButton_Down.setEnabled(True)
         self.ui.QPushButton_Rotate_Right.setEnabled(True)
         self.ui.QPushButton_Rotate_Left.setEnabled(True)
+        self.ui.QFrame_Basic_Moves.setStyleSheet(u"QFrame#QFrame_Basic_Moves {\n"
+                                                 "    border-radius: 64px;\n"
+                                                 "	    border: 2px solid green;\n"
+                                                 "	background-color: #393E46;\n"
+                                                 "}")
+        self.ui.QFrame_Advanced_Moves.setStyleSheet(u"QFrame#QFrame_Advanced_Moves {\n"
+                                                    "    border-radius: 64px;\n"
+                                                    "	border: 2px solid green;\n"
+                                                    "	background-color: #393E46;\n"
+                                                    "}")
+
+    def send_gestures_to_the_drone_control_slot(self, move):
+        self.DroneControlThread.firstWork(move)
 
     def add_message_to_the_logs(self, message):
         """
@@ -333,6 +347,7 @@ class CameraThread(QThread):
     image_update_signal = Signal(QImage)
     landmarks_update_signal = Signal(list)
     message_update_signal = Signal(str)
+    gesture_update_signal = Signal(str)
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -350,20 +365,20 @@ class CameraThread(QThread):
             if data_collector.multi_hand_landmarks is not None:
                 fingers = data_collector.find_fingers()
                 if fingers == [1, 1, 1, 1, 1]:
-                    self.message_update_signal.emit(
-                        "<font color=\"GreenYellow\"> [✗] Stop")
+                    self.gesture_update_signal.emit(" ")
                 elif fingers == [0, 1, 0, 0, 0]:
-                    self.message_update_signal.emit(
-                        "<font color=\"GreenYellow\"> [↑] Up")
+                    self.gesture_update_signal.emit(UP)
                 elif fingers == [0, 1, 1, 0, 0]:
-                    self.message_update_signal.emit(
-                        "<font color=\"GreenYellow\"> [↓] Down")
+                    self.gesture_update_signal.emit(DOWN)
                 elif fingers == [1, 0, 0, 0, 0]:
-                    self.message_update_signal.emit(
-                        "<font color=\"GreenYellow\"> [←] Left")
+                    self.gesture_update_signal.emit(LEFT)
                 elif fingers == [0, 0, 0, 0, 1]:
-                    self.message_update_signal.emit(
-                        "<font color=\"GreenYellow\"> [→] Right")
+                    self.gesture_update_signal.emit(RIGHT)
+                else:
+                    self.gesture_update_signal.emit(" ")
+            else:
+                self.gesture_update_signal.emit(" ")
+                # pass
 
             data_collector.multi_hand_landmarks = None  # Clear hand landmarks
 
