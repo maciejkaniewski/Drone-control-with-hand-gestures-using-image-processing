@@ -13,6 +13,7 @@ LANDMARK_RADIUS = 2
 
 # Constants for MediaPipe's hand lines
 HAND_LINE_COLOR_BGR = (67, 244, 153)
+RED_HAND_LINE_COLOR_BGR = (255, 0, 0)
 HAND_LINE_THICKNESS = 4
 HAND_LINE_RADIUS = 2
 
@@ -115,20 +116,20 @@ class DataCollector:
         local_landmarks = None
         local_handedness = None
 
-        if hand_mode:
-            cv2.rectangle(self.image, (775, 100), (1150, 625), (255, 0, 0), 6)
-        else:
-            cv2.rectangle(self.image, (35, 100), (410, 625), (255, 0, 0), 6)
+        if not camera_source:
+            if hand_mode:
+                cv2.rectangle(self.image, (775, 100), (1150, 625), (255, 0, 0), 6)
+            else:
+                cv2.rectangle(self.image, (35, 100), (410, 625), (255, 0, 0), 6)
 
         if results.multi_hand_landmarks:
 
             for hand_landmarks in results.multi_hand_landmarks:
-
                 handLandmarks = []
-
                 for landmarks in hand_landmarks.landmark:
                     handLandmarks.append([landmarks.x * self.image_width, landmarks.y * self.image_height])
 
+            if not camera_source:
                 if hand_mode:
                     if all([(775 < handLandmark[X_CORD] < 1150) and
                             (100 < handLandmark[Y_CORD] < 625) for handLandmark in handLandmarks]):
@@ -181,6 +182,71 @@ class DataCollector:
                             self.multi_hand_landmarks = results.multi_hand_landmarks
                             self.multi_handedness = results.multi_handedness
                             cv2.rectangle(self.image, (35, 100), (410, 625), (0, 255, 0), 6)
+            else:
+                if hand_mode:
+                    local_landmarks = results.multi_hand_landmarks
+                    local_handedness = results.multi_handedness
+                    handIndex = local_landmarks.index(hand_landmarks)
+                    handLabel = local_handedness[handIndex].classification[0].label
+
+                    if handLabel == "Right":
+                        self.multi_hand_landmarks = results.multi_hand_landmarks
+                        self.multi_handedness = results.multi_handedness
+                        self.mp_drawing.draw_landmarks(
+                            self.image,
+                            hand_landmarks,
+                            self.mp_hands.HAND_CONNECTIONS,
+                            self.mp_drawing.DrawingSpec(color=LANDMARK_COLOR_BGR,
+                                                        thickness=LANDMARK_THICKNESS,
+                                                        circle_radius=LANDMARK_RADIUS),
+                            self.mp_drawing.DrawingSpec(color=HAND_LINE_COLOR_BGR,
+                                                        thickness=HAND_LINE_THICKNESS,
+                                                        circle_radius=HAND_LINE_RADIUS),
+                        )
+                    else:
+                        self.mp_drawing.draw_landmarks(
+                            self.image,
+                            hand_landmarks,
+                            self.mp_hands.HAND_CONNECTIONS,
+                            self.mp_drawing.DrawingSpec(color=LANDMARK_COLOR_BGR,
+                                                        thickness=LANDMARK_THICKNESS,
+                                                        circle_radius=LANDMARK_RADIUS),
+                            self.mp_drawing.DrawingSpec(color=RED_HAND_LINE_COLOR_BGR,
+                                                        thickness=HAND_LINE_THICKNESS,
+                                                        circle_radius=HAND_LINE_RADIUS),
+                        )
+                else:
+                    local_landmarks = results.multi_hand_landmarks
+                    local_handedness = results.multi_handedness
+                    handIndex = local_landmarks.index(hand_landmarks)
+                    handLabel = local_handedness[handIndex].classification[0].label
+
+                    if handLabel == "Left":
+                        self.multi_hand_landmarks = results.multi_hand_landmarks
+                        self.multi_handedness = results.multi_handedness
+                        self.mp_drawing.draw_landmarks(
+                            self.image,
+                            hand_landmarks,
+                            self.mp_hands.HAND_CONNECTIONS,
+                            self.mp_drawing.DrawingSpec(color=LANDMARK_COLOR_BGR,
+                                                        thickness=LANDMARK_THICKNESS,
+                                                        circle_radius=LANDMARK_RADIUS),
+                            self.mp_drawing.DrawingSpec(color=HAND_LINE_COLOR_BGR,
+                                                        thickness=HAND_LINE_THICKNESS,
+                                                        circle_radius=HAND_LINE_RADIUS),
+                        )
+                    else:
+                        self.mp_drawing.draw_landmarks(
+                            self.image,
+                            hand_landmarks,
+                            self.mp_hands.HAND_CONNECTIONS,
+                            self.mp_drawing.DrawingSpec(color=LANDMARK_COLOR_BGR,
+                                                        thickness=LANDMARK_THICKNESS,
+                                                        circle_radius=LANDMARK_RADIUS),
+                            self.mp_drawing.DrawingSpec(color=RED_HAND_LINE_COLOR_BGR,
+                                                        thickness=HAND_LINE_THICKNESS,
+                                                        circle_radius=HAND_LINE_RADIUS),
+                        )
 
         ConvertToQtFormat = QImage(self.image.data, self.image.shape[1], self.image.shape[0],
                                    QImage.Format_RGB888)
