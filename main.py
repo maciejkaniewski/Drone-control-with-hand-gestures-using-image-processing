@@ -375,12 +375,17 @@ class MainWindow(QMainWindow):
         self.DroneControlThread.firstWork(" ")
 
     def take_off_pressed(self):
-        self.DroneControlThread.firstWork(TAKE_OFF)
+        if self.ui.QProgressBar_Battery.value() < 20:
+            self.add_message_to_the_logs("<font color=\"OrangeRed\">Unable to take off, battery below 20%.")
+        else:
+            self.DroneControlThread.firstWork(TAKE_OFF)
+
 
     def take_off_released(self):
         self.DroneControlThread.firstWork("")
-        self.ui.QPushButton_Take_Off.setEnabled(False)
-        self.ui.QPushButton_Land.setEnabled(True)
+        if self.ui.QProgressBar_Battery.value() >= 20:
+            self.ui.QPushButton_Take_Off.setEnabled(False)
+            self.ui.QPushButton_Land.setEnabled(True)
 
     def land_pressed(self):
         self.DroneControlThread.firstWork(LAND)
