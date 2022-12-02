@@ -2,9 +2,7 @@
 import sys
 import os
 
-import cv2
 from PySide6.QtGui import *
-from PySide6.QtWidgets import *
 from PySide6.QtCore import *
 
 from PySide6.QtWidgets import QApplication, QMainWindow
@@ -15,9 +13,6 @@ from wifi import WiFi
 from wifi.wifi import DRONE_WIFI_NETWORK_NAME
 from djitellopy import Tello
 import time
-
-from tensorflow import keras
-import numpy as np
 
 CAMERA_SOURCE = 0  # 0 - PC, 1 - DRONE
 
@@ -43,7 +38,7 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.WindowMinimizeButtonHint)
-        self.has_streamon_called = False;
+        self.has_streamon_called = False
 
         self.tello_drone = Tello()
 
