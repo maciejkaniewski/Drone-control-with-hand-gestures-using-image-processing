@@ -54,7 +54,7 @@ class Ui_MainWindow(object):
         self.QGroupBox_1.setFont(font)
         self.QGroupBox_1.setStyleSheet(u"QGroupBox#QGroupBox_1 {\n"
 "    background-color:  #222831;\n"
-"    border: 2px solid gray;\n"
+"    border: 3px solid gray;\n"
 "	 border-color: #00ADB5;\n"
 "    border-radius: 8px;\n"
 "    margin-top: 1ex; /* leave space at the top for the title */\n"
@@ -94,7 +94,7 @@ class Ui_MainWindow(object):
         self.QGroupBox_Camera_Feed.setFont(font)
         self.QGroupBox_Camera_Feed.setStyleSheet(u"QGroupBox#QGroupBox_Camera_Feed {\n"
 "    background-color:  #222831;\n"
-"    border: 2px solid gray;\n"
+"    border: 3px solid gray;\n"
 "	 border-color: #00ADB5;\n"
 "    border-radius: 8px;\n"
 "    margin-top: 1ex; /* leave space at the top for the title */\n"
@@ -127,7 +127,7 @@ class Ui_MainWindow(object):
         self.QGroupBox_3.setFont(font)
         self.QGroupBox_3.setStyleSheet(u"QGroupBox#QGroupBox_3 {\n"
 "    background-color:  #222831;\n"
-"    border: 2px solid gray;\n"
+"    border: 3px solid gray;\n"
 "	 border-color: #00ADB5;\n"
 "    border-radius: 8px;\n"
 "    margin-top: 1ex; /* leave space at the top for the title */\n"
@@ -141,7 +141,9 @@ class Ui_MainWindow(object):
 "    padding: 0px 5px 0px 5px;\n"
 "}")
         self.gridLayout_10 = QGridLayout(self.QGroupBox_3)
+        self.gridLayout_10.setSpacing(16)
         self.gridLayout_10.setObjectName(u"gridLayout_10")
+        self.gridLayout_10.setContentsMargins(16, 16, 16, 16)
         self.QFrame_Advanced_Moves = QFrame(self.QGroupBox_3)
         self.QFrame_Advanced_Moves.setObjectName(u"QFrame_Advanced_Moves")
         self.QFrame_Advanced_Moves.setStyleSheet(u"QFrame#QFrame_Advanced_Moves {\n"
@@ -251,7 +253,7 @@ class Ui_MainWindow(object):
         self.gridLayout_12.addWidget(self.QLabel_CCW, 2, 0, 1, 1)
 
 
-        self.gridLayout_10.addWidget(self.QFrame_Advanced_Moves, 0, 0, 1, 1)
+        self.gridLayout_10.addWidget(self.QFrame_Advanced_Moves, 1, 0, 1, 1)
 
         self.QFrame_Basic_Moves = QFrame(self.QGroupBox_3)
         self.QFrame_Basic_Moves.setObjectName(u"QFrame_Basic_Moves")
@@ -365,20 +367,7 @@ class Ui_MainWindow(object):
         self.gridLayout_11.addWidget(self.QLabel_Backward, 4, 3, 1, 1)
 
 
-        self.gridLayout_10.addWidget(self.QFrame_Basic_Moves, 0, 2, 1, 1)
-
-        self.QPushButton_Take_Off = QPushButton(self.QGroupBox_3)
-        self.QPushButton_Take_Off.setObjectName(u"QPushButton_Take_Off")
-        self.QPushButton_Take_Off.setEnabled(False)
-        self.QPushButton_Take_Off.setStyleSheet(u"QPushButton#QPushButton_Take_Off{\n"
-"	color:#EEEEEE;\n"
-"}\n"
-"\n"
-"QPushButton::disabled#QPushButton_Take_Off  {\n"
-"    color:  grey;\n"
-"}")
-
-        self.gridLayout_10.addWidget(self.QPushButton_Take_Off, 1, 0, 1, 1)
+        self.gridLayout_10.addWidget(self.QFrame_Basic_Moves, 1, 2, 1, 1)
 
         self.QPushButton_Land = QPushButton(self.QGroupBox_3)
         self.QPushButton_Land.setObjectName(u"QPushButton_Land")
@@ -391,7 +380,20 @@ class Ui_MainWindow(object):
 "    color:  grey;\n"
 "}")
 
-        self.gridLayout_10.addWidget(self.QPushButton_Land, 1, 2, 1, 1)
+        self.gridLayout_10.addWidget(self.QPushButton_Land, 2, 2, 1, 1)
+
+        self.QPushButton_Take_Off = QPushButton(self.QGroupBox_3)
+        self.QPushButton_Take_Off.setObjectName(u"QPushButton_Take_Off")
+        self.QPushButton_Take_Off.setEnabled(False)
+        self.QPushButton_Take_Off.setStyleSheet(u"QPushButton#QPushButton_Take_Off{\n"
+"	color:#EEEEEE;\n"
+"}\n"
+"\n"
+"QPushButton::disabled#QPushButton_Take_Off  {\n"
+"    color:  grey;\n"
+"}")
+
+        self.gridLayout_10.addWidget(self.QPushButton_Take_Off, 2, 0, 1, 1)
 
 
         self.gridLayout.addWidget(self.QGroupBox_3, 1, 0, 1, 1)
@@ -402,7 +404,7 @@ class Ui_MainWindow(object):
         self.QGroupBox_2.setFont(font)
         self.QGroupBox_2.setStyleSheet(u"QGroupBox#QGroupBox_2 {\n"
 "    background-color:  #222831;\n"
-"    border: 2px solid gray;\n"
+"    border: 3px solid gray;\n"
 "	 border-color: #00ADB5;\n"
 "    border-radius: 8px;\n"
 "    margin-top: 1ex; /* leave space at the top for the title */\n"
@@ -415,8 +417,128 @@ class Ui_MainWindow(object):
 "	left: 15px;\n"
 "    padding: 0px 5px 0px 5px;\n"
 "}")
-        self.gridLayout_23 = QGridLayout(self.QGroupBox_2)
+        self.gridLayout_25 = QGridLayout(self.QGroupBox_2)
+        self.gridLayout_25.setSpacing(12)
+        self.gridLayout_25.setObjectName(u"gridLayout_25")
+        self.gridLayout_25.setContentsMargins(12, 12, 12, 12)
+        self.QGroupBox_Absolute_Height = QGroupBox(self.QGroupBox_2)
+        self.QGroupBox_Absolute_Height.setObjectName(u"QGroupBox_Absolute_Height")
+        self.QGroupBox_Absolute_Height.setStyleSheet(u"QGroupBox#QGroupBox_Absolute_Height{\n"
+"    background-color:  #222831;\n"
+"    border: 2px solid gray;\n"
+"	 border-color: #00ADB5;\n"
+"    border-radius: 8px;\n"
+"    margin-top: 1ex; /* leave space at the top for the title */\n"
+"	font-size: 14px;\n"
+"}\n"
+"\n"
+"QGroupBox::title#QGroupBox_Absolute_Height {\n"
+"    color:  white;\n"
+"    subcontrol-origin: margin;\n"
+"	left: 15px;\n"
+"    padding: 0px 5px 0px 5px;\n"
+"}")
+        self.gridLayout_24 = QGridLayout(self.QGroupBox_Absolute_Height)
+        self.gridLayout_24.setObjectName(u"gridLayout_24")
+        self.gridLayout_24.setContentsMargins(12, 12, 12, 12)
+        self.QFrame_Absolute_Height = QFrame(self.QGroupBox_Absolute_Height)
+        self.QFrame_Absolute_Height.setObjectName(u"QFrame_Absolute_Height")
+        self.QFrame_Absolute_Height.setStyleSheet(u"QFrame#QFrame_Absolute_Height{\n"
+"    border-radius: 8px;\n"
+"	background-color: #393E46;\n"
+"}")
+        self.QFrame_Absolute_Height.setFrameShape(QFrame.Panel)
+        self.QFrame_Absolute_Height.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_10 = QHBoxLayout(self.QFrame_Absolute_Height)
+        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.QLineEdit_Absolute_Height = QLineEdit(self.QFrame_Absolute_Height)
+        self.QLineEdit_Absolute_Height.setObjectName(u"QLineEdit_Absolute_Height")
+        self.QLineEdit_Absolute_Height.setEnabled(True)
+        self.QLineEdit_Absolute_Height.setStyleSheet(u"QLineEdit#QLineEdit_Absolute_Height{\n"
+"    border: 1px solid grey;\n"
+"    border-radius: 4px;\n"
+"	 color:#EEEEEE;\n"
+"}")
+        self.QLineEdit_Absolute_Height.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.QLineEdit_Absolute_Height.setReadOnly(True)
+
+        self.horizontalLayout_10.addWidget(self.QLineEdit_Absolute_Height)
+
+        self.QLabel_cm_b = QLabel(self.QFrame_Absolute_Height)
+        self.QLabel_cm_b.setObjectName(u"QLabel_cm_b")
+        font1 = QFont()
+        font1.setPointSize(11)
+        self.QLabel_cm_b.setFont(font1)
+        self.QLabel_cm_b.setStyleSheet(u"QLabel#QLabel_cm_b{\n"
+"	 color:#EEEEEE;\n"
+"}")
+
+        self.horizontalLayout_10.addWidget(self.QLabel_cm_b)
+
+
+        self.gridLayout_24.addWidget(self.QFrame_Absolute_Height, 0, 0, 1, 1)
+
+
+        self.gridLayout_25.addWidget(self.QGroupBox_Absolute_Height, 0, 0, 1, 1)
+
+        self.QGroupBox_Flight_Time = QGroupBox(self.QGroupBox_2)
+        self.QGroupBox_Flight_Time.setObjectName(u"QGroupBox_Flight_Time")
+        self.QGroupBox_Flight_Time.setStyleSheet(u"QGroupBox#QGroupBox_Flight_Time{\n"
+"    background-color:  #222831;\n"
+"    border: 2px solid gray;\n"
+"	 border-color: #00ADB5;\n"
+"    border-radius: 8px;\n"
+"    margin-top: 1ex; /* leave space at the top for the title */\n"
+"	font-size: 14px;\n"
+"}\n"
+"\n"
+"QGroupBox::title#QGroupBox_Flight_Time{\n"
+"    color:  white;\n"
+"    subcontrol-origin: margin;\n"
+"	left: 15px;\n"
+"    padding: 0px 5px 0px 5px;\n"
+"}")
+        self.gridLayout_23 = QGridLayout(self.QGroupBox_Flight_Time)
         self.gridLayout_23.setObjectName(u"gridLayout_23")
+        self.gridLayout_23.setContentsMargins(12, 12, 12, 12)
+        self.QFrame_Flight_Time = QFrame(self.QGroupBox_Flight_Time)
+        self.QFrame_Flight_Time.setObjectName(u"QFrame_Flight_Time")
+        self.QFrame_Flight_Time.setStyleSheet(u"QFrame#QFrame_Flight_Time{\n"
+"    border-radius: 8px;\n"
+"	background-color: #393E46;\n"
+"}")
+        self.QFrame_Flight_Time.setFrameShape(QFrame.Panel)
+        self.QFrame_Flight_Time.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_9 = QHBoxLayout(self.QFrame_Flight_Time)
+        self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
+        self.QLineEdit_Flight_Time = QLineEdit(self.QFrame_Flight_Time)
+        self.QLineEdit_Flight_Time.setObjectName(u"QLineEdit_Flight_Time")
+        self.QLineEdit_Flight_Time.setEnabled(True)
+        self.QLineEdit_Flight_Time.setStyleSheet(u"QLineEdit#QLineEdit_Flight_Time{\n"
+"    border: 1px solid grey;\n"
+"    border-radius: 4px;\n"
+"	 color:#EEEEEE;\n"
+"}")
+        self.QLineEdit_Flight_Time.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.QLineEdit_Flight_Time.setReadOnly(True)
+
+        self.horizontalLayout_9.addWidget(self.QLineEdit_Flight_Time)
+
+        self.QLabel_s = QLabel(self.QFrame_Flight_Time)
+        self.QLabel_s.setObjectName(u"QLabel_s")
+        self.QLabel_s.setFont(font1)
+        self.QLabel_s.setStyleSheet(u"QLabel#QLabel_s{\n"
+"	 color:#EEEEEE;\n"
+"}")
+
+        self.horizontalLayout_9.addWidget(self.QLabel_s)
+
+
+        self.gridLayout_23.addWidget(self.QFrame_Flight_Time, 0, 0, 1, 1)
+
+
+        self.gridLayout_25.addWidget(self.QGroupBox_Flight_Time, 0, 1, 1, 1)
+
         self.QGroupBox_Temperature = QGroupBox(self.QGroupBox_2)
         self.QGroupBox_Temperature.setObjectName(u"QGroupBox_Temperature")
         self.QGroupBox_Temperature.setStyleSheet(u"QGroupBox#QGroupBox_Temperature{\n"
@@ -462,9 +584,9 @@ class Ui_MainWindow(object):
 
         self.QLabel_celcius = QLabel(self.QFrame_Temperature)
         self.QLabel_celcius.setObjectName(u"QLabel_celcius")
-        font1 = QFont()
-        font1.setPointSize(15)
-        self.QLabel_celcius.setFont(font1)
+        font2 = QFont()
+        font2.setPointSize(15)
+        self.QLabel_celcius.setFont(font2)
         self.QLabel_celcius.setStyleSheet(u"QLabel#QLabel_celcius{\n"
 "	 color:#EEEEEE;\n"
 "}")
@@ -475,7 +597,7 @@ class Ui_MainWindow(object):
         self.gridLayout_22.addWidget(self.QFrame_Temperature, 0, 0, 1, 1)
 
 
-        self.gridLayout_23.addWidget(self.QGroupBox_Temperature, 0, 2, 1, 1)
+        self.gridLayout_25.addWidget(self.QGroupBox_Temperature, 0, 2, 1, 1)
 
         self.QGroupBox_TOF = QGroupBox(self.QGroupBox_2)
         self.QGroupBox_TOF.setObjectName(u"QGroupBox_TOF")
@@ -499,7 +621,7 @@ class Ui_MainWindow(object):
         self.gridLayout_21.setContentsMargins(12, 12, 12, 12)
         self.QFrame_TOF = QFrame(self.QGroupBox_TOF)
         self.QFrame_TOF.setObjectName(u"QFrame_TOF")
-        self.QFrame_TOF.setStyleSheet(u"QFrame#QFrame_Barometer{\n"
+        self.QFrame_TOF.setStyleSheet(u"QFrame#QFrame_TOF{\n"
 "    border-radius: 8px;\n"
 "	background-color: #393E46;\n"
 "}")
@@ -532,7 +654,7 @@ class Ui_MainWindow(object):
         self.gridLayout_21.addWidget(self.QFrame_TOF, 0, 0, 1, 1)
 
 
-        self.gridLayout_23.addWidget(self.QGroupBox_TOF, 1, 0, 1, 1)
+        self.gridLayout_25.addWidget(self.QGroupBox_TOF, 1, 0, 1, 1)
 
         self.QGroupBox_Camera_Source = QGroupBox(self.QGroupBox_2)
         self.QGroupBox_Camera_Source.setObjectName(u"QGroupBox_Camera_Source")
@@ -570,9 +692,7 @@ class Ui_MainWindow(object):
         self.QPushButton_Computer.setObjectName(u"QPushButton_Computer")
         self.QPushButton_Computer.setEnabled(False)
         self.QPushButton_Computer.setMinimumSize(QSize(0, 35))
-        font2 = QFont()
-        font2.setPointSize(11)
-        self.QPushButton_Computer.setFont(font2)
+        self.QPushButton_Computer.setFont(font1)
         self.QPushButton_Computer.setStyleSheet(u"QPushButton#QPushButton_Computer{\n"
 "	color:#EEEEEE;\n"
 "}\n"
@@ -587,7 +707,7 @@ class Ui_MainWindow(object):
         self.QPushButton_Tello.setObjectName(u"QPushButton_Tello")
         self.QPushButton_Tello.setEnabled(False)
         self.QPushButton_Tello.setMinimumSize(QSize(0, 35))
-        self.QPushButton_Tello.setFont(font2)
+        self.QPushButton_Tello.setFont(font1)
         self.QPushButton_Tello.setStyleSheet(u"QPushButton#QPushButton_Tello{\n"
 "	color:#EEEEEE;\n"
 "}\n"
@@ -605,7 +725,7 @@ class Ui_MainWindow(object):
         self.gridLayout_19.addWidget(self.QFrame_Camera_Source, 0, 0, 1, 1)
 
 
-        self.gridLayout_23.addWidget(self.QGroupBox_Camera_Source, 1, 1, 1, 1)
+        self.gridLayout_25.addWidget(self.QGroupBox_Camera_Source, 1, 1, 1, 1)
 
         self.QGroupBox_Hand_Mode = QGroupBox(self.QGroupBox_2)
         self.QGroupBox_Hand_Mode.setObjectName(u"QGroupBox_Hand_Mode")
@@ -643,7 +763,7 @@ class Ui_MainWindow(object):
         self.QPushButton_Left_Hand.setObjectName(u"QPushButton_Left_Hand")
         self.QPushButton_Left_Hand.setEnabled(True)
         self.QPushButton_Left_Hand.setMinimumSize(QSize(0, 35))
-        self.QPushButton_Left_Hand.setFont(font2)
+        self.QPushButton_Left_Hand.setFont(font1)
         self.QPushButton_Left_Hand.setStyleSheet(u"QPushButton#QPushButton_Left_Hand{\n"
 "	color:#EEEEEE;\n"
 "}\n"
@@ -658,7 +778,7 @@ class Ui_MainWindow(object):
         self.QPushButton_Right_Hand.setObjectName(u"QPushButton_Right_Hand")
         self.QPushButton_Right_Hand.setEnabled(False)
         self.QPushButton_Right_Hand.setMinimumSize(QSize(0, 35))
-        self.QPushButton_Right_Hand.setFont(font2)
+        self.QPushButton_Right_Hand.setFont(font1)
         self.QPushButton_Right_Hand.setStyleSheet(u"QPushButton#QPushButton_Right_Hand{\n"
 "	color:#EEEEEE;\n"
 "}\n"
@@ -676,7 +796,7 @@ class Ui_MainWindow(object):
         self.gridLayout_13.addWidget(self.QFrame_Hand_Mode, 0, 0, 1, 1)
 
 
-        self.gridLayout_23.addWidget(self.QGroupBox_Hand_Mode, 1, 2, 1, 1)
+        self.gridLayout_25.addWidget(self.QGroupBox_Hand_Mode, 1, 2, 1, 1)
 
         self.QGroupBox_Drone_Battery = QGroupBox(self.QGroupBox_2)
         self.QGroupBox_Drone_Battery.setObjectName(u"QGroupBox_Drone_Battery")
@@ -739,7 +859,7 @@ class Ui_MainWindow(object):
         self.gridLayout_8.addWidget(self.QFrame_Drone_Battery, 0, 0, 1, 1)
 
 
-        self.gridLayout_23.addWidget(self.QGroupBox_Drone_Battery, 2, 0, 1, 1)
+        self.gridLayout_25.addWidget(self.QGroupBox_Drone_Battery, 2, 0, 1, 1)
 
         self.QGroupBox_Drone_Connection = QGroupBox(self.QGroupBox_2)
         self.QGroupBox_Drone_Connection.setObjectName(u"QGroupBox_Drone_Connection")
@@ -776,7 +896,7 @@ class Ui_MainWindow(object):
         self.QPushButton_Connect = QPushButton(self.QFrame_Drone_Connection)
         self.QPushButton_Connect.setObjectName(u"QPushButton_Connect")
         self.QPushButton_Connect.setMinimumSize(QSize(0, 35))
-        self.QPushButton_Connect.setFont(font2)
+        self.QPushButton_Connect.setFont(font1)
         self.QPushButton_Connect.setStyleSheet(u"QPushButton#QPushButton_Connect{\n"
 "	color:#EEEEEE;\n"
 "}")
@@ -802,7 +922,7 @@ class Ui_MainWindow(object):
         self.gridLayout_7.addWidget(self.QFrame_Drone_Connection, 0, 0, 1, 1)
 
 
-        self.gridLayout_23.addWidget(self.QGroupBox_Drone_Connection, 2, 1, 1, 1)
+        self.gridLayout_25.addWidget(self.QGroupBox_Drone_Connection, 2, 1, 1, 1)
 
         self.QGroupBox_Data_Collector = QGroupBox(self.QGroupBox_2)
         self.QGroupBox_Data_Collector.setObjectName(u"QGroupBox_Data_Collector")
@@ -842,7 +962,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.QPushButton_Save_Gesture = QPushButton(self.QFrame_Data_Collector)
         self.QPushButton_Save_Gesture.setObjectName(u"QPushButton_Save_Gesture")
-        self.QPushButton_Save_Gesture.setFont(font2)
+        self.QPushButton_Save_Gesture.setFont(font1)
         self.QPushButton_Save_Gesture.setStyleSheet(u"QPushButton#QPushButton_Save_Gesture {\n"
 "	color:#EEEEEE;\n"
 "}")
@@ -863,7 +983,7 @@ class Ui_MainWindow(object):
 
         self.QPushButton_Clear_All_Gestures = QPushButton(self.QFrame_Data_Collector)
         self.QPushButton_Clear_All_Gestures.setObjectName(u"QPushButton_Clear_All_Gestures")
-        self.QPushButton_Clear_All_Gestures.setFont(font2)
+        self.QPushButton_Clear_All_Gestures.setFont(font1)
         self.QPushButton_Clear_All_Gestures.setStyleSheet(u"QPushButton#QPushButton_Clear_All_Gestures{\n"
 "	color:#EEEEEE;\n"
 "}")
@@ -877,7 +997,7 @@ class Ui_MainWindow(object):
         self.gridLayout_5.addWidget(self.QFrame_Data_Collector, 0, 0, 1, 1)
 
 
-        self.gridLayout_23.addWidget(self.QGroupBox_Data_Collector, 2, 2, 1, 1)
+        self.gridLayout_25.addWidget(self.QGroupBox_Data_Collector, 2, 2, 1, 1)
 
 
         self.gridLayout.addWidget(self.QGroupBox_2, 0, 1, 1, 1)
@@ -944,9 +1064,15 @@ class Ui_MainWindow(object):
         self.QLabel_Right.setText(QCoreApplication.translate("MainWindow", u"Right", None))
         self.QPushButton_Dummy1.setText("")
         self.QLabel_Backward.setText(QCoreApplication.translate("MainWindow", u"Backward", None))
-        self.QPushButton_Take_Off.setText(QCoreApplication.translate("MainWindow", u"Take Off", None))
         self.QPushButton_Land.setText(QCoreApplication.translate("MainWindow", u"Land", None))
+        self.QPushButton_Take_Off.setText(QCoreApplication.translate("MainWindow", u"Take Off", None))
         self.QGroupBox_2.setTitle(QCoreApplication.translate("MainWindow", u"Utilities and settings", None))
+        self.QGroupBox_Absolute_Height.setTitle(QCoreApplication.translate("MainWindow", u"Absolute Height", None))
+        self.QLineEdit_Absolute_Height.setText(QCoreApplication.translate("MainWindow", u"0", None))
+        self.QLabel_cm_b.setText(QCoreApplication.translate("MainWindow", u"cm", None))
+        self.QGroupBox_Flight_Time.setTitle(QCoreApplication.translate("MainWindow", u"Flight Time", None))
+        self.QLineEdit_Flight_Time.setText(QCoreApplication.translate("MainWindow", u"0", None))
+        self.QLabel_s.setText(QCoreApplication.translate("MainWindow", u"s", None))
         self.QGroupBox_Temperature.setTitle(QCoreApplication.translate("MainWindow", u"Drone Temperature", None))
         self.QLineEdit_Temperature.setText(QCoreApplication.translate("MainWindow", u"0", None))
         self.QLabel_celcius.setText(QCoreApplication.translate("MainWindow", u"\u00b0", None))

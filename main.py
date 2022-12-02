@@ -67,6 +67,8 @@ class MainWindow(QMainWindow):
         self.WiFiThread.battery_percentage_update_signal.connect(self.battery_percentage_update_slot)
         self.WiFiThread.tof_distance_update_signal.connect(self.tof_distance_update_slot)
         self.WiFiThread.temperature_update_signal.connect(self.temperature_update_slot)
+        self.WiFiThread.absolute_height_update_signal.connect(self.absolute_height_update_slot)
+        self.WiFiThread.flight_time_update_signal.connect(self.flight_time_update_slot)
         self.WiFiThread.message_update_signal.connect(self.add_message_to_the_logs)
         self.WiFiThread.ui_update_signal.connect(self.ui_update_slot)
 
@@ -222,6 +224,24 @@ class MainWindow(QMainWindow):
         """
 
         self.ui.QLineEdit_Temperature.setText(str(temperature))
+
+    def absolute_height_update_slot(self, absolute_height):
+        """
+        Updates drone's absolute height.
+
+        :param absolute_height: absolute_height
+        """
+
+        self.ui.QLineEdit_Absolute_Height.setText(str(absolute_height))
+
+    def flight_time_update_slot(self, flight_time):
+        """
+        Updates drone's flight time.
+
+        :param flight_time: flight_time
+        """
+
+        self.ui.QLineEdit_Flight_Time.setText(str(flight_time))
 
     def ui_update_slot(self):
         """
@@ -499,6 +519,8 @@ class WiFiThread(QThread):
     battery_percentage_update_signal = Signal(int)
     tof_distance_update_signal = Signal(int)
     temperature_update_signal = Signal(float)
+    absolute_height_update_signal = Signal(int)
+    flight_time_update_signal = Signal(int)
     message_update_signal = Signal(str)
     ui_update_signal = Signal()
 
@@ -527,6 +549,8 @@ class WiFiThread(QThread):
                 self.battery_percentage_update_signal.emit(self.tello_drone.get_battery())
                 self.tof_distance_update_signal.emit(self.tello_drone.get_distance_tof())
                 self.temperature_update_signal.emit(self.tello_drone.get_temperature())
+                self.absolute_height_update_signal.emit(self.tello_drone.get_barometer())
+                self.flight_time_update_signal.emit(self.tello_drone.get_flight_time())
             else:
                 self.wifi_strength_update_signal.emit(0)
 

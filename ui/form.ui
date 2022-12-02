@@ -75,7 +75,7 @@
       <property name="styleSheet">
        <string notr="true">QGroupBox#QGroupBox_1 {
     background-color:  #222831;
-    border: 2px solid gray;
+    border: 3px solid gray;
 	 border-color: #00ADB5;
     border-radius: 8px;
     margin-top: 1ex; /* leave space at the top for the title */
@@ -147,7 +147,7 @@ QGroupBox::title#QGroupBox_1 {
       <property name="styleSheet">
        <string notr="true">QGroupBox#QGroupBox_Camera_Feed {
     background-color:  #222831;
-    border: 2px solid gray;
+    border: 3px solid gray;
 	 border-color: #00ADB5;
     border-radius: 8px;
     margin-top: 1ex; /* leave space at the top for the title */
@@ -209,7 +209,7 @@ QGroupBox::title#QGroupBox_Camera_Feed {
       <property name="styleSheet">
        <string notr="true">QGroupBox#QGroupBox_3 {
     background-color:  #222831;
-    border: 2px solid gray;
+    border: 3px solid gray;
 	 border-color: #00ADB5;
     border-radius: 8px;
     margin-top: 1ex; /* leave space at the top for the title */
@@ -227,7 +227,22 @@ QGroupBox::title#QGroupBox_3 {
        <string>Controls</string>
       </property>
       <layout class="QGridLayout" name="gridLayout_10">
-       <item row="0" column="0">
+       <property name="leftMargin">
+        <number>16</number>
+       </property>
+       <property name="topMargin">
+        <number>16</number>
+       </property>
+       <property name="rightMargin">
+        <number>16</number>
+       </property>
+       <property name="bottomMargin">
+        <number>16</number>
+       </property>
+       <property name="spacing">
+        <number>16</number>
+       </property>
+       <item row="1" column="0">
         <widget class="QFrame" name="QFrame_Advanced_Moves">
          <property name="styleSheet">
           <string notr="true">QFrame#QFrame_Advanced_Moves {
@@ -459,7 +474,7 @@ QGroupBox::title#QGroupBox_3 {
          </layout>
         </widget>
        </item>
-       <item row="0" column="2">
+       <item row="1" column="2">
         <widget class="QFrame" name="QFrame_Basic_Moves">
          <property name="styleSheet">
           <string notr="true">QFrame#QFrame_Basic_Moves {
@@ -703,26 +718,7 @@ QGroupBox::title#QGroupBox_3 {
          </layout>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QPushButton" name="QPushButton_Take_Off">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton#QPushButton_Take_Off{
-	color:#EEEEEE;
-}
-
-QPushButton::disabled#QPushButton_Take_Off  {
-    color:  grey;
-}</string>
-         </property>
-         <property name="text">
-          <string>Take Off</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
+       <item row="2" column="2">
         <widget class="QPushButton" name="QPushButton_Land">
          <property name="enabled">
           <bool>false</bool>
@@ -738,6 +734,25 @@ QPushButton::disabled#QPushButton_Land {
          </property>
          <property name="text">
           <string>Land</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="QPushButton_Take_Off">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton#QPushButton_Take_Off{
+	color:#EEEEEE;
+}
+
+QPushButton::disabled#QPushButton_Take_Off  {
+    color:  grey;
+}</string>
+         </property>
+         <property name="text">
+          <string>Take Off</string>
          </property>
         </widget>
        </item>
@@ -761,7 +776,7 @@ QPushButton::disabled#QPushButton_Land {
       <property name="styleSheet">
        <string notr="true">QGroupBox#QGroupBox_2 {
     background-color:  #222831;
-    border: 2px solid gray;
+    border: 3px solid gray;
 	 border-color: #00ADB5;
     border-radius: 8px;
     margin-top: 1ex; /* leave space at the top for the title */
@@ -778,7 +793,214 @@ QGroupBox::title#QGroupBox_2 {
       <property name="title">
        <string>Utilities and settings</string>
       </property>
-      <layout class="QGridLayout" name="gridLayout_23">
+      <layout class="QGridLayout" name="gridLayout_25">
+       <property name="leftMargin">
+        <number>12</number>
+       </property>
+       <property name="topMargin">
+        <number>12</number>
+       </property>
+       <property name="rightMargin">
+        <number>12</number>
+       </property>
+       <property name="bottomMargin">
+        <number>12</number>
+       </property>
+       <property name="spacing">
+        <number>12</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QGroupBox" name="QGroupBox_Absolute_Height">
+         <property name="styleSheet">
+          <string notr="true">QGroupBox#QGroupBox_Absolute_Height{
+    background-color:  #222831;
+    border: 2px solid gray;
+	 border-color: #00ADB5;
+    border-radius: 8px;
+    margin-top: 1ex; /* leave space at the top for the title */
+	font-size: 14px;
+}
+
+QGroupBox::title#QGroupBox_Absolute_Height {
+    color:  white;
+    subcontrol-origin: margin;
+	left: 15px;
+    padding: 0px 5px 0px 5px;
+}</string>
+         </property>
+         <property name="title">
+          <string>Absolute Height</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_24">
+          <property name="leftMargin">
+           <number>12</number>
+          </property>
+          <property name="topMargin">
+           <number>12</number>
+          </property>
+          <property name="rightMargin">
+           <number>12</number>
+          </property>
+          <property name="bottomMargin">
+           <number>12</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QFrame" name="QFrame_Absolute_Height">
+            <property name="styleSheet">
+             <string notr="true">QFrame#QFrame_Absolute_Height{
+    border-radius: 8px;
+	background-color: #393E46;
+}</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Panel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_10">
+             <item>
+              <widget class="QLineEdit" name="QLineEdit_Absolute_Height">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QLineEdit#QLineEdit_Absolute_Height{
+    border: 1px solid grey;
+    border-radius: 4px;
+	 color:#EEEEEE;
+}</string>
+               </property>
+               <property name="text">
+                <string>0</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="QLabel_cm_b">
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QLabel#QLabel_cm_b{
+	 color:#EEEEEE;
+}</string>
+               </property>
+               <property name="text">
+                <string>cm</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QGroupBox" name="QGroupBox_Flight_Time">
+         <property name="styleSheet">
+          <string notr="true">QGroupBox#QGroupBox_Flight_Time{
+    background-color:  #222831;
+    border: 2px solid gray;
+	 border-color: #00ADB5;
+    border-radius: 8px;
+    margin-top: 1ex; /* leave space at the top for the title */
+	font-size: 14px;
+}
+
+QGroupBox::title#QGroupBox_Flight_Time{
+    color:  white;
+    subcontrol-origin: margin;
+	left: 15px;
+    padding: 0px 5px 0px 5px;
+}</string>
+         </property>
+         <property name="title">
+          <string>Flight Time</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_23">
+          <property name="leftMargin">
+           <number>12</number>
+          </property>
+          <property name="topMargin">
+           <number>12</number>
+          </property>
+          <property name="rightMargin">
+           <number>12</number>
+          </property>
+          <property name="bottomMargin">
+           <number>12</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QFrame" name="QFrame_Flight_Time">
+            <property name="styleSheet">
+             <string notr="true">QFrame#QFrame_Flight_Time{
+    border-radius: 8px;
+	background-color: #393E46;
+}</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Panel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_9">
+             <item>
+              <widget class="QLineEdit" name="QLineEdit_Flight_Time">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QLineEdit#QLineEdit_Flight_Time{
+    border: 1px solid grey;
+    border-radius: 4px;
+	 color:#EEEEEE;
+}</string>
+               </property>
+               <property name="text">
+                <string>0</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="QLabel_s">
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QLabel#QLabel_s{
+	 color:#EEEEEE;
+}</string>
+               </property>
+               <property name="text">
+                <string>s</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
        <item row="0" column="2">
         <widget class="QGroupBox" name="QGroupBox_Temperature">
          <property name="styleSheet">
@@ -913,7 +1135,7 @@ QGroupBox::title#QGroupBox_TOF {
           <item row="0" column="0">
            <widget class="QFrame" name="QFrame_TOF">
             <property name="styleSheet">
-             <string notr="true">QFrame#QFrame_Barometer{
+             <string notr="true">QFrame#QFrame_TOF{
     border-radius: 8px;
 	background-color: #393E46;
 }</string>
