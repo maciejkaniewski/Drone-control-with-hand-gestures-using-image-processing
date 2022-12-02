@@ -66,6 +66,7 @@ class MainWindow(QMainWindow):
         self.WiFiThread.wifi_strength_update_signal.connect(self.wifi_strength_update_slot)
         self.WiFiThread.battery_percentage_update_signal.connect(self.battery_percentage_update_slot)
         self.WiFiThread.tof_distance_update_signal.connect(self.tof_distance_update_slot)
+        self.WiFiThread.temperature_update_signal.connect(self.temperature_update_slot)
         self.WiFiThread.message_update_signal.connect(self.add_message_to_the_logs)
         self.WiFiThread.ui_update_signal.connect(self.ui_update_slot)
 
@@ -212,6 +213,15 @@ class MainWindow(QMainWindow):
         """
 
         self.ui.QLineEdit_Distance.setText(str(distance))
+
+    def temperature_update_slot(self, temperature: float):
+        """
+        Updates drone's temperature.
+
+        :param temperature: temperature
+        """
+
+        self.ui.QLineEdit_Temperature.setText(str(temperature))
 
     def ui_update_slot(self):
         """
@@ -488,6 +498,7 @@ class WiFiThread(QThread):
     wifi_strength_update_signal = Signal(int)
     battery_percentage_update_signal = Signal(int)
     tof_distance_update_signal = Signal(int)
+    temperature_update_signal = Signal(float)
     message_update_signal = Signal(str)
     ui_update_signal = Signal()
 
@@ -515,6 +526,7 @@ class WiFiThread(QThread):
                 self.wifi_strength_update_signal.emit(self.wifi.check_signal_strength())
                 self.battery_percentage_update_signal.emit(self.tello_drone.get_battery())
                 self.tof_distance_update_signal.emit(self.tello_drone.get_distance_tof())
+                self.temperature_update_signal.emit(self.tello_drone.get_temperature())
             else:
                 self.wifi_strength_update_signal.emit(0)
 

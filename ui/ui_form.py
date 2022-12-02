@@ -415,10 +415,11 @@ class Ui_MainWindow(object):
 "	left: 15px;\n"
 "    padding: 0px 5px 0px 5px;\n"
 "}")
-        self.QGroupBox_Data_Collector = QGroupBox(self.QGroupBox_2)
-        self.QGroupBox_Data_Collector.setObjectName(u"QGroupBox_Data_Collector")
-        self.QGroupBox_Data_Collector.setGeometry(QRect(410, 210, 191, 101))
-        self.QGroupBox_Data_Collector.setStyleSheet(u"QGroupBox#QGroupBox_Data_Collector {\n"
+        self.gridLayout_23 = QGridLayout(self.QGroupBox_2)
+        self.gridLayout_23.setObjectName(u"gridLayout_23")
+        self.QGroupBox_Temperature = QGroupBox(self.QGroupBox_2)
+        self.QGroupBox_Temperature.setObjectName(u"QGroupBox_Temperature")
+        self.QGroupBox_Temperature.setStyleSheet(u"QGroupBox#QGroupBox_Temperature{\n"
 "    background-color:  #222831;\n"
 "    border: 2px solid gray;\n"
 "	 border-color: #00ADB5;\n"
@@ -427,73 +428,58 @@ class Ui_MainWindow(object):
 "	font-size: 14px;\n"
 "}\n"
 "\n"
-"QGroupBox::title#QGroupBox_Data_Collector  {\n"
+"QGroupBox::title#QGroupBox_Temperature {\n"
 "    color:  white;\n"
 "    subcontrol-origin: margin;\n"
 "	left: 15px;\n"
 "    padding: 0px 5px 0px 5px;\n"
 "}")
-        self.gridLayout_5 = QGridLayout(self.QGroupBox_Data_Collector)
-        self.gridLayout_5.setObjectName(u"gridLayout_5")
-        self.gridLayout_5.setContentsMargins(12, 12, 12, 12)
-        self.QFrame_Data_Collector = QFrame(self.QGroupBox_Data_Collector)
-        self.QFrame_Data_Collector.setObjectName(u"QFrame_Data_Collector")
-        self.QFrame_Data_Collector.setStyleSheet(u"QFrame#QFrame_Data_Collector {\n"
+        self.gridLayout_22 = QGridLayout(self.QGroupBox_Temperature)
+        self.gridLayout_22.setObjectName(u"gridLayout_22")
+        self.gridLayout_22.setContentsMargins(12, 12, 12, 12)
+        self.QFrame_Temperature = QFrame(self.QGroupBox_Temperature)
+        self.QFrame_Temperature.setObjectName(u"QFrame_Temperature")
+        self.QFrame_Temperature.setStyleSheet(u"QFrame#QFrame_Temperature{\n"
 "    border-radius: 8px;\n"
 "	background-color: #393E46;\n"
 "}")
-        self.QFrame_Data_Collector.setFrameShape(QFrame.Panel)
-        self.QFrame_Data_Collector.setFrameShadow(QFrame.Raised)
-        self.gridLayout_3 = QGridLayout(self.QFrame_Data_Collector)
-        self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.verticalLayout = QVBoxLayout()
-        self.verticalLayout.setSpacing(8)
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout.setContentsMargins(0, -1, -1, -1)
-        self.horizontalLayout = QHBoxLayout()
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.QPushButton_Save_Gesture = QPushButton(self.QFrame_Data_Collector)
-        self.QPushButton_Save_Gesture.setObjectName(u"QPushButton_Save_Gesture")
+        self.QFrame_Temperature.setFrameShape(QFrame.Panel)
+        self.QFrame_Temperature.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_8 = QHBoxLayout(self.QFrame_Temperature)
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.QLineEdit_Temperature = QLineEdit(self.QFrame_Temperature)
+        self.QLineEdit_Temperature.setObjectName(u"QLineEdit_Temperature")
+        self.QLineEdit_Temperature.setEnabled(True)
+        self.QLineEdit_Temperature.setStyleSheet(u"QLineEdit#QLineEdit_Temperature{\n"
+"    border: 1px solid grey;\n"
+"    border-radius: 4px;\n"
+"	 color:#EEEEEE;\n"
+"}")
+        self.QLineEdit_Temperature.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.QLineEdit_Temperature.setReadOnly(True)
+
+        self.horizontalLayout_8.addWidget(self.QLineEdit_Temperature)
+
+        self.QLabel_celcius = QLabel(self.QFrame_Temperature)
+        self.QLabel_celcius.setObjectName(u"QLabel_celcius")
         font1 = QFont()
-        font1.setPointSize(11)
-        self.QPushButton_Save_Gesture.setFont(font1)
-        self.QPushButton_Save_Gesture.setStyleSheet(u"QPushButton#QPushButton_Save_Gesture {\n"
-"	color:#EEEEEE;\n"
+        font1.setPointSize(15)
+        self.QLabel_celcius.setFont(font1)
+        self.QLabel_celcius.setStyleSheet(u"QLabel#QLabel_celcius{\n"
+"	 color:#EEEEEE;\n"
 "}")
 
-        self.horizontalLayout.addWidget(self.QPushButton_Save_Gesture)
-
-        self.QSpinBox_Gesture_Label = QSpinBox(self.QFrame_Data_Collector)
-        self.QSpinBox_Gesture_Label.setObjectName(u"QSpinBox_Gesture_Label")
-        self.QSpinBox_Gesture_Label.setStyleSheet(u"QSpinBox#QSpinBox_Gesture_Label {\n"
-"	color:#EEEEEE;\n"
-"}")
-        self.QSpinBox_Gesture_Label.setMaximum(9)
-
-        self.horizontalLayout.addWidget(self.QSpinBox_Gesture_Label)
+        self.horizontalLayout_8.addWidget(self.QLabel_celcius)
 
 
-        self.verticalLayout.addLayout(self.horizontalLayout)
-
-        self.QPushButton_Clear_All_Gestures = QPushButton(self.QFrame_Data_Collector)
-        self.QPushButton_Clear_All_Gestures.setObjectName(u"QPushButton_Clear_All_Gestures")
-        self.QPushButton_Clear_All_Gestures.setFont(font1)
-        self.QPushButton_Clear_All_Gestures.setStyleSheet(u"QPushButton#QPushButton_Clear_All_Gestures{\n"
-"	color:#EEEEEE;\n"
-"}")
-
-        self.verticalLayout.addWidget(self.QPushButton_Clear_All_Gestures)
+        self.gridLayout_22.addWidget(self.QFrame_Temperature, 0, 0, 1, 1)
 
 
-        self.gridLayout_3.addLayout(self.verticalLayout, 0, 0, 1, 1)
+        self.gridLayout_23.addWidget(self.QGroupBox_Temperature, 0, 2, 1, 1)
 
-
-        self.gridLayout_5.addWidget(self.QFrame_Data_Collector, 0, 0, 1, 1)
-
-        self.QGroupBox_Drone_Connection = QGroupBox(self.QGroupBox_2)
-        self.QGroupBox_Drone_Connection.setObjectName(u"QGroupBox_Drone_Connection")
-        self.QGroupBox_Drone_Connection.setGeometry(QRect(210, 210, 191, 101))
-        self.QGroupBox_Drone_Connection.setStyleSheet(u"QGroupBox#QGroupBox_Drone_Connection {\n"
+        self.QGroupBox_TOF = QGroupBox(self.QGroupBox_2)
+        self.QGroupBox_TOF.setObjectName(u"QGroupBox_TOF")
+        self.QGroupBox_TOF.setStyleSheet(u"QGroupBox#QGroupBox_TOF{\n"
 "    background-color:  #222831;\n"
 "    border: 2px solid gray;\n"
 "	 border-color: #00ADB5;\n"
@@ -502,58 +488,198 @@ class Ui_MainWindow(object):
 "	font-size: 14px;\n"
 "}\n"
 "\n"
-"QGroupBox::title#QGroupBox_Drone_Connection   {\n"
+"QGroupBox::title#QGroupBox_TOF {\n"
 "    color:  white;\n"
 "    subcontrol-origin: margin;\n"
 "	left: 15px;\n"
 "    padding: 0px 5px 0px 5px;\n"
 "}")
-        self.gridLayout_7 = QGridLayout(self.QGroupBox_Drone_Connection)
-        self.gridLayout_7.setObjectName(u"gridLayout_7")
-        self.gridLayout_7.setContentsMargins(12, 12, 12, 12)
-        self.QFrame_Drone_Connection = QFrame(self.QGroupBox_Drone_Connection)
-        self.QFrame_Drone_Connection.setObjectName(u"QFrame_Drone_Connection")
-        self.QFrame_Drone_Connection.setStyleSheet(u"QFrame#QFrame_Drone_Connection {\n"
+        self.gridLayout_21 = QGridLayout(self.QGroupBox_TOF)
+        self.gridLayout_21.setObjectName(u"gridLayout_21")
+        self.gridLayout_21.setContentsMargins(12, 12, 12, 12)
+        self.QFrame_TOF = QFrame(self.QGroupBox_TOF)
+        self.QFrame_TOF.setObjectName(u"QFrame_TOF")
+        self.QFrame_TOF.setStyleSheet(u"QFrame#QFrame_Barometer{\n"
 "    border-radius: 8px;\n"
 "	background-color: #393E46;\n"
 "}")
-        self.QFrame_Drone_Connection.setFrameShape(QFrame.Panel)
-        self.QFrame_Drone_Connection.setFrameShadow(QFrame.Raised)
-        self.gridLayout_4 = QGridLayout(self.QFrame_Drone_Connection)
-        self.gridLayout_4.setObjectName(u"gridLayout_4")
-        self.horizontalLayout_2 = QHBoxLayout()
-        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.QPushButton_Connect = QPushButton(self.QFrame_Drone_Connection)
-        self.QPushButton_Connect.setObjectName(u"QPushButton_Connect")
-        self.QPushButton_Connect.setMinimumSize(QSize(0, 35))
-        self.QPushButton_Connect.setFont(font1)
-        self.QPushButton_Connect.setStyleSheet(u"QPushButton#QPushButton_Connect{\n"
-"	color:#EEEEEE;\n"
+        self.QFrame_TOF.setFrameShape(QFrame.Panel)
+        self.QFrame_TOF.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_7 = QHBoxLayout(self.QFrame_TOF)
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.QLineEdit_Distance = QLineEdit(self.QFrame_TOF)
+        self.QLineEdit_Distance.setObjectName(u"QLineEdit_Distance")
+        self.QLineEdit_Distance.setEnabled(True)
+        self.QLineEdit_Distance.setStyleSheet(u"QLineEdit#QLineEdit_Distance{\n"
+"    border: 1px solid grey;\n"
+"    border-radius: 4px;\n"
+"	 color:#EEEEEE;\n"
+"}")
+        self.QLineEdit_Distance.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.QLineEdit_Distance.setReadOnly(True)
+
+        self.horizontalLayout_7.addWidget(self.QLineEdit_Distance)
+
+        self.QLabel_cm = QLabel(self.QFrame_TOF)
+        self.QLabel_cm.setObjectName(u"QLabel_cm")
+        self.QLabel_cm.setStyleSheet(u"QLabel#QLabel_cm{\n"
+"	 color:#EEEEEE;\n"
 "}")
 
-        self.horizontalLayout_2.addWidget(self.QPushButton_Connect)
-
-        self.QLabel_WiFI = QLabel(self.QFrame_Drone_Connection)
-        self.QLabel_WiFI.setObjectName(u"QLabel_WiFI")
-        sizePolicy.setHeightForWidth(self.QLabel_WiFI.sizePolicy().hasHeightForWidth())
-        self.QLabel_WiFI.setSizePolicy(sizePolicy)
-        self.QLabel_WiFI.setMinimumSize(QSize(35, 35))
-        self.QLabel_WiFI.setMaximumSize(QSize(35, 35))
-        self.QLabel_WiFI.setPixmap(QPixmap(u":/images/images/wifi_0.png"))
-        self.QLabel_WiFI.setScaledContents(True)
-        self.QLabel_WiFI.setAlignment(Qt.AlignCenter)
-
-        self.horizontalLayout_2.addWidget(self.QLabel_WiFI)
+        self.horizontalLayout_7.addWidget(self.QLabel_cm)
 
 
-        self.gridLayout_4.addLayout(self.horizontalLayout_2, 0, 1, 1, 1)
+        self.gridLayout_21.addWidget(self.QFrame_TOF, 0, 0, 1, 1)
 
 
-        self.gridLayout_7.addWidget(self.QFrame_Drone_Connection, 0, 0, 1, 1)
+        self.gridLayout_23.addWidget(self.QGroupBox_TOF, 1, 0, 1, 1)
+
+        self.QGroupBox_Camera_Source = QGroupBox(self.QGroupBox_2)
+        self.QGroupBox_Camera_Source.setObjectName(u"QGroupBox_Camera_Source")
+        self.QGroupBox_Camera_Source.setStyleSheet(u"QGroupBox#QGroupBox_Camera_Source{\n"
+"    background-color:  #222831;\n"
+"    border: 2px solid gray;\n"
+"	 border-color: #00ADB5;\n"
+"    border-radius: 8px;\n"
+"    margin-top: 1ex; /* leave space at the top for the title */\n"
+"	font-size: 14px;\n"
+"}\n"
+"\n"
+"QGroupBox::title#QGroupBox_Camera_Source  {\n"
+"    color:  white;\n"
+"    subcontrol-origin: margin;\n"
+"	left: 15px;\n"
+"    padding: 0px 5px 0px 5px;\n"
+"}")
+        self.gridLayout_19 = QGridLayout(self.QGroupBox_Camera_Source)
+        self.gridLayout_19.setObjectName(u"gridLayout_19")
+        self.gridLayout_19.setContentsMargins(12, 12, 12, 12)
+        self.QFrame_Camera_Source = QFrame(self.QGroupBox_Camera_Source)
+        self.QFrame_Camera_Source.setObjectName(u"QFrame_Camera_Source")
+        self.QFrame_Camera_Source.setStyleSheet(u"QFrame#QFrame_Camera_Source{\n"
+"    border-radius: 8px;\n"
+"	background-color: #393E46;\n"
+"}")
+        self.QFrame_Camera_Source.setFrameShape(QFrame.Panel)
+        self.QFrame_Camera_Source.setFrameShadow(QFrame.Raised)
+        self.gridLayout_20 = QGridLayout(self.QFrame_Camera_Source)
+        self.gridLayout_20.setObjectName(u"gridLayout_20")
+        self.horizontalLayout_6 = QHBoxLayout()
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.QPushButton_Computer = QPushButton(self.QFrame_Camera_Source)
+        self.QPushButton_Computer.setObjectName(u"QPushButton_Computer")
+        self.QPushButton_Computer.setEnabled(False)
+        self.QPushButton_Computer.setMinimumSize(QSize(0, 35))
+        font2 = QFont()
+        font2.setPointSize(11)
+        self.QPushButton_Computer.setFont(font2)
+        self.QPushButton_Computer.setStyleSheet(u"QPushButton#QPushButton_Computer{\n"
+"	color:#EEEEEE;\n"
+"}\n"
+"\n"
+"QPushButton::disabled#QPushButton_Computer   {\n"
+"    color:  grey;\n"
+"}")
+
+        self.horizontalLayout_6.addWidget(self.QPushButton_Computer)
+
+        self.QPushButton_Tello = QPushButton(self.QFrame_Camera_Source)
+        self.QPushButton_Tello.setObjectName(u"QPushButton_Tello")
+        self.QPushButton_Tello.setEnabled(False)
+        self.QPushButton_Tello.setMinimumSize(QSize(0, 35))
+        self.QPushButton_Tello.setFont(font2)
+        self.QPushButton_Tello.setStyleSheet(u"QPushButton#QPushButton_Tello{\n"
+"	color:#EEEEEE;\n"
+"}\n"
+"\n"
+"QPushButton::disabled#QPushButton_Tello  {\n"
+"    color:  grey;\n"
+"}")
+
+        self.horizontalLayout_6.addWidget(self.QPushButton_Tello)
+
+
+        self.gridLayout_20.addLayout(self.horizontalLayout_6, 0, 0, 1, 1)
+
+
+        self.gridLayout_19.addWidget(self.QFrame_Camera_Source, 0, 0, 1, 1)
+
+
+        self.gridLayout_23.addWidget(self.QGroupBox_Camera_Source, 1, 1, 1, 1)
+
+        self.QGroupBox_Hand_Mode = QGroupBox(self.QGroupBox_2)
+        self.QGroupBox_Hand_Mode.setObjectName(u"QGroupBox_Hand_Mode")
+        self.QGroupBox_Hand_Mode.setStyleSheet(u"QGroupBox#QGroupBox_Hand_Mode {\n"
+"    background-color:  #222831;\n"
+"    border: 2px solid gray;\n"
+"	 border-color: #00ADB5;\n"
+"    border-radius: 8px;\n"
+"    margin-top: 1ex; /* leave space at the top for the title */\n"
+"	font-size: 14px;\n"
+"}\n"
+"\n"
+"QGroupBox::title#QGroupBox_Hand_Mode   {\n"
+"    color:  white;\n"
+"    subcontrol-origin: margin;\n"
+"	left: 15px;\n"
+"    padding: 0px 5px 0px 5px;\n"
+"}")
+        self.gridLayout_13 = QGridLayout(self.QGroupBox_Hand_Mode)
+        self.gridLayout_13.setObjectName(u"gridLayout_13")
+        self.gridLayout_13.setContentsMargins(12, 12, 12, 12)
+        self.QFrame_Hand_Mode = QFrame(self.QGroupBox_Hand_Mode)
+        self.QFrame_Hand_Mode.setObjectName(u"QFrame_Hand_Mode")
+        self.QFrame_Hand_Mode.setStyleSheet(u"QFrame#QFrame_Hand_Mode {\n"
+"    border-radius: 8px;\n"
+"	background-color: #393E46;\n"
+"}")
+        self.QFrame_Hand_Mode.setFrameShape(QFrame.Panel)
+        self.QFrame_Hand_Mode.setFrameShadow(QFrame.Raised)
+        self.gridLayout_14 = QGridLayout(self.QFrame_Hand_Mode)
+        self.gridLayout_14.setObjectName(u"gridLayout_14")
+        self.horizontalLayout_5 = QHBoxLayout()
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.QPushButton_Left_Hand = QPushButton(self.QFrame_Hand_Mode)
+        self.QPushButton_Left_Hand.setObjectName(u"QPushButton_Left_Hand")
+        self.QPushButton_Left_Hand.setEnabled(True)
+        self.QPushButton_Left_Hand.setMinimumSize(QSize(0, 35))
+        self.QPushButton_Left_Hand.setFont(font2)
+        self.QPushButton_Left_Hand.setStyleSheet(u"QPushButton#QPushButton_Left_Hand{\n"
+"	color:#EEEEEE;\n"
+"}\n"
+"\n"
+"QPushButton::disabled#QPushButton_Left_Hand   {\n"
+"    color:  grey;\n"
+"}")
+
+        self.horizontalLayout_5.addWidget(self.QPushButton_Left_Hand)
+
+        self.QPushButton_Right_Hand = QPushButton(self.QFrame_Hand_Mode)
+        self.QPushButton_Right_Hand.setObjectName(u"QPushButton_Right_Hand")
+        self.QPushButton_Right_Hand.setEnabled(False)
+        self.QPushButton_Right_Hand.setMinimumSize(QSize(0, 35))
+        self.QPushButton_Right_Hand.setFont(font2)
+        self.QPushButton_Right_Hand.setStyleSheet(u"QPushButton#QPushButton_Right_Hand{\n"
+"	color:#EEEEEE;\n"
+"}\n"
+"\n"
+"QPushButton::disabled#QPushButton_Right_Hand   {\n"
+"    color:  grey;\n"
+"}")
+
+        self.horizontalLayout_5.addWidget(self.QPushButton_Right_Hand)
+
+
+        self.gridLayout_14.addLayout(self.horizontalLayout_5, 0, 0, 1, 1)
+
+
+        self.gridLayout_13.addWidget(self.QFrame_Hand_Mode, 0, 0, 1, 1)
+
+
+        self.gridLayout_23.addWidget(self.QGroupBox_Hand_Mode, 1, 2, 1, 1)
 
         self.QGroupBox_Drone_Battery = QGroupBox(self.QGroupBox_2)
         self.QGroupBox_Drone_Battery.setObjectName(u"QGroupBox_Drone_Battery")
-        self.QGroupBox_Drone_Battery.setGeometry(QRect(10, 210, 191, 101))
         self.QGroupBox_Drone_Battery.setStyleSheet(u"QGroupBox#QGroupBox_Drone_Battery {\n"
 "    background-color:  #222831;\n"
 "    border: 2px solid gray;\n"
@@ -612,10 +738,12 @@ class Ui_MainWindow(object):
 
         self.gridLayout_8.addWidget(self.QFrame_Drone_Battery, 0, 0, 1, 1)
 
-        self.QGroupBox_Hand_Mode = QGroupBox(self.QGroupBox_2)
-        self.QGroupBox_Hand_Mode.setObjectName(u"QGroupBox_Hand_Mode")
-        self.QGroupBox_Hand_Mode.setGeometry(QRect(410, 110, 191, 90))
-        self.QGroupBox_Hand_Mode.setStyleSheet(u"QGroupBox#QGroupBox_Hand_Mode {\n"
+
+        self.gridLayout_23.addWidget(self.QGroupBox_Drone_Battery, 2, 0, 1, 1)
+
+        self.QGroupBox_Drone_Connection = QGroupBox(self.QGroupBox_2)
+        self.QGroupBox_Drone_Connection.setObjectName(u"QGroupBox_Drone_Connection")
+        self.QGroupBox_Drone_Connection.setStyleSheet(u"QGroupBox#QGroupBox_Drone_Connection {\n"
 "    background-color:  #222831;\n"
 "    border: 2px solid gray;\n"
 "	 border-color: #00ADB5;\n"
@@ -624,67 +752,61 @@ class Ui_MainWindow(object):
 "	font-size: 14px;\n"
 "}\n"
 "\n"
-"QGroupBox::title#QGroupBox_Hand_Mode   {\n"
+"QGroupBox::title#QGroupBox_Drone_Connection   {\n"
 "    color:  white;\n"
 "    subcontrol-origin: margin;\n"
 "	left: 15px;\n"
 "    padding: 0px 5px 0px 5px;\n"
 "}")
-        self.gridLayout_13 = QGridLayout(self.QGroupBox_Hand_Mode)
-        self.gridLayout_13.setObjectName(u"gridLayout_13")
-        self.gridLayout_13.setContentsMargins(12, 12, 12, 12)
-        self.QFrame_Hand_Mode = QFrame(self.QGroupBox_Hand_Mode)
-        self.QFrame_Hand_Mode.setObjectName(u"QFrame_Hand_Mode")
-        self.QFrame_Hand_Mode.setStyleSheet(u"QFrame#QFrame_Hand_Mode {\n"
+        self.gridLayout_7 = QGridLayout(self.QGroupBox_Drone_Connection)
+        self.gridLayout_7.setObjectName(u"gridLayout_7")
+        self.gridLayout_7.setContentsMargins(12, 12, 12, 12)
+        self.QFrame_Drone_Connection = QFrame(self.QGroupBox_Drone_Connection)
+        self.QFrame_Drone_Connection.setObjectName(u"QFrame_Drone_Connection")
+        self.QFrame_Drone_Connection.setStyleSheet(u"QFrame#QFrame_Drone_Connection {\n"
 "    border-radius: 8px;\n"
 "	background-color: #393E46;\n"
 "}")
-        self.QFrame_Hand_Mode.setFrameShape(QFrame.Panel)
-        self.QFrame_Hand_Mode.setFrameShadow(QFrame.Raised)
-        self.gridLayout_14 = QGridLayout(self.QFrame_Hand_Mode)
-        self.gridLayout_14.setObjectName(u"gridLayout_14")
-        self.horizontalLayout_5 = QHBoxLayout()
-        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
-        self.QPushButton_Left_Hand = QPushButton(self.QFrame_Hand_Mode)
-        self.QPushButton_Left_Hand.setObjectName(u"QPushButton_Left_Hand")
-        self.QPushButton_Left_Hand.setEnabled(True)
-        self.QPushButton_Left_Hand.setMinimumSize(QSize(0, 35))
-        self.QPushButton_Left_Hand.setFont(font1)
-        self.QPushButton_Left_Hand.setStyleSheet(u"QPushButton#QPushButton_Left_Hand{\n"
+        self.QFrame_Drone_Connection.setFrameShape(QFrame.Panel)
+        self.QFrame_Drone_Connection.setFrameShadow(QFrame.Raised)
+        self.gridLayout_4 = QGridLayout(self.QFrame_Drone_Connection)
+        self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.horizontalLayout_2 = QHBoxLayout()
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.QPushButton_Connect = QPushButton(self.QFrame_Drone_Connection)
+        self.QPushButton_Connect.setObjectName(u"QPushButton_Connect")
+        self.QPushButton_Connect.setMinimumSize(QSize(0, 35))
+        self.QPushButton_Connect.setFont(font2)
+        self.QPushButton_Connect.setStyleSheet(u"QPushButton#QPushButton_Connect{\n"
 "	color:#EEEEEE;\n"
-"}\n"
-"\n"
-"QPushButton::disabled#QPushButton_Left_Hand   {\n"
-"    color:  grey;\n"
 "}")
 
-        self.horizontalLayout_5.addWidget(self.QPushButton_Left_Hand)
+        self.horizontalLayout_2.addWidget(self.QPushButton_Connect)
 
-        self.QPushButton_Right_Hand = QPushButton(self.QFrame_Hand_Mode)
-        self.QPushButton_Right_Hand.setObjectName(u"QPushButton_Right_Hand")
-        self.QPushButton_Right_Hand.setEnabled(False)
-        self.QPushButton_Right_Hand.setMinimumSize(QSize(0, 35))
-        self.QPushButton_Right_Hand.setFont(font1)
-        self.QPushButton_Right_Hand.setStyleSheet(u"QPushButton#QPushButton_Right_Hand{\n"
-"	color:#EEEEEE;\n"
-"}\n"
-"\n"
-"QPushButton::disabled#QPushButton_Right_Hand   {\n"
-"    color:  grey;\n"
-"}")
+        self.QLabel_WiFI = QLabel(self.QFrame_Drone_Connection)
+        self.QLabel_WiFI.setObjectName(u"QLabel_WiFI")
+        sizePolicy.setHeightForWidth(self.QLabel_WiFI.sizePolicy().hasHeightForWidth())
+        self.QLabel_WiFI.setSizePolicy(sizePolicy)
+        self.QLabel_WiFI.setMinimumSize(QSize(35, 35))
+        self.QLabel_WiFI.setMaximumSize(QSize(35, 35))
+        self.QLabel_WiFI.setPixmap(QPixmap(u":/images/images/wifi_0.png"))
+        self.QLabel_WiFI.setScaledContents(True)
+        self.QLabel_WiFI.setAlignment(Qt.AlignCenter)
 
-        self.horizontalLayout_5.addWidget(self.QPushButton_Right_Hand)
+        self.horizontalLayout_2.addWidget(self.QLabel_WiFI)
 
 
-        self.gridLayout_14.addLayout(self.horizontalLayout_5, 0, 0, 1, 1)
+        self.gridLayout_4.addLayout(self.horizontalLayout_2, 0, 1, 1, 1)
 
 
-        self.gridLayout_13.addWidget(self.QFrame_Hand_Mode, 0, 0, 1, 1)
+        self.gridLayout_7.addWidget(self.QFrame_Drone_Connection, 0, 0, 1, 1)
 
-        self.QGroupBox_Camera_Source = QGroupBox(self.QGroupBox_2)
-        self.QGroupBox_Camera_Source.setObjectName(u"QGroupBox_Camera_Source")
-        self.QGroupBox_Camera_Source.setGeometry(QRect(210, 110, 191, 90))
-        self.QGroupBox_Camera_Source.setStyleSheet(u"QGroupBox#QGroupBox_Camera_Source{\n"
+
+        self.gridLayout_23.addWidget(self.QGroupBox_Drone_Connection, 2, 1, 1, 1)
+
+        self.QGroupBox_Data_Collector = QGroupBox(self.QGroupBox_2)
+        self.QGroupBox_Data_Collector.setObjectName(u"QGroupBox_Data_Collector")
+        self.QGroupBox_Data_Collector.setStyleSheet(u"QGroupBox#QGroupBox_Data_Collector {\n"
 "    background-color:  #222831;\n"
 "    border: 2px solid gray;\n"
 "	 border-color: #00ADB5;\n"
@@ -693,117 +815,69 @@ class Ui_MainWindow(object):
 "	font-size: 14px;\n"
 "}\n"
 "\n"
-"QGroupBox::title#QGroupBox_Camera_Source  {\n"
+"QGroupBox::title#QGroupBox_Data_Collector  {\n"
 "    color:  white;\n"
 "    subcontrol-origin: margin;\n"
 "	left: 15px;\n"
 "    padding: 0px 5px 0px 5px;\n"
 "}")
-        self.gridLayout_19 = QGridLayout(self.QGroupBox_Camera_Source)
-        self.gridLayout_19.setObjectName(u"gridLayout_19")
-        self.gridLayout_19.setContentsMargins(12, 12, 12, 12)
-        self.QFrame_Camera_Source = QFrame(self.QGroupBox_Camera_Source)
-        self.QFrame_Camera_Source.setObjectName(u"QFrame_Camera_Source")
-        self.QFrame_Camera_Source.setStyleSheet(u"QFrame#QFrame_Camera_Source{\n"
+        self.gridLayout_5 = QGridLayout(self.QGroupBox_Data_Collector)
+        self.gridLayout_5.setObjectName(u"gridLayout_5")
+        self.gridLayout_5.setContentsMargins(12, 12, 12, 12)
+        self.QFrame_Data_Collector = QFrame(self.QGroupBox_Data_Collector)
+        self.QFrame_Data_Collector.setObjectName(u"QFrame_Data_Collector")
+        self.QFrame_Data_Collector.setStyleSheet(u"QFrame#QFrame_Data_Collector {\n"
 "    border-radius: 8px;\n"
 "	background-color: #393E46;\n"
 "}")
-        self.QFrame_Camera_Source.setFrameShape(QFrame.Panel)
-        self.QFrame_Camera_Source.setFrameShadow(QFrame.Raised)
-        self.gridLayout_20 = QGridLayout(self.QFrame_Camera_Source)
-        self.gridLayout_20.setObjectName(u"gridLayout_20")
-        self.horizontalLayout_6 = QHBoxLayout()
-        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.QPushButton_Computer = QPushButton(self.QFrame_Camera_Source)
-        self.QPushButton_Computer.setObjectName(u"QPushButton_Computer")
-        self.QPushButton_Computer.setEnabled(False)
-        self.QPushButton_Computer.setMinimumSize(QSize(0, 35))
-        self.QPushButton_Computer.setFont(font1)
-        self.QPushButton_Computer.setStyleSheet(u"QPushButton#QPushButton_Computer{\n"
+        self.QFrame_Data_Collector.setFrameShape(QFrame.Panel)
+        self.QFrame_Data_Collector.setFrameShadow(QFrame.Raised)
+        self.gridLayout_3 = QGridLayout(self.QFrame_Data_Collector)
+        self.gridLayout_3.setObjectName(u"gridLayout_3")
+        self.verticalLayout = QVBoxLayout()
+        self.verticalLayout.setSpacing(8)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout.setContentsMargins(0, -1, -1, -1)
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.QPushButton_Save_Gesture = QPushButton(self.QFrame_Data_Collector)
+        self.QPushButton_Save_Gesture.setObjectName(u"QPushButton_Save_Gesture")
+        self.QPushButton_Save_Gesture.setFont(font2)
+        self.QPushButton_Save_Gesture.setStyleSheet(u"QPushButton#QPushButton_Save_Gesture {\n"
 "	color:#EEEEEE;\n"
-"}\n"
-"\n"
-"QPushButton::disabled#QPushButton_Computer   {\n"
-"    color:  grey;\n"
 "}")
 
-        self.horizontalLayout_6.addWidget(self.QPushButton_Computer)
+        self.horizontalLayout.addWidget(self.QPushButton_Save_Gesture)
 
-        self.QPushButton_Tello = QPushButton(self.QFrame_Camera_Source)
-        self.QPushButton_Tello.setObjectName(u"QPushButton_Tello")
-        self.QPushButton_Tello.setEnabled(False)
-        self.QPushButton_Tello.setMinimumSize(QSize(0, 35))
-        self.QPushButton_Tello.setFont(font1)
-        self.QPushButton_Tello.setStyleSheet(u"QPushButton#QPushButton_Tello{\n"
+        self.QSpinBox_Gesture_Label = QSpinBox(self.QFrame_Data_Collector)
+        self.QSpinBox_Gesture_Label.setObjectName(u"QSpinBox_Gesture_Label")
+        self.QSpinBox_Gesture_Label.setStyleSheet(u"QSpinBox#QSpinBox_Gesture_Label {\n"
 "	color:#EEEEEE;\n"
-"}\n"
-"\n"
-"QPushButton::disabled#QPushButton_Tello  {\n"
-"    color:  grey;\n"
+"}")
+        self.QSpinBox_Gesture_Label.setMaximum(9)
+
+        self.horizontalLayout.addWidget(self.QSpinBox_Gesture_Label)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout)
+
+        self.QPushButton_Clear_All_Gestures = QPushButton(self.QFrame_Data_Collector)
+        self.QPushButton_Clear_All_Gestures.setObjectName(u"QPushButton_Clear_All_Gestures")
+        self.QPushButton_Clear_All_Gestures.setFont(font2)
+        self.QPushButton_Clear_All_Gestures.setStyleSheet(u"QPushButton#QPushButton_Clear_All_Gestures{\n"
+"	color:#EEEEEE;\n"
 "}")
 
-        self.horizontalLayout_6.addWidget(self.QPushButton_Tello)
+        self.verticalLayout.addWidget(self.QPushButton_Clear_All_Gestures)
 
 
-        self.gridLayout_20.addLayout(self.horizontalLayout_6, 0, 0, 1, 1)
+        self.gridLayout_3.addLayout(self.verticalLayout, 0, 0, 1, 1)
 
 
-        self.gridLayout_19.addWidget(self.QFrame_Camera_Source, 0, 0, 1, 1)
-
-        self.QGroupBox_TOF = QGroupBox(self.QGroupBox_2)
-        self.QGroupBox_TOF.setObjectName(u"QGroupBox_TOF")
-        self.QGroupBox_TOF.setGeometry(QRect(10, 110, 191, 91))
-        self.QGroupBox_TOF.setStyleSheet(u"QGroupBox#QGroupBox_TOF{\n"
-"    background-color:  #222831;\n"
-"    border: 2px solid gray;\n"
-"	 border-color: #00ADB5;\n"
-"    border-radius: 8px;\n"
-"    margin-top: 1ex; /* leave space at the top for the title */\n"
-"	font-size: 14px;\n"
-"}\n"
-"\n"
-"QGroupBox::title#QGroupBox_TOF {\n"
-"    color:  white;\n"
-"    subcontrol-origin: margin;\n"
-"	left: 15px;\n"
-"    padding: 0px 5px 0px 5px;\n"
-"}")
-        self.gridLayout_21 = QGridLayout(self.QGroupBox_TOF)
-        self.gridLayout_21.setObjectName(u"gridLayout_21")
-        self.gridLayout_21.setContentsMargins(12, 12, 12, 12)
-        self.QFrame_TOF = QFrame(self.QGroupBox_TOF)
-        self.QFrame_TOF.setObjectName(u"QFrame_TOF")
-        self.QFrame_TOF.setStyleSheet(u"QFrame#QFrame_Barometer{\n"
-"    border-radius: 8px;\n"
-"	background-color: #393E46;\n"
-"}")
-        self.QFrame_TOF.setFrameShape(QFrame.Panel)
-        self.QFrame_TOF.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_7 = QHBoxLayout(self.QFrame_TOF)
-        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
-        self.QLineEdit_Distance = QLineEdit(self.QFrame_TOF)
-        self.QLineEdit_Distance.setObjectName(u"QLineEdit_Distance")
-        self.QLineEdit_Distance.setEnabled(True)
-        self.QLineEdit_Distance.setStyleSheet(u"QLineEdit#QLineEdit_Distance{\n"
-"    border: 1px solid grey;\n"
-"    border-radius: 4px;\n"
-"	 color:#EEEEEE;\n"
-"}")
-        self.QLineEdit_Distance.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-        self.QLineEdit_Distance.setReadOnly(True)
-
-        self.horizontalLayout_7.addWidget(self.QLineEdit_Distance)
-
-        self.QLabel_cm = QLabel(self.QFrame_TOF)
-        self.QLabel_cm.setObjectName(u"QLabel_cm")
-        self.QLabel_cm.setStyleSheet(u"QLabel#QLabel_cm{\n"
-"	 color:#EEEEEE;\n"
-"}")
-
-        self.horizontalLayout_7.addWidget(self.QLabel_cm)
+        self.gridLayout_5.addWidget(self.QFrame_Data_Collector, 0, 0, 1, 1)
 
 
-        self.gridLayout_21.addWidget(self.QFrame_TOF, 0, 0, 1, 1)
+        self.gridLayout_23.addWidget(self.QGroupBox_Data_Collector, 2, 2, 1, 1)
 
 
         self.gridLayout.addWidget(self.QGroupBox_2, 0, 1, 1, 1)
@@ -873,21 +947,24 @@ class Ui_MainWindow(object):
         self.QPushButton_Take_Off.setText(QCoreApplication.translate("MainWindow", u"Take Off", None))
         self.QPushButton_Land.setText(QCoreApplication.translate("MainWindow", u"Land", None))
         self.QGroupBox_2.setTitle(QCoreApplication.translate("MainWindow", u"Utilities and settings", None))
-        self.QGroupBox_Data_Collector.setTitle(QCoreApplication.translate("MainWindow", u"Data Collector", None))
-        self.QPushButton_Save_Gesture.setText(QCoreApplication.translate("MainWindow", u"Save gesture", None))
-        self.QPushButton_Clear_All_Gestures.setText(QCoreApplication.translate("MainWindow", u"Clear all gestures", None))
-        self.QGroupBox_Drone_Connection.setTitle(QCoreApplication.translate("MainWindow", u"Connection", None))
-        self.QPushButton_Connect.setText(QCoreApplication.translate("MainWindow", u"Connect", None))
-        self.QLabel_WiFI.setText("")
-        self.QGroupBox_Drone_Battery.setTitle(QCoreApplication.translate("MainWindow", u"Battery", None))
-        self.QGroupBox_Hand_Mode.setTitle(QCoreApplication.translate("MainWindow", u"Hand Mode", None))
-        self.QPushButton_Left_Hand.setText(QCoreApplication.translate("MainWindow", u"Left", None))
-        self.QPushButton_Right_Hand.setText(QCoreApplication.translate("MainWindow", u"Right", None))
-        self.QGroupBox_Camera_Source.setTitle(QCoreApplication.translate("MainWindow", u"Camera source", None))
-        self.QPushButton_Computer.setText(QCoreApplication.translate("MainWindow", u"PC", None))
-        self.QPushButton_Tello.setText(QCoreApplication.translate("MainWindow", u"Drone", None))
+        self.QGroupBox_Temperature.setTitle(QCoreApplication.translate("MainWindow", u"Drone Temperature", None))
+        self.QLineEdit_Temperature.setText(QCoreApplication.translate("MainWindow", u"0", None))
+        self.QLabel_celcius.setText(QCoreApplication.translate("MainWindow", u"\u00b0", None))
         self.QGroupBox_TOF.setTitle(QCoreApplication.translate("MainWindow", u"TOF Distance", None))
         self.QLineEdit_Distance.setText(QCoreApplication.translate("MainWindow", u"0", None))
         self.QLabel_cm.setText(QCoreApplication.translate("MainWindow", u"cm", None))
+        self.QGroupBox_Camera_Source.setTitle(QCoreApplication.translate("MainWindow", u"Camera source", None))
+        self.QPushButton_Computer.setText(QCoreApplication.translate("MainWindow", u"PC", None))
+        self.QPushButton_Tello.setText(QCoreApplication.translate("MainWindow", u"Drone", None))
+        self.QGroupBox_Hand_Mode.setTitle(QCoreApplication.translate("MainWindow", u"Hand Mode", None))
+        self.QPushButton_Left_Hand.setText(QCoreApplication.translate("MainWindow", u"Left", None))
+        self.QPushButton_Right_Hand.setText(QCoreApplication.translate("MainWindow", u"Right", None))
+        self.QGroupBox_Drone_Battery.setTitle(QCoreApplication.translate("MainWindow", u"Battery", None))
+        self.QGroupBox_Drone_Connection.setTitle(QCoreApplication.translate("MainWindow", u"Connection", None))
+        self.QPushButton_Connect.setText(QCoreApplication.translate("MainWindow", u"Connect", None))
+        self.QLabel_WiFI.setText("")
+        self.QGroupBox_Data_Collector.setTitle(QCoreApplication.translate("MainWindow", u"Data Collector", None))
+        self.QPushButton_Save_Gesture.setText(QCoreApplication.translate("MainWindow", u"Save gesture", None))
+        self.QPushButton_Clear_All_Gestures.setText(QCoreApplication.translate("MainWindow", u"Clear all gestures", None))
     # retranslateUi
 
