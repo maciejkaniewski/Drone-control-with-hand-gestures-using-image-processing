@@ -132,7 +132,6 @@ class DataCollector:
                 if hand_mode:
                     if all([(775 < handLandmark[X_CORD] < 1150) and
                             (100 < handLandmark[Y_CORD] < 625) for handLandmark in handLandmarks]):
-                        cv2.rectangle(self.image, (775, 100), (1150, 625), (0, 255, 0), 6)
 
                         self.mp_drawing.draw_landmarks(
                             self.image,
@@ -155,10 +154,10 @@ class DataCollector:
                         if handLabel == "Right":
                             self.multi_hand_landmarks = results.multi_hand_landmarks
                             self.multi_handedness = results.multi_handedness
+                            cv2.rectangle(self.image, (775, 100), (1150, 625), (0, 255, 0), 6)
                 else:
                     if all([(35 < handLandmark[X_CORD] < 410) and
                             (100 < handLandmark[Y_CORD] < 625) for handLandmark in handLandmarks]):
-                        cv2.rectangle(self.image, (35, 100), (410, 625), (0, 255, 0), 6)
 
                         self.mp_drawing.draw_landmarks(
                             self.image,
@@ -181,6 +180,7 @@ class DataCollector:
                         if handLabel == "Left":
                             self.multi_hand_landmarks = results.multi_hand_landmarks
                             self.multi_handedness = results.multi_handedness
+                            cv2.rectangle(self.image, (35, 100), (410, 625), (0, 255, 0), 6)
 
         ConvertToQtFormat = QImage(self.image.data, self.image.shape[1], self.image.shape[0],
                                    QImage.Format_RGB888)

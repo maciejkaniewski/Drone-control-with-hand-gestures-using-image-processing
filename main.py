@@ -43,6 +43,7 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.WindowMinimizeButtonHint)
+        self.has_streamon_called = False;
 
         self.tello_drone = Tello()
 
@@ -123,7 +124,9 @@ class MainWindow(QMainWindow):
         self.WiFiThread.wait(500)
         self.DroneControlThread.stop_thread()
         self.DroneControlThread.wait(500)
-        self.tello_drone.streamoff()
+
+        if self.has_streamon_called:
+            self.tello_drone.streamoff()
 
         if self.CameraThread.isFinished() and self.WiFiThread.isFinished() and self.DroneControlThread.isFinished():
             event.accept()
@@ -394,6 +397,7 @@ class MainWindow(QMainWindow):
         self.CameraThread.wait(125)
         global CAMERA_SOURCE
         CAMERA_SOURCE = 0
+        self.has_streamon_called = False
         self.tello_drone.streamoff()
         self.CameraThread.start()
         self.ui.QPushButton_Computer.setEnabled(False)
@@ -404,6 +408,7 @@ class MainWindow(QMainWindow):
         self.CameraThread.wait(125)
         global CAMERA_SOURCE
         CAMERA_SOURCE = 1
+        self.has_streamon_called = True
         self.CameraThread.start()
         self.ui.QPushButton_Computer.setEnabled(True)
         self.ui.QPushButton_Tello.setEnabled(False)
