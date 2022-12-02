@@ -65,6 +65,7 @@ class MainWindow(QMainWindow):
         self.WiFiThread = WiFiThread(self.wifi, self.tello_drone)
         self.WiFiThread.wifi_strength_update_signal.connect(self.wifi_strength_update_slot)
         self.WiFiThread.battery_percentage_update_signal.connect(self.battery_percentage_update_slot)
+        self.WiFiThread.tof_distance_update_signal.connect(self.tof_distance_update_slot)
         self.WiFiThread.message_update_signal.connect(self.add_message_to_the_logs)
         self.WiFiThread.ui_update_signal.connect(self.ui_update_slot)
 
@@ -202,6 +203,15 @@ class MainWindow(QMainWindow):
                                                        "    width: 20px;\n"
                                                        "}\n"
                                                        "")
+
+    def tof_distance_update_slot(self, distance: int):
+        """
+        Updates drone's tof distance.
+
+        :param distance: distance
+        """
+
+        self.ui.QLineEdit_Distance.setText(str(distance))
 
     def ui_update_slot(self):
         """
@@ -477,6 +487,7 @@ class CameraThread(QThread):
 class WiFiThread(QThread):
     wifi_strength_update_signal = Signal(int)
     battery_percentage_update_signal = Signal(int)
+    tof_distance_update_signal = Signal(int)
     message_update_signal = Signal(str)
     ui_update_signal = Signal()
 
@@ -503,6 +514,7 @@ class WiFiThread(QThread):
             if self.wifi.current_connection() == DRONE_WIFI_NETWORK_NAME:
                 self.wifi_strength_update_signal.emit(self.wifi.check_signal_strength())
                 self.battery_percentage_update_signal.emit(self.tello_drone.get_battery())
+                self.tof_distance_update_signal.emit(self.tello_drone.get_distance_tof())
             else:
                 self.wifi_strength_update_signal.emit(0)
 

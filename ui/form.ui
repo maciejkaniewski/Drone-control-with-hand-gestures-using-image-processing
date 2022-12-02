@@ -782,9 +782,9 @@ QGroupBox::title#QGroupBox_2 {
        <property name="geometry">
         <rect>
          <x>410</x>
-         <y>200</y>
+         <y>210</y>
          <width>191</width>
-         <height>111</height>
+         <height>101</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -904,9 +904,9 @@ QGroupBox::title#QGroupBox_Data_Collector  {
        <property name="geometry">
         <rect>
          <x>210</x>
-         <y>200</y>
+         <y>210</y>
          <width>191</width>
-         <height>111</height>
+         <height>101</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -1027,9 +1027,9 @@ QGroupBox::title#QGroupBox_Drone_Connection   {
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>200</y>
+         <y>210</y>
          <width>191</width>
-         <height>111</height>
+         <height>101</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -1130,7 +1130,7 @@ QProgressBar::chunk#QProgressBar_Battery  {
        <property name="geometry">
         <rect>
          <x>410</x>
-         <y>100</y>
+         <y>110</y>
          <width>191</width>
          <height>90</height>
         </rect>
@@ -1256,7 +1256,7 @@ QPushButton::disabled#QPushButton_Right_Hand   {
        <property name="geometry">
         <rect>
          <x>210</x>
-         <y>100</y>
+         <y>110</y>
          <width>191</width>
          <height>90</height>
         </rect>
@@ -1372,6 +1372,103 @@ QPushButton::disabled#QPushButton_Tello  {
               </widget>
              </item>
             </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QGroupBox" name="QGroupBox_TOF">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>110</y>
+         <width>191</width>
+         <height>91</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QGroupBox#QGroupBox_TOF{
+    background-color:  #222831;
+    border: 2px solid gray;
+	 border-color: #00ADB5;
+    border-radius: 8px;
+    margin-top: 1ex; /* leave space at the top for the title */
+	font-size: 14px;
+}
+
+QGroupBox::title#QGroupBox_TOF {
+    color:  white;
+    subcontrol-origin: margin;
+	left: 15px;
+    padding: 0px 5px 0px 5px;
+}</string>
+       </property>
+       <property name="title">
+        <string>TOF Distance</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_21">
+        <property name="leftMargin">
+         <number>12</number>
+        </property>
+        <property name="topMargin">
+         <number>12</number>
+        </property>
+        <property name="rightMargin">
+         <number>12</number>
+        </property>
+        <property name="bottomMargin">
+         <number>12</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QFrame" name="QFrame_TOF">
+          <property name="styleSheet">
+           <string notr="true">QFrame#QFrame_Barometer{
+    border-radius: 8px;
+	background-color: #393E46;
+}</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Panel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_7">
+           <item>
+            <widget class="QLineEdit" name="QLineEdit_Distance">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QLineEdit#QLineEdit_Distance{
+    border: 1px solid grey;
+    border-radius: 4px;
+	 color:#EEEEEE;
+}</string>
+             </property>
+             <property name="text">
+              <string>0</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="QLabel_cm">
+             <property name="styleSheet">
+              <string notr="true">QLabel#QLabel_cm{
+	 color:#EEEEEE;
+}</string>
+             </property>
+             <property name="text">
+              <string>cm</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>

@@ -16,9 +16,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QGroupBox,
-    QHBoxLayout, QLabel, QMainWindow, QMenuBar,
-    QProgressBar, QPushButton, QSizePolicy, QSpinBox,
-    QStatusBar, QTextBrowser, QVBoxLayout, QWidget)
+    QHBoxLayout, QLabel, QLineEdit, QMainWindow,
+    QMenuBar, QProgressBar, QPushButton, QSizePolicy,
+    QSpinBox, QStatusBar, QTextBrowser, QVBoxLayout,
+    QWidget)
 from resources import resources_rc
 
 class Ui_MainWindow(object):
@@ -416,7 +417,7 @@ class Ui_MainWindow(object):
 "}")
         self.QGroupBox_Data_Collector = QGroupBox(self.QGroupBox_2)
         self.QGroupBox_Data_Collector.setObjectName(u"QGroupBox_Data_Collector")
-        self.QGroupBox_Data_Collector.setGeometry(QRect(410, 200, 191, 111))
+        self.QGroupBox_Data_Collector.setGeometry(QRect(410, 210, 191, 101))
         self.QGroupBox_Data_Collector.setStyleSheet(u"QGroupBox#QGroupBox_Data_Collector {\n"
 "    background-color:  #222831;\n"
 "    border: 2px solid gray;\n"
@@ -491,7 +492,7 @@ class Ui_MainWindow(object):
 
         self.QGroupBox_Drone_Connection = QGroupBox(self.QGroupBox_2)
         self.QGroupBox_Drone_Connection.setObjectName(u"QGroupBox_Drone_Connection")
-        self.QGroupBox_Drone_Connection.setGeometry(QRect(210, 200, 191, 111))
+        self.QGroupBox_Drone_Connection.setGeometry(QRect(210, 210, 191, 101))
         self.QGroupBox_Drone_Connection.setStyleSheet(u"QGroupBox#QGroupBox_Drone_Connection {\n"
 "    background-color:  #222831;\n"
 "    border: 2px solid gray;\n"
@@ -552,7 +553,7 @@ class Ui_MainWindow(object):
 
         self.QGroupBox_Drone_Battery = QGroupBox(self.QGroupBox_2)
         self.QGroupBox_Drone_Battery.setObjectName(u"QGroupBox_Drone_Battery")
-        self.QGroupBox_Drone_Battery.setGeometry(QRect(10, 200, 191, 111))
+        self.QGroupBox_Drone_Battery.setGeometry(QRect(10, 210, 191, 101))
         self.QGroupBox_Drone_Battery.setStyleSheet(u"QGroupBox#QGroupBox_Drone_Battery {\n"
 "    background-color:  #222831;\n"
 "    border: 2px solid gray;\n"
@@ -613,7 +614,7 @@ class Ui_MainWindow(object):
 
         self.QGroupBox_Hand_Mode = QGroupBox(self.QGroupBox_2)
         self.QGroupBox_Hand_Mode.setObjectName(u"QGroupBox_Hand_Mode")
-        self.QGroupBox_Hand_Mode.setGeometry(QRect(410, 100, 191, 90))
+        self.QGroupBox_Hand_Mode.setGeometry(QRect(410, 110, 191, 90))
         self.QGroupBox_Hand_Mode.setStyleSheet(u"QGroupBox#QGroupBox_Hand_Mode {\n"
 "    background-color:  #222831;\n"
 "    border: 2px solid gray;\n"
@@ -682,7 +683,7 @@ class Ui_MainWindow(object):
 
         self.QGroupBox_Camera_Source = QGroupBox(self.QGroupBox_2)
         self.QGroupBox_Camera_Source.setObjectName(u"QGroupBox_Camera_Source")
-        self.QGroupBox_Camera_Source.setGeometry(QRect(210, 100, 191, 90))
+        self.QGroupBox_Camera_Source.setGeometry(QRect(210, 110, 191, 90))
         self.QGroupBox_Camera_Source.setStyleSheet(u"QGroupBox#QGroupBox_Camera_Source{\n"
 "    background-color:  #222831;\n"
 "    border: 2px solid gray;\n"
@@ -748,6 +749,61 @@ class Ui_MainWindow(object):
 
 
         self.gridLayout_19.addWidget(self.QFrame_Camera_Source, 0, 0, 1, 1)
+
+        self.QGroupBox_TOF = QGroupBox(self.QGroupBox_2)
+        self.QGroupBox_TOF.setObjectName(u"QGroupBox_TOF")
+        self.QGroupBox_TOF.setGeometry(QRect(10, 110, 191, 91))
+        self.QGroupBox_TOF.setStyleSheet(u"QGroupBox#QGroupBox_TOF{\n"
+"    background-color:  #222831;\n"
+"    border: 2px solid gray;\n"
+"	 border-color: #00ADB5;\n"
+"    border-radius: 8px;\n"
+"    margin-top: 1ex; /* leave space at the top for the title */\n"
+"	font-size: 14px;\n"
+"}\n"
+"\n"
+"QGroupBox::title#QGroupBox_TOF {\n"
+"    color:  white;\n"
+"    subcontrol-origin: margin;\n"
+"	left: 15px;\n"
+"    padding: 0px 5px 0px 5px;\n"
+"}")
+        self.gridLayout_21 = QGridLayout(self.QGroupBox_TOF)
+        self.gridLayout_21.setObjectName(u"gridLayout_21")
+        self.gridLayout_21.setContentsMargins(12, 12, 12, 12)
+        self.QFrame_TOF = QFrame(self.QGroupBox_TOF)
+        self.QFrame_TOF.setObjectName(u"QFrame_TOF")
+        self.QFrame_TOF.setStyleSheet(u"QFrame#QFrame_Barometer{\n"
+"    border-radius: 8px;\n"
+"	background-color: #393E46;\n"
+"}")
+        self.QFrame_TOF.setFrameShape(QFrame.Panel)
+        self.QFrame_TOF.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_7 = QHBoxLayout(self.QFrame_TOF)
+        self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.QLineEdit_Distance = QLineEdit(self.QFrame_TOF)
+        self.QLineEdit_Distance.setObjectName(u"QLineEdit_Distance")
+        self.QLineEdit_Distance.setEnabled(True)
+        self.QLineEdit_Distance.setStyleSheet(u"QLineEdit#QLineEdit_Distance{\n"
+"    border: 1px solid grey;\n"
+"    border-radius: 4px;\n"
+"	 color:#EEEEEE;\n"
+"}")
+        self.QLineEdit_Distance.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.QLineEdit_Distance.setReadOnly(True)
+
+        self.horizontalLayout_7.addWidget(self.QLineEdit_Distance)
+
+        self.QLabel_cm = QLabel(self.QFrame_TOF)
+        self.QLabel_cm.setObjectName(u"QLabel_cm")
+        self.QLabel_cm.setStyleSheet(u"QLabel#QLabel_cm{\n"
+"	 color:#EEEEEE;\n"
+"}")
+
+        self.horizontalLayout_7.addWidget(self.QLabel_cm)
+
+
+        self.gridLayout_21.addWidget(self.QFrame_TOF, 0, 0, 1, 1)
 
 
         self.gridLayout.addWidget(self.QGroupBox_2, 0, 1, 1, 1)
@@ -830,5 +886,8 @@ class Ui_MainWindow(object):
         self.QGroupBox_Camera_Source.setTitle(QCoreApplication.translate("MainWindow", u"Camera source", None))
         self.QPushButton_Computer.setText(QCoreApplication.translate("MainWindow", u"PC", None))
         self.QPushButton_Tello.setText(QCoreApplication.translate("MainWindow", u"Drone", None))
+        self.QGroupBox_TOF.setTitle(QCoreApplication.translate("MainWindow", u"TOF Distance", None))
+        self.QLineEdit_Distance.setText(QCoreApplication.translate("MainWindow", u"0", None))
+        self.QLabel_cm.setText(QCoreApplication.translate("MainWindow", u"cm", None))
     # retranslateUi
 
