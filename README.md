@@ -11,12 +11,12 @@ of particular gestures will result in the drone performing appropriate movement 
 
 ## Tasks
 
-- [ ] Design of the graphical interface of the application.
-- [ ] Implementation of hand gesture recognition.
-- [ ] Manually controlling the drone via the app.
-- [ ] Controlling the drone with hand gestures.
-- [ ] Integration of functionalities.
-- [ ] Testing the application.
+- [x] Design of the graphical interface of the application.
+- [x] Implementation of hand gesture recognition.
+- [x] Manually controlling the drone via the app.
+- [x] Controlling the drone with hand gestures.
+- [x] Integration of functionalities.
+- [x] Testing the application.
 
 ## Table of Contents
 
@@ -38,7 +38,7 @@ Clone repository:
 
 Create virtual environment:
 
-    python3 -m venv venv
+    cd Drone-control-with-hand-gestures-using-image-processing && python3 -m venv venv
 
 Activate virtual environment:
 
@@ -49,5 +49,9 @@ Install requirements:
     pip3 install -r requirements.txt
 
 ## Usage
+    
+Launching the application:
+
+    ./exec.sh
 
 ## Concepts I Learned
