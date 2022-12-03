@@ -29,7 +29,7 @@ X_CORD = 0
 Y_CORD = 1
 
 
-class DataCollector:
+class HandDetector:
     """
     A class used to represent a Data Collector.
     """

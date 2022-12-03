@@ -1,4 +1,27 @@
 ## This Python file uses the following encoding: utf-8
+
+# MIT License
+#
+# Copyright (c) 2018 DAMIÀ FUENTES ESCOTÉ
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+
 import sys
 import os
 
@@ -8,7 +31,7 @@ from PySide6.QtCore import *
 from PySide6.QtWidgets import QApplication, QMainWindow
 
 from ui import Ui_MainWindow
-from data_collector import DataCollector
+from hand_detector import HandDetector
 from wifi import WiFi
 from wifi.wifi import DRONE_WIFI_NETWORK_NAME
 from djitellopy import Tello
@@ -42,8 +65,8 @@ class MainWindow(QMainWindow):
 
         self.tello_drone = Tello()
 
-        self.data_collector = DataCollector()  # Construct Data Collector instance
-        self.data_collector.configure_MediaPipe_Hands(False, 1, 0.8, 0.6)  # Configure MediaPipe model
+        self.hand_detector = HandDetector()  # Construct Data Collector instance
+        self.hand_detector.configure_MediaPipe_Hands(False, 1, 0.8, 0.6)  # Configure MediaPipe model
         self.wifi = WiFi()
         self.gesture_label = "0"  # Variable for gesture label
         self.wifi_signal_image = None
@@ -146,7 +169,7 @@ class MainWindow(QMainWindow):
         :param landmarks_list: hand landmarks
         """
 
-        self.data_collector.multi_hand_landmarks = landmarks_list
+        self.hand_detector.multi_hand_landmarks = landmarks_list
 
     def wifi_strength_update_slot(self, strength: int):
         """
@@ -289,19 +312,19 @@ class MainWindow(QMainWindow):
         Saves the gesture.
         """
 
-        if len(self.data_collector.multi_hand_landmarks):
-            self.data_collector.convert_coordinates()
-            self.data_collector.maximum_absolute_scaling()
-            self.data_collector.min_max_scaling()
-            self.data_collector.standardization()
-            self.data_collector.robust_scaling()
-            self.data_collector.append_labels(int(self.gesture_label))
-            self.data_collector.save_data(
-                'data_collector/data/01_data_raw.csv',
-                'data_collector/data/02_data_max_abs.csv',
-                'data_collector/data/03_data_min_max.csv',
-                'data_collector/data/04_data_standardized.csv',
-                'data_collector/data/05_data_robust.csv')
+        if len(self.hand_detector.multi_hand_landmarks):
+            self.hand_detector.convert_coordinates()
+            self.hand_detector.maximum_absolute_scaling()
+            self.hand_detector.min_max_scaling()
+            self.hand_detector.standardization()
+            self.hand_detector.robust_scaling()
+            self.hand_detector.append_labels(int(self.gesture_label))
+            self.hand_detector.save_data(
+                'hand_detector/data/01_data_raw.csv',
+                'hand_detector/data/02_data_max_abs.csv',
+                'hand_detector/data/03_data_min_max.csv',
+                'hand_detector/data/04_data_standardized.csv',
+                'hand_detector/data/05_data_robust.csv')
             self.add_message_to_the_logs(
                 "<font color=\"GreenYellow\">Gesture with label <font color=\"Plum\">"
                 + self.gesture_label
@@ -314,14 +337,14 @@ class MainWindow(QMainWindow):
         Clears all gesture files.
         """
 
-        if os.stat('data_collector/data/01_data_raw.csv').st_size == 0:
+        if os.stat('hand_detector/data/01_data_raw.csv').st_size == 0:
             self.add_message_to_the_logs("<font color=\"Gold\">Gesture files are already empty, no need to clear.")
         else:
-            self.data_collector.clear_data('data_collector/data/01_data_raw.csv')
-            self.data_collector.clear_data('data_collector/data/02_data_max_abs.csv')
-            self.data_collector.clear_data('data_collector/data/03_data_min_max.csv')
-            self.data_collector.clear_data('data_collector/data/04_data_standardized.csv')
-            self.data_collector.clear_data('data_collector/data/05_data_robust.csv')
+            self.hand_detector.clear_data('hand_detector/data/01_data_raw.csv')
+            self.hand_detector.clear_data('hand_detector/data/02_data_max_abs.csv')
+            self.hand_detector.clear_data('hand_detector/data/03_data_min_max.csv')
+            self.hand_detector.clear_data('hand_detector/data/04_data_standardized.csv')
+            self.hand_detector.clear_data('hand_detector/data/05_data_robust.csv')
             self.add_message_to_the_logs("<font color=\"GreenYellow\">All gesture files have been cleared.")
 
     def connect_to_the_drone(self):
@@ -468,19 +491,19 @@ class CameraThread(QThread):
         self.hand_mode = True
 
     def run(self):
-        data_collector = DataCollector()  # Construct Data Collector instance
-        data_collector.configure_camera()  # Configure Data Collector's camera
-        data_collector.configure_MediaPipe_Hands(False, 1, 0.8, 0.6)  # Configure MediaPipe model
+        hand_detector = HandDetector()  # Construct Data Collector instance
+        hand_detector.configure_camera()  # Configure Data Collector's camera
+        hand_detector.configure_MediaPipe_Hands(False, 1, 0.8, 0.6)  # Configure MediaPipe model
         self.ThreadActive = True
         if CAMERA_SOURCE:
             self.tello_drone.streamon()
         while self.ThreadActive:
-            data_collector.detect(self.hand_mode, self.tello_drone, CAMERA_SOURCE)
-            self.image_update_signal.emit(data_collector.image)
-            self.landmarks_update_signal.emit(data_collector.multi_hand_landmarks)
+            hand_detector.detect(self.hand_mode, self.tello_drone, CAMERA_SOURCE)
+            self.image_update_signal.emit(hand_detector.image)
+            self.landmarks_update_signal.emit(hand_detector.multi_hand_landmarks)
             self.fingers = [0, 0, 0, 0, 0]
-            if data_collector.multi_hand_landmarks is not None:
-                self.fingers = data_collector.find_fingers()
+            if hand_detector.multi_hand_landmarks is not None:
+                self.fingers = hand_detector.find_fingers()
                 if self.fingers == [1, 1, 1, 1, 1]:
                     self.gesture_update_signal.emit(" ")
                 elif self.fingers == [0, 1, 0, 0, 0]:
@@ -503,7 +526,7 @@ class CameraThread(QThread):
                 # self.gesture_update_signal.emit(" ")
                 pass
 
-            data_collector.multi_hand_landmarks = None  # Clear hand landmarks
+            hand_detector.multi_hand_landmarks = None  # Clear hand landmarks
 
     def stop_thread(self):
         self.ThreadActive = False
