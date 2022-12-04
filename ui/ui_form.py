@@ -584,9 +584,7 @@ class Ui_MainWindow(object):
 
         self.QLabel_celcius = QLabel(self.QFrame_Temperature)
         self.QLabel_celcius.setObjectName(u"QLabel_celcius")
-        font2 = QFont()
-        font2.setPointSize(15)
-        self.QLabel_celcius.setFont(font2)
+        self.QLabel_celcius.setFont(font1)
         self.QLabel_celcius.setStyleSheet(u"QLabel#QLabel_celcius{\n"
 "	 color:#EEEEEE;\n"
 "}")
@@ -1087,7 +1085,7 @@ class Ui_MainWindow(object):
         self.QLabel_s.setText(QCoreApplication.translate("MainWindow", u"s", None))
         self.QGroupBox_Temperature.setTitle(QCoreApplication.translate("MainWindow", u"Drone Temperature", None))
         self.QLineEdit_Temperature.setText(QCoreApplication.translate("MainWindow", u"0", None))
-        self.QLabel_celcius.setText(QCoreApplication.translate("MainWindow", u"\u00b0", None))
+        self.QLabel_celcius.setText(QCoreApplication.translate("MainWindow", u"\u00b0C", None))
         self.QGroupBox_TOF.setTitle(QCoreApplication.translate("MainWindow", u"TOF Distance", None))
         self.QLineEdit_Distance.setText(QCoreApplication.translate("MainWindow", u"0", None))
         self.QLabel_cm.setText(QCoreApplication.translate("MainWindow", u"cm", None))
