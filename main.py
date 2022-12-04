@@ -465,6 +465,9 @@ class MainWindow(QMainWindow):
         self.CameraThread.start()
         self.ui.QPushButton_Computer.setEnabled(False)
         self.ui.QPushButton_Tello.setEnabled(True)
+        self.ui.QPushButton_Clear_All_Gestures.setEnabled(True)
+        self.ui.QPushButton_Save_Gesture.setEnabled(True)
+        self.ui.QSpinBox_Gesture_Label.setEnabled(True)
 
     def change_to_tello_source(self):
         self.CameraThread.stop_thread()
@@ -475,6 +478,9 @@ class MainWindow(QMainWindow):
         self.CameraThread.start()
         self.ui.QPushButton_Computer.setEnabled(True)
         self.ui.QPushButton_Tello.setEnabled(False)
+        self.ui.QPushButton_Clear_All_Gestures.setEnabled(False)
+        self.ui.QPushButton_Save_Gesture.setEnabled(False)
+        self.ui.QSpinBox_Gesture_Label.setEnabled(False)
 
 
 class CameraThread(QThread):

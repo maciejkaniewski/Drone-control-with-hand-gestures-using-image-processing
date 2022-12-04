@@ -1192,18 +1192,18 @@ QGroupBox::title#QGroupBox_TOF {
         <widget class="QGroupBox" name="QGroupBox_Camera_Source">
          <property name="styleSheet">
           <string notr="true">QGroupBox#QGroupBox_Camera_Source{
-    background-color:  #222831;
-    border: 2px solid gray;
-	 border-color: #00ADB5;
-    border-radius: 8px;
-    margin-top: 1ex; /* leave space at the top for the title */
+	background-color:  #222831;  /* Ustaw kolor tła */
+	border: 2px solid gray;
+	border-color: #00ADB5;
+	border-radius: 8px;
+	margin-top: 1ex;
 	font-size: 14px;
 }
 
 QGroupBox::title#QGroupBox_Camera_Source  {
     color:  white;
     subcontrol-origin: margin;
-	left: 15px;
+	 left: 15px;
     padding: 0px 5px 0px 5px;
 }</string>
          </property>
@@ -1712,6 +1712,10 @@ QGroupBox::title#QGroupBox_Data_Collector  {
                    <property name="styleSheet">
                     <string notr="true">QPushButton#QPushButton_Save_Gesture {
 	color:#EEEEEE;
+}
+
+QPushButton::disabled#QPushButton_Save_Gesture   {
+    color:  grey;
 }</string>
                    </property>
                    <property name="text">
@@ -1724,6 +1728,10 @@ QGroupBox::title#QGroupBox_Data_Collector  {
                    <property name="styleSheet">
                     <string notr="true">QSpinBox#QSpinBox_Gesture_Label {
 	color:#EEEEEE;
+}
+
+QSpinBox::disabled#QSpinBox_Gesture_Label   {
+    color:  grey;
 }</string>
                    </property>
                    <property name="maximum">
@@ -1743,6 +1751,10 @@ QGroupBox::title#QGroupBox_Data_Collector  {
                  <property name="styleSheet">
                   <string notr="true">QPushButton#QPushButton_Clear_All_Gestures{
 	color:#EEEEEE;
+}
+
+QPushButton::disabled#QPushButton_Clear_All_Gestures  {
+    color:  grey;
 }</string>
                  </property>
                  <property name="text">

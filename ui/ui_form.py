@@ -659,18 +659,18 @@ class Ui_MainWindow(object):
         self.QGroupBox_Camera_Source = QGroupBox(self.QGroupBox_2)
         self.QGroupBox_Camera_Source.setObjectName(u"QGroupBox_Camera_Source")
         self.QGroupBox_Camera_Source.setStyleSheet(u"QGroupBox#QGroupBox_Camera_Source{\n"
-"    background-color:  #222831;\n"
-"    border: 2px solid gray;\n"
-"	 border-color: #00ADB5;\n"
-"    border-radius: 8px;\n"
-"    margin-top: 1ex; /* leave space at the top for the title */\n"
+"	background-color:  #222831;  /* Ustaw kolor t\u0142a */\n"
+"	border: 2px solid gray;\n"
+"	border-color: #00ADB5;\n"
+"	border-radius: 8px;\n"
+"	margin-top: 1ex;\n"
 "	font-size: 14px;\n"
 "}\n"
 "\n"
 "QGroupBox::title#QGroupBox_Camera_Source  {\n"
 "    color:  white;\n"
 "    subcontrol-origin: margin;\n"
-"	left: 15px;\n"
+"	 left: 15px;\n"
 "    padding: 0px 5px 0px 5px;\n"
 "}")
         self.gridLayout_19 = QGridLayout(self.QGroupBox_Camera_Source)
@@ -965,6 +965,10 @@ class Ui_MainWindow(object):
         self.QPushButton_Save_Gesture.setFont(font1)
         self.QPushButton_Save_Gesture.setStyleSheet(u"QPushButton#QPushButton_Save_Gesture {\n"
 "	color:#EEEEEE;\n"
+"}\n"
+"\n"
+"QPushButton::disabled#QPushButton_Save_Gesture   {\n"
+"    color:  grey;\n"
 "}")
 
         self.horizontalLayout.addWidget(self.QPushButton_Save_Gesture)
@@ -973,6 +977,10 @@ class Ui_MainWindow(object):
         self.QSpinBox_Gesture_Label.setObjectName(u"QSpinBox_Gesture_Label")
         self.QSpinBox_Gesture_Label.setStyleSheet(u"QSpinBox#QSpinBox_Gesture_Label {\n"
 "	color:#EEEEEE;\n"
+"}\n"
+"\n"
+"QSpinBox::disabled#QSpinBox_Gesture_Label   {\n"
+"    color:  grey;\n"
 "}")
         self.QSpinBox_Gesture_Label.setMaximum(9)
 
@@ -986,6 +994,10 @@ class Ui_MainWindow(object):
         self.QPushButton_Clear_All_Gestures.setFont(font1)
         self.QPushButton_Clear_All_Gestures.setStyleSheet(u"QPushButton#QPushButton_Clear_All_Gestures{\n"
 "	color:#EEEEEE;\n"
+"}\n"
+"\n"
+"QPushButton::disabled#QPushButton_Clear_All_Gestures  {\n"
+"    color:  grey;\n"
 "}")
 
         self.verticalLayout.addWidget(self.QPushButton_Clear_All_Gestures)
