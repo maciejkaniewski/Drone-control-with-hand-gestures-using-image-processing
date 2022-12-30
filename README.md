@@ -55,3 +55,13 @@ Launching the application:
     ./exec.sh
 
 ## Concepts I Learned
+
+## Acknowledgements
+
+To visualize some elements of the user interface, the graphic resources listed below were used and adapted to the needs of the application:
+
+- <a href="https://www.flaticon.com/free-icon/drone_215736" title="drone icons">Drone icons created by Roundicons - Flaticon</a>
+
+- <a href="https://www.flaticon.com/packs/electronics-5" title="wifi icons">Icon Pack: Electronics created by Roundicons - Flaticon</a>
+
+- <a href="https://www.flaticon.com/packs/arrow-227" title="arrows icons">Icon Pack: Arrow created by MYS Design - Flaticon</a>
