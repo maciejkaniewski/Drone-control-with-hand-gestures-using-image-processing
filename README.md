@@ -20,15 +20,9 @@ of particular gestures will result in the drone performing appropriate movement 
 
 ## Table of Contents
 
-  - [Features](#features)
-  - [Screenshots](#screenshots)
   - [Setup](#setup)
   - [Usage](#usage)
-  - [Concepts I Learned](#concepts-i-learned)
-
-## Features
-
-## Screenshots
+  - [Acknowledgements](#acknowledgements)
 
 ## Setup
 
@@ -53,8 +47,6 @@ Install requirements:
 Launching the application:
 
     ./exec.sh
-
-## Concepts I Learned
 
 ## Acknowledgements
 
