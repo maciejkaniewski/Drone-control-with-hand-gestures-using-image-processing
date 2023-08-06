@@ -5,9 +5,9 @@ as a bachelor thesis at the Wroclaw University of Technology in the field of Con
 
 ## The purpose and scope of the project
 
-The main purpose of the project is to create an application that would allow you to control the drone using hand gestures.
-Gesture recognition will be realized by processing the image from the drone's built-in camera. Detection
-of particular gestures will result in the drone performing appropriate movement actions.
+The main purpose of the project was to create an application that would allow user to control the drone using hand gestures.
+Gesture recognition has been realized by processing the image from the drone's built-in camera. Detection
+of particular gestures results in the drone performing appropriate movement actions.
 
 ## Tasks
 
@@ -47,6 +47,9 @@ Install requirements:
 Launching the application:
 
     ./exec.sh
+
+![Application](./images/application.png "Application")
+![Architecture](./images/architecture.png "Architecture")
 
 ## Acknowledgements
 
